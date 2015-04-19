@@ -1,5 +1,4 @@
 *.pyc
-true
 __init__.py
 settings_local.py
 contenido.txt
