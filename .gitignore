@@ -1,0 +1,10 @@
+*.pyc
+*.pid
+true
+cache
+__init__.py
+settings_local.py
+contenido.txt
+migrations
+/static
+/media
