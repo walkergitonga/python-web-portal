@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from django.utils.translation import ugettext_lazy as _
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SITE_ID = 1
@@ -34,7 +37,9 @@ DJANGO_APP = (
 
 THIRD_PARTY_APPS = ()
 
-LOCAL_APSS = ()
+LOCAL_APSS = (
+    'apps.baseapp',
+)
 
 # Application definition
 INSTALLED_APPS = DJANGO_APP + THIRD_PARTY_APPS + LOCAL_APSS
@@ -48,31 +53,33 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'portal.urls'
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,'templates'),
-)
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
 
-# Static files (CSS, JavaScript, Images)
+'''Static files (CSS, JavaScript, Images)'''
+
 STATIC_URL = '/static/'
 
 #Root absolute for static files
@@ -88,20 +95,37 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-WSGI_APPLICATION = 'portal.wsgi.application'
+'''Internationalization'''
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
+#Working Lenguage 
+LANGUAGE_CODE = 'es'
 
-LANGUAGE_CODE = 'es-ar'
+#Lenguage support 
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+)
 
-TIME_ZONE = 'America/Buenos_Aires'
+#Path of the folder locale
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
+#Defined processor of contexto
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.request",
+)
 
 USE_I18N = True
-
 USE_L10N = True
 
+'''Time Zone'''
+
+TIME_ZONE = 'America/Buenos_Aires'
 USE_TZ = True
+
+WSGI_APPLICATION = 'portal.wsgi.application'
 
 # Import local settings
 try:

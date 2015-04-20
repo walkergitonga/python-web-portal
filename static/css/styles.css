@@ -1,0 +1,17 @@
+
+footer {
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #f8f8f8;
+}
+
+/*Margin text footer*/
+.container .text-muted {
+  margin: 10px 0;
+}
+
+/*Margin select lenguaje footer*/
+.container #lenguage_sel {
+  margin: 5px 0;
+}
