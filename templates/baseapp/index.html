@@ -9,7 +9,11 @@
 		    <h2>{% trans "Welcome to Portal web python" %}</h2>
 		    <p class="lead">{% trans "Python web portal is a community for the python programming language, where developers can share knowledge and make new friends." %}</p>
 		    
-		    <p><a class="btn btn-large btn-success" href="#" target="ext">{% trans "Sign up" %} »</a></p>
+		    {% if not user.is_authenticated %}
+		    	<p><a class="btn btn-large btn-success" href="/join/">{% trans "Sign up" %} »</a></p>
+		    {% else %}
+		    	<p>{% trans "Date joined: " %} {{ request.user.date_joined }} </p>
+		    {% endif %}
 		</div>
   	</div>
 

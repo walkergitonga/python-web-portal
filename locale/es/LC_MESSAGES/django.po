@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-21 10:50-0300\n"
+"POT-Creation-Date: 2015-04-21 19:01-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,17 +18,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/baseapp/forms.py:12
+#: apps/baseapp/forms.py:15
 msgid "Username or Email"
 msgstr "Usuario o Email"
 
-#: apps/baseapp/forms.py:14
+#: apps/baseapp/forms.py:17 apps/baseapp/forms.py:49
 msgid "Password"
 msgstr "Contraseña"
 
-#: apps/baseapp/forms.py:35
+#: apps/baseapp/forms.py:38
 msgid "Incorrect username or password."
 msgstr "Nombre de usuario o contraseña incorrecta"
+
+#: apps/baseapp/forms.py:51
+msgid "Repeat password"
+msgstr "Repita la contraseña"
+
+#: apps/baseapp/forms.py:75
+msgid "Passwords don't match"
+msgstr "Las contraseñas no coinciden"
+
+#: apps/baseapp/forms.py:85
+msgid "Email addresses must be unique."
+msgstr "El correo electrónico ya está registrado"
+
+#: apps/baseapp/views.py:91
+msgid "Registration was successful"
+msgstr "El registro ha sido satisfactorio"
+
+#: apps/baseapp/views.py:94
+msgid "Form invalid"
+msgstr "Formulario invalido"
 
 #: portal/settings.py:111
 msgid "English"
@@ -55,7 +75,7 @@ msgid "Works"
 msgstr "Empleos"
 
 #: templates/base.html:39 templates/baseapp/login.html:12
-#: templates/baseapp/login.html.py:42
+#: templates/baseapp/login.html.py:42 templates/baseapp/signup.html:80
 msgid "Sign in"
 msgstr "Ingresar"
 
@@ -84,15 +104,19 @@ msgstr ""
 "donde los desarrolladores podrán compartir sus conocimientos y hacer nuevos "
 "amigos."
 
-#: templates/baseapp/index.html:12
+#: templates/baseapp/index.html:13 templates/baseapp/signup.html:19
 msgid "Sign up"
 msgstr "Registrarse"
 
-#: templates/baseapp/index.html:20
+#: templates/baseapp/index.html:15
+msgid "Date joined: "
+msgstr "Fecha de Registro"
+
+#: templates/baseapp/index.html:24
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#: templates/baseapp/index.html:21
+#: templates/baseapp/index.html:25
 msgid ""
 "This section will contain open source applications for the community to "
 "contribute."
@@ -100,20 +124,20 @@ msgstr ""
 "Esta sección contendrá las aplicaciones open source para que la comunidad "
 "pueda contribuir"
 
-#: templates/baseapp/index.html:22
+#: templates/baseapp/index.html:26
 msgid "Feel free to upload the app you want."
 msgstr "Sientete libre de subir tu aplicación cuando lo desees."
 
-#: templates/baseapp/index.html:23 templates/baseapp/index.html.py:28
-#: templates/baseapp/index.html:33
+#: templates/baseapp/index.html:27 templates/baseapp/index.html.py:32
+#: templates/baseapp/index.html:37
 msgid "Got to section"
 msgstr "Ir a la sección"
 
-#: templates/baseapp/index.html:26
+#: templates/baseapp/index.html:30
 msgid "Rankings"
 msgstr "Rankings"
 
-#: templates/baseapp/index.html:27
+#: templates/baseapp/index.html:31
 msgid ""
 "This section provides rankings of the most used applications on github, "
 "rankings of the prominent users, etc."
@@ -121,11 +145,10 @@ msgstr ""
 "En esta sección se ofrece rankings de las aplicaciones más utilizadas en "
 "GitHub, ranking de los usuarios prominentes, etc."
 
-#: templates/baseapp/index.html:31
+#: templates/baseapp/index.html:35
 msgid "Users"
 msgstr "Usuarios"
 
-#: templates/baseapp/index.html:32
+#: templates/baseapp/index.html:36
 msgid "This section contains users of the community."
 msgstr "Esta sección contiene los usuarios de la comunidad"
-
