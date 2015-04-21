@@ -2,6 +2,7 @@
 
 from django.contrib.auth import login, logout
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 
@@ -22,6 +23,14 @@ class LoginView(FormView):
 	template_name = "baseapp/login.html"
 	form_class = FormLogin
 	success_url = '/'
+
+	def get(self, request, *args, **kwargs):
+
+		if request.user.is_authenticated():
+			return HttpResponseRedirect("/")
+		else:
+			return render(request, self.template_name, 
+						{'form': self.form_class})
 
 	def post(self, request, *args, **kwargs):
 

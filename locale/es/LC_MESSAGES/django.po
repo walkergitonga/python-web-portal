@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-20 20:09-0300\n"
+"POT-Creation-Date: 2015-04-21 10:50-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,41 +18,58 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/baseapp/forms.py:11
+#: apps/baseapp/forms.py:12
 msgid "Username or Email"
 msgstr "Usuario o Email"
 
-#: apps/baseapp/forms.py:13
+#: apps/baseapp/forms.py:14
 msgid "Password"
 msgstr "Contraseña"
 
-#: portal/settings.py:110
+#: apps/baseapp/forms.py:35
+msgid "Incorrect username or password."
+msgstr "Nombre de usuario o contraseña incorrecta"
+
+#: portal/settings.py:111
 msgid "English"
 msgstr "Ingles"
 
-#: portal/settings.py:111
+#: portal/settings.py:112
 msgid "Spanish"
 msgstr "Español"
 
-#: templates/base.html:20
+#: templates/base.html:30
 msgid "Blog"
 msgstr "Blog"
 
-#: templates/base.html:21
+#: templates/base.html:31
 msgid "Forum"
 msgstr "Foro"
 
-#: templates/base.html:22
+#: templates/base.html:32
 msgid "Tutorials"
 msgstr "Tutoriales"
 
-#: templates/base.html:23
+#: templates/base.html:33
 msgid "Works"
 msgstr "Empleos"
 
-#: templates/base.html:39
+#: templates/base.html:39 templates/baseapp/login.html:12
+#: templates/baseapp/login.html.py:42
 msgid "Sign in"
 msgstr "Ingresar"
+
+#: templates/base.html:50
+msgid "Profile"
+msgstr "Perfil"
+
+#: templates/base.html:56
+msgid "Configuration"
+msgstr "Configuración"
+
+#: templates/base.html:62
+msgid "Sign out"
+msgstr "Salir"
 
 #: templates/baseapp/index.html:9
 msgid "Welcome to Portal web python"
@@ -68,8 +85,8 @@ msgstr ""
 "amigos."
 
 #: templates/baseapp/index.html:12
-msgid "Learn more"
-msgstr "Aprender más"
+msgid "Sign up"
+msgstr "Registrarse"
 
 #: templates/baseapp/index.html:20
 msgid "Applications"
@@ -111,3 +128,4 @@ msgstr "Usuarios"
 #: templates/baseapp/index.html:32
 msgid "This section contains users of the community."
 msgstr "Esta sección contiene los usuarios de la comunidad"
+
