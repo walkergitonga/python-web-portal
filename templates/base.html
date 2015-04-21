@@ -22,50 +22,53 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          <a class="navbar-brand" href="/">Portal Web Python</a>
         </div>
 
 		<div class="container">
-		    <a class="navbar-brand" href="/">Portal Web Python</a>
-		    <ul class="nav navbar-nav">
-		      <li><a href="#">{% trans "Blog" %}</a></li>
-		      <li><a href="#">{% trans "Forum" %}</a></li>
-		      <li><a href="#">{% trans "Tutorials" %}</a></li>
-		      <li><a href="#">{% trans "Works" %}</a></li>
-		    </ul>
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			    <ul class="nav navbar-nav">
+			      <li><a href="#">{% trans "Blog" %}</a></li>
+			      <li><a href="#">{% trans "Forum" %}</a></li>
+			      <li><a href="#">{% trans "Tutorials" %}</a></li>
+			      <li><a href="#">{% trans "Works" %}</a></li>
+			    </ul>
 
-		    {% if not user.is_authenticated %}
-		    	{% if request.path != "/login/" %}
-				   	<form class="navbar-form navbar-right">
-			            <a href="/login/" class="btn btn-success">{% trans "Sign in" %}</a>
-		        	</form>
+
+			    {% if not user.is_authenticated %}
+			    	{% if request.path != "/login/" %}
+					   	<form class="navbar-form navbar-right">
+				            <a href="/login/" class="btn btn-success">{% trans "Sign in" %}</a>
+			        	</form>
+		        	{% endif %}
+		        {% else %}
+		        	<form class="nav navbar-nav navbar-right">
+			        	<li class="dropdown" class="nav navbar-nav navbar-right">
+			              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ user.username }}  <span class="caret"></span></a>
+			              <ul class="dropdown-menu" role="menu">
+			                  <li>
+			                    <a href="#">
+			                      <i class="glyphicon glyphicon-user"></i>
+			                      <span>{% trans "Profile" %}</span>
+			                    </a>
+			                  </li>
+			                  <li>
+			                      <a href="#">
+			                          <i class="glyphicon glyphicon-pencil"></i>
+			                          <span>{% trans "Configuration" %}</span>
+			                      </a>
+			                  </li>
+			                  <li>
+			                      <a href="/logout">
+			                          <i class="glyphicon glyphicon-log-out"></i>
+			                          <span>{% trans "Sign out" %}</span>
+			                      </a>
+			                  </li>
+			              </ul>
+			            </li>
+			        </form>
 	        	{% endif %}
-	        {% else %}
-	        	<form class="nav navbar-nav navbar-right">
-		        	<li class="dropdown" class="nav navbar-nav navbar-right">
-		              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ user.username }}  <span class="caret"></span></a>
-		              <ul class="dropdown-menu" role="menu">
-		                  <li>
-		                    <a href="#">
-		                      <i class="glyphicon glyphicon-user"></i>
-		                      <span>{% trans "Profile" %}</span>
-		                    </a>
-		                  </li>
-		                  <li>
-		                      <a href="#">
-		                          <i class="glyphicon glyphicon-pencil"></i>
-		                          <span>{% trans "Configuration" %}</span>
-		                      </a>
-		                  </li>
-		                  <li>
-		                      <a href="/logout">
-		                          <i class="glyphicon glyphicon-log-out"></i>
-		                          <span>{% trans "Sign out" %}</span>
-		                      </a>
-		                  </li>
-		              </ul>
-		            </li>
-		        </form>
-        	{% endif %}
+        	</div>
 		</div>
 
 	</div>
@@ -83,20 +86,24 @@
 			</div>
 
 			<div id="lenguage_sel" class="pull-right">
-				<form action="{% url 'set_language' %}" method="post" class="form-inline">
+				<form action="{% url 'set_language' %}" method="post" class="form-search">
 					{% csrf_token %}
 					<input name="next" type="hidden" value="{{ redirect_to }}" />
-					<select class="form-control input-sm" name="language">
-					{% get_current_language as LANGUAGE_CODE %}
-					{% get_available_languages as LANGUAGES %}
-					{% get_language_info_list for LANGUAGES as languages %}
-					{% for language in languages %}
-					<option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
-					    {{ language.name_local }} ({{ language.code }})
-					</option>
-					{% endfor %}
-					</select>
-					<input type="submit" class="btn btn-default  btn-sm" value="Go" />
+					<div class="input-group">
+						<select class="form-control input-sm" name="language">
+						{% get_current_language as LANGUAGE_CODE %}
+						{% get_available_languages as LANGUAGES %}
+						{% get_language_info_list for LANGUAGES as languages %}
+						{% for language in languages %}
+						<option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+						    {{ language.name_local }} ({{ language.code }})
+						</option>
+						{% endfor %}
+						</select>
+						<span class="input-group-btn">
+							<input type="submit" class="btn btn-default  btn-sm" value="Go" />
+						</span>
+					</div>
 				</form>
 			</div>
 		</div>
