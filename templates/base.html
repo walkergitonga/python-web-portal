@@ -14,6 +14,16 @@
 
 <body>
 	<div class="navbar navbar-default">
+
+		<div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
 		<div class="container">
 		    <a class="navbar-brand" href="#">Portal Web Python</a>
 		    <ul class="nav navbar-nav">
@@ -23,15 +33,51 @@
 		      <li><a href="#">{% trans "Works" %}</a></li>
 		    </ul>
 
-		   	<form class="navbar-form navbar-right">
-	            <div class="form-group">
-	              <input type="text" placeholder="Email" class="form-control">
-	            </div>
-	            <div class="form-group">
-	              <input type="password" placeholder="Password" class="form-control">
-	            </div>
-	            <button type="submit" class="btn btn-success">{% trans "Sign in" %}</button>
-        	</form>
+		    {% if not user.is_authenticated %}
+			   	<form class="navbar-form navbar-right" action="/login/" method="POST">{% csrf_token%}
+			   		{% for field in form %}
+			            <div class="form-group">
+			            	{% if field.name == "user_email" %}
+			            		{{ form.user_email.errors.as_text }}
+			              		{{ field }} 
+			              	{% endif %}
+			            </div>
+			            <div class="form-group">
+			              	{% if field.name == "password" %}
+			              		{{ field.errors }} 
+			              		{{ field }} 
+			              	{% endif %}
+			            </div>
+		            {% endfor %}
+		            <button type="submit" class="btn btn-success">{% trans "Sign in" %}</button>
+	        	</form>
+	        {% else %}
+	        	<form class="nav navbar-nav navbar-right">
+		        	<li class="dropdown" class="nav navbar-nav navbar-right">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ user.username }}  <span class="caret"></span></a>
+		              <ul class="dropdown-menu" role="menu">
+		                  <li>
+		                    <a href="#">
+		                      <i class="glyphicon glyphicon-user"></i>
+		                      <span>{% trans "Profile" %}</span>
+		                    </a>
+		                  </li>
+		                  <li>
+		                      <a href="#">
+		                          <i class="glyphicon glyphicon-pencil"></i>
+		                          <span>{% trans "Configuration" %}</span>
+		                      </a>
+		                  </li>
+		                  <li>
+		                      <a href="/logout">
+		                          <i class="glyphicon glyphicon-log-out"></i>
+		                          <span>{% trans "Sign out" %}</span>
+		                      </a>
+		                  </li>
+		              </ul>
+		            </li>
+		        </form>
+        	{% endif %}
 		</div>
 
 	</div>

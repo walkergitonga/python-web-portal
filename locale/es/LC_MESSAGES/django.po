@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-20 00:46-0300\n"
+"POT-Creation-Date: 2015-04-20 20:09-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: portal/settings.py:105
+#: apps/baseapp/forms.py:11
+msgid "Username or Email"
+msgstr "Usuario o Email"
+
+#: apps/baseapp/forms.py:13
+msgid "Password"
+msgstr "Contraseña"
+
+#: portal/settings.py:110
 msgid "English"
 msgstr "Ingles"
 
-#: portal/settings.py:106
+#: portal/settings.py:111
 msgid "Spanish"
 msgstr "Español"
 
@@ -42,7 +50,7 @@ msgstr "Tutoriales"
 msgid "Works"
 msgstr "Empleos"
 
-#: templates/base.html:33
+#: templates/base.html:39
 msgid "Sign in"
 msgstr "Ingresar"
 

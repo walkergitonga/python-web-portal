@@ -58,6 +58,12 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'portal.urls'
 
+#Backend of login
+AUTHENTICATION_BACKENDS = (
+    'apps.baseapp.backends.EmailOrUsernameModelBackend',
+    'django.contrib.auth.backends.ModelBackend'
+)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
