@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
+from apps.profiles.models import Profile
+
 '''
 	Form of login
 '''
@@ -104,3 +106,10 @@ class FormSignup(forms.ModelForm):
 
 		us.set_password(password)
 		us.save()
+
+		iduser = us.id
+
+		pr = Profile(iduser_id=iduser, company="",
+					location="", photo="")
+
+		pr.save()

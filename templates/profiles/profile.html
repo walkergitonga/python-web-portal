@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+	
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 bg_blur ">
+    	    
+    	   <img src="{% static 'img/profile.png' %}" class="img-thumbnail picture hidden-xs" width="150" hegiht="150" />
+           <div class="header">
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                <h4>{{ profile.location }}</h4>
+                <h4>{{ profile.company }}</h4>
+                <h4>{{ user.date_joined }}</h4>
+           </div>
+
+		</div>
+        <div class="col-md-8  col-xs-12">
+
+        	{% for message in messages %}
+				{% if message.tags != "error" %}
+					<div class="alert alert-success" role="alert">{{ message }}</div>
+				{% else %}
+					<div class="alert alert-danger" role="alert">{{ message }}</div>
+				{% endif %}
+			{% endfor %}
+
+        	<form method="POST" action="/profile/" enctype="multipart/form-data">{% csrf_token %}
+        		{{ form.as_p }}
+        		<button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+        	</form>
+        </div>
+    </div>   
+    
+</div>
+
+
+{% endblock %}

@@ -39,6 +39,7 @@ THIRD_PARTY_APPS = ()
 
 LOCAL_APSS = (
     'apps.baseapp',
+    'apps.profiles',
 )
 
 # Application definition
@@ -63,6 +64,9 @@ AUTHENTICATION_BACKENDS = (
     'apps.baseapp.backends.EmailOrUsernameModelBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+#For login required
+LOGIN_URL = "/"
 
 TEMPLATES = [
     {

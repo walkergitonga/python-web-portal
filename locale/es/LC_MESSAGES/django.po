@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-21 19:01-0300\n"
+"POT-Creation-Date: 2015-04-22 01:17-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/baseapp/forms.py:15
+#: apps/baseapp/forms.py:17
 msgid "Username or Email"
 msgstr "Usuario o Email"
 
-#: apps/baseapp/forms.py:17 apps/baseapp/forms.py:49
+#: apps/baseapp/forms.py:19 apps/baseapp/forms.py:51
 msgid "Password"
 msgstr "Contraseña"
 
-#: apps/baseapp/forms.py:38
+#: apps/baseapp/forms.py:40
 msgid "Incorrect username or password."
 msgstr "Nombre de usuario o contraseña incorrecta"
 
-#: apps/baseapp/forms.py:51
+#: apps/baseapp/forms.py:53
 msgid "Repeat password"
 msgstr "Repita la contraseña"
 
-#: apps/baseapp/forms.py:75
+#: apps/baseapp/forms.py:77
 msgid "Passwords don't match"
 msgstr "Las contraseñas no coinciden"
 
-#: apps/baseapp/forms.py:85
+#: apps/baseapp/forms.py:87
 msgid "Email addresses must be unique."
 msgstr "El correo electrónico ya está registrado"
 
@@ -46,48 +46,52 @@ msgstr "El correo electrónico ya está registrado"
 msgid "Registration was successful"
 msgstr "El registro ha sido satisfactorio"
 
-#: apps/baseapp/views.py:94
+#: apps/baseapp/views.py:94 apps/profiles/views.py:43
 msgid "Form invalid"
 msgstr "Formulario invalido"
 
-#: portal/settings.py:111
+#: apps/profiles/views.py:39
+msgid "Changes saved correctly"
+msgstr "Cambios guardados correctamente"
+
+#: portal/settings.py:115
 msgid "English"
 msgstr "Ingles"
 
-#: portal/settings.py:112
+#: portal/settings.py:116
 msgid "Spanish"
 msgstr "Español"
 
-#: templates/base.html:30
+#: templates/base.html:31
 msgid "Blog"
 msgstr "Blog"
 
-#: templates/base.html:31
+#: templates/base.html:32
 msgid "Forum"
 msgstr "Foro"
 
-#: templates/base.html:32
+#: templates/base.html:33
 msgid "Tutorials"
 msgstr "Tutoriales"
 
-#: templates/base.html:33
+#: templates/base.html:34
 msgid "Works"
 msgstr "Empleos"
 
-#: templates/base.html:39 templates/baseapp/login.html:12
+#: templates/base.html:41 templates/baseapp/login.html:12
 #: templates/baseapp/login.html.py:42 templates/baseapp/signup.html:80
 msgid "Sign in"
 msgstr "Ingresar"
 
-#: templates/base.html:50
+#: templates/base.html:52
 msgid "Profile"
 msgstr "Perfil"
 
-#: templates/base.html:56
+#: templates/base.html:58
 msgid "Configuration"
 msgstr "Configuración"
 
-#: templates/base.html:62
+#: templates/base.html:64
 msgid "Sign out"
 msgstr "Salir"
 
@@ -152,3 +156,7 @@ msgstr "Usuarios"
 #: templates/baseapp/index.html:36
 msgid "This section contains users of the community."
 msgstr "Esta sección contiene los usuarios de la comunidad"
+
+#: templates/profiles/profile.html:33
+msgid "Save"
+msgstr "Grabar"
