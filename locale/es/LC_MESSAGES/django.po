@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-23 11:59-0300\n"
+"POT-Creation-Date: 2015-04-23 17:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,11 +46,11 @@ msgstr "El correo electrónico ya está registrado"
 msgid "Registration was successful"
 msgstr "El registro ha sido satisfactorio"
 
-#: apps/baseapp/views.py:94 apps/profiles/views.py:83
+#: apps/baseapp/views.py:94 apps/profiles/views.py:77
 msgid "Form invalid"
 msgstr "Formulario invalido"
 
-#: apps/profiles/views.py:79
+#: apps/profiles/views.py:74
 msgid "Changes saved correctly"
 msgstr "Cambios guardados correctamente"
 
@@ -83,7 +83,7 @@ msgstr "Empleos"
 msgid "Sign in"
 msgstr "Ingresar"
 
-#: templates/base.html:52 templates/profiles/edit_profile.html:9
+#: templates/base.html:52 templates/profiles/edit_profile.html:13
 msgid "Profile"
 msgstr "Perfil"
 
@@ -157,7 +157,7 @@ msgstr "Usuarios"
 msgid "This section contains users of the community."
 msgstr "Esta sección contiene los usuarios de la comunidad"
 
-#: templates/profiles/edit_profile.html:21
+#: templates/profiles/edit_profile.html:67
 msgid "Save"
 msgstr "Grabar"
 
@@ -166,5 +166,9 @@ msgid "Edit profile"
 msgstr "Editar Perfil"
 
 #: templates/profiles/profile.html:30
+msgid "About me"
+msgstr "Acerca de mí"
+
+#: templates/profiles/profile.html:38
 msgid "Contributions"
 msgstr "Contribuciones"
