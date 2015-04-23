@@ -27,7 +27,16 @@
 		</div>
         <div class="col-md-8  col-xs-12">
 
+            <h3>{% trans "About me" %}</h3>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {{ profile.about|safe }}
+                </div>
+            </div>
+                        
             <h3>{% trans "Contributions" %}</h3>
+            <hr>
 
         </div>
     </div>   

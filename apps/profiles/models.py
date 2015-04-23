@@ -14,3 +14,4 @@ class Profile(models.Model):
 								blank=True)
 	location = models.CharField(max_length=200, null=True)
 	company = models.CharField(max_length=150, null=True)
+	about = models.TextField(blank=True, null=True)

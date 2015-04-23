@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*-
-
 from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import render
@@ -19,13 +18,8 @@ class ProfileView(View):
 
 		profile = Profile.objects.get(iduser_id=self.request.user.id)
 
-		form = FormProfile(initial={
-					"location": profile.location,
-					"company": profile.company
-				})
-
 		return render(request, self.template_name,
-					{'form': form, 'profile': profile})
+					{'profile': profile})
 
 class EditProfileView(FormView):
 
@@ -39,7 +33,8 @@ class EditProfileView(FormView):
 
 		form = FormProfile(initial={
 					"location": profile.location,
-					"company": profile.company
+					"company": profile.company,
+					"about": profile.about
 				})
 
 		return render(request, self.template_name,
@@ -78,7 +73,6 @@ class EditProfileView(FormView):
 
 			messages.success(request, _("Changes saved correctly"))
 			return self.form_valid(form, **kwargs)
-
 		else:
 			messages.error(request, _("Form invalid"))
 			return self.form_invalid(form, **kwargs)

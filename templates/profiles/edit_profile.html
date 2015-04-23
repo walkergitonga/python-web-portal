@@ -3,6 +3,10 @@
 {% load i18n %}
 {% load static %}
 
+{% block extra_js %}
+    {{ form.media.js }}
+{% endblock %}
+
 {% block content %}
 	
 <div class="container center_div_full_screen">
@@ -17,7 +21,49 @@
     {% endfor %}
 
 	<form method="POST" action="/edit_profile/" enctype="multipart/form-data">{% csrf_token %}
-		{{ form.as_p }}
+		{% for field in form %}
+
+            {% if field.name == "photo" %}
+                <b>{{ field.label }}</b>
+                {{ field }}
+                {% if form.photo.errors %}
+                    <div style="color: red">{{ form.photo.errors }}</div>
+                {% else %}
+                    <br>
+                {% endif %}
+            {% endif %}
+
+            {% if field.name == "location" %}
+                <b>{{ field.label }}</b>
+                {{ field }}
+                {% if form.location.errors %}
+                    <div style="color: red">{{ form.location.errors }}</div>
+                {% else %}
+                    <br>
+                {% endif %}
+            {% endif %}
+
+            {% if field.name == "company" %}
+                <b>{{ field.label }}</b>
+                {{ field }}
+                {% if form.company.errors %}
+                    <div style="color: red">{{ form.company.errors }}</div>
+                {% else %}
+                    <br>
+                {% endif %}
+            {% endif %}
+
+            {% if field.name == "about" %}
+                <b>{{ field.label }}</b>
+                {{ field }}
+                {% if form.about.errors %}
+                    <div style="color: red">{{ form.about.errors }}</div>
+                {% else %}
+                    <br>
+                {% endif %}
+            {% endif %}
+
+        {% endfor %}
 		<button type="submit" class="btn btn-success">{% trans "Save" %}</button>
 	</form>
 </div>
