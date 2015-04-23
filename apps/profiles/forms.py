@@ -13,10 +13,9 @@ class FormProfile(forms.ModelForm):
 		exclude = ('iduser', "idprofile")
 
 	def __init__(self, *args, **kwargs):
-
 		super(FormProfile, self).__init__(*args, **kwargs)
+		
 		class_css = 'form-control'
-
 		for key in self.fields:
 			if key != 'photo':
 				self.fields[key].required = True

@@ -14,12 +14,19 @@ class ProfileView(FormView):
 	template_name = "profiles/profile.html"
 	form_class = FormProfile
 	success_url = '/profile/'
+	initial = {"location": "Entro"}
 
 	def get(self, request, *args, **kwargs):
 
 		profile = Profile.objects.get(iduser_id=self.request.user.id)
+
+		form = FormProfile(initial={
+					"location": profile.location,
+					"company": profile.company
+				})
+
 		return render(request, self.template_name,
-					{'form': self.form_class, 'profile': profile})
+					{'form': form, 'profile': profile})
 
 	def post(self, request, *args, **kwargs):
 
@@ -27,7 +34,12 @@ class ProfileView(FormView):
 		form = self.get_form(form_class)
 
 		if form.is_valid():
-			photo = request.FILES['photo']
+
+			try:
+				photo = request.FILES['photo']
+			except Exception:
+				photo = ""
+			
 			location = request.POST['location']
 			company = request.POST['company']
 
