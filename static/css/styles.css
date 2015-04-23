@@ -14,3 +14,9 @@ footer {
 .container #lenguage_sel {
   margin: 5px 0;
 }
+
+/*Center one form and resize width that is full screen*/
+.center_div_full_screen{
+    margin: 0 auto;
+    width:50% 
+}

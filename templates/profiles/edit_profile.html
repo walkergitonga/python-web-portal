@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+	
+<div class="container center_div_full_screen">
+    <h3>{% trans "Profile" %}: {{ user.first_name }} {{ user.last_name }}</h3>
+    <hr>
+    {% for message in messages %}
+        {% if message.tags != "error" %}
+            <div class="alert alert-success" role="alert">{{ message }}</div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+        {% endif %}
+    {% endfor %}
+
+	<form method="POST" action="/edit_profile/" enctype="multipart/form-data">{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+	</form>
+</div>
+
+{% endblock %}
