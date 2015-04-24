@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-23 17:44-0300\n"
+"POT-Creation-Date: 2015-04-24 00:02-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,6 +49,10 @@ msgstr "El registro ha sido satisfactorio"
 #: apps/baseapp/views.py:94 apps/profiles/views.py:77
 msgid "Form invalid"
 msgstr "Formulario invalido"
+
+#: apps/profiles/validators.py:18 templates/profiles/edit_profile.html:23
+msgid "Files allowed: jpg, png, gif, ico, bmp"
+msgstr "Archivos permitidos: jpg, png, gif, ico, bmp"
 
 #: apps/profiles/views.py:74
 msgid "Changes saved correctly"
@@ -157,17 +161,29 @@ msgstr "Usuarios"
 msgid "This section contains users of the community."
 msgstr "Esta sección contiene los usuarios de la comunidad"
 
-#: templates/profiles/edit_profile.html:67
+#: templates/profiles/edit_profile.html:31
+msgid "Photo"
+msgstr "Foto"
+
+#: templates/profiles/edit_profile.html:41
+msgid "Location"
+msgstr "Ubicación"
+
+#: templates/profiles/edit_profile.html:51
+msgid "Company"
+msgstr "Empresa"
+
+#: templates/profiles/edit_profile.html:61 templates/profiles/profile.html:30
+msgid "About me"
+msgstr "Acerca de mí"
+
+#: templates/profiles/edit_profile.html:71
 msgid "Save"
 msgstr "Grabar"
 
 #: templates/profiles/profile.html:25
 msgid "Edit profile"
 msgstr "Editar Perfil"
-
-#: templates/profiles/profile.html:30
-msgid "About me"
-msgstr "Acerca de mí"
 
 #: templates/profiles/profile.html:38
 msgid "Contributions"
