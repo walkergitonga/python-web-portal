@@ -5,7 +5,7 @@ from apps.profiles.views import (EditProfileView, ProfileView,
 								AdminView)
 
 urlpatterns = [
-    url(r'^profile/$', 
+    url(r'^profile/(?P<username>.+)/$', 
     	login_required(ProfileView.as_view()), name='profile'),
     url(r'^settings/edit_profile/$', 
     	login_required(EditProfileView.as_view()), name='edit_profile'),

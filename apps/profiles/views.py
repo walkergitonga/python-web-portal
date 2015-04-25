@@ -16,12 +16,15 @@ class ProfileView(View):
 
 	template_name = "profiles/profile.html"
 
-	def get(self, request, *args, **kwargs):
+	def get(self, request, username, *args, **kwargs):
 
-		profile = Profile.objects.get(iduser_id=self.request.user.id)
+		us = User.objects.get(username=username)
+		iduser = us.id
+
+		profile = Profile.objects.get(iduser_id=iduser)
 
 		return render(request, self.template_name,
-					{'profile': profile})
+					{'profile': profile, 'user_data': us})
 
 class EditProfileView(FormView):
 

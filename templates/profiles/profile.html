@@ -16,13 +16,15 @@
             {% endif %}
 
             <div class="header">
-                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                <h1>{{ user_data.first_name }} {{ user_data.last_name }}</h1>
                 <h4>{{ profile.location }}</h4>
                 <h4>{{ profile.company }}</h4>
-                <h4>{{ user.date_joined }}</h4>
+                <h4>{{ user_data.date_joined }}</h4>
             </div>
 
-            <a href="/settings/edit_profile/" class="btn btn btn-success">{% trans "Edit profile" %}</a>
+            {% if user_data.id == user.id %}
+                <a href="/settings/edit_profile/" class="btn btn btn-success">{% trans "Edit profile" %}</a>
+            {% endif %}
 
 		</div>
         <div class="col-md-8  col-xs-12">
