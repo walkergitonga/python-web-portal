@@ -106,7 +106,7 @@ class AdminView(FormView):
 				return self.form_invalid(form, **kwargs)
 
 			if new_password != new_password2:
-				messages.error(request, _("New passwords do not match"))
+				messages.error(request, _("New password do not match"))
 				return self.form_invalid(form, **kwargs)
 
 			#Save new password
