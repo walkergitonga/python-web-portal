@@ -6,7 +6,7 @@ from apps.profiles.models import Profile
 from apps.widgets import TextareaWidget
 
 '''
-	Form of profile
+	Form of edit profile
 '''
 class FormProfile(forms.ModelForm):
 
@@ -27,3 +27,19 @@ class FormProfile(forms.ModelForm):
 			if key != 'photo':
 				self.fields[key].required = True
 				self.fields[key].widget.attrs['class'] = class_css
+
+
+'''
+	Form of admin account profile
+'''
+class AdminProfileForm(forms.Form):
+
+	widgetPass = forms.PasswordInput(attrs={'class': 'form-control'})
+
+	password = forms.CharField(max_length=45, widget=widgetPass, 
+							required=True)
+	new_password = forms.CharField(max_length=45, widget=widgetPass, 
+							required=True)
+	new_password2 = forms.CharField(max_length=45, widget=widgetPass, 
+							required=True)
+	

@@ -1,0 +1,57 @@
+{% load i18n %}
+{% load static %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Profile" %}: {{ user.first_name }} {{ user.last_name }}</h3>
+    </div>
+    <div class="panel-body">
+        {% for message in messages %}
+            {% if message.tags != "error" %}
+                <div class="alert alert-success" role="alert">{{ message }}</div>
+            {% else %}
+                <div class="alert alert-danger" role="alert">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+
+        <form method="POST" action="/settings/admin/">{% csrf_token %}
+            {% for field in form %}
+
+                {% if field.name == "password" %}
+                    <b>{% trans "Old password" %}</b>
+                    {{ field }}
+                    {% if form.password.errors %}
+                        <div style="color: red">{{ form.password.errors }}</div>
+                    {% else %}
+                        <br>
+                    {% endif %}
+                {% endif %}
+
+                {% if field.name == "new_password" %}
+                    <b>{% trans "New password" %}</b>
+                    {{ field }}
+                    {% if form.new_password.errors %}
+                        <div style="color: red">{{ form.new_password.errors }}</div>
+                    {% else %}
+                        <br>
+                    {% endif %}
+                {% endif %}
+
+                {% if field.name == "new_password2" %}
+                    <b>{% trans "Confirm new password" %}</b>
+                    {{ field }}
+                    {% if form.new_password2.errors %}
+                        <div style="color: red">{{ form.new_password2.errors }}</div>
+                    {% else %}
+                        <br>
+                    {% endif %}
+                {% endif %}
+
+            {% endfor %}
+            <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+        </form>
+
+    </div>
+</div>
+
+    

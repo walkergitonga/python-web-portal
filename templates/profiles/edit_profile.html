@@ -1,5 +1,3 @@
-{% extends 'base.html' %}
-
 {% load i18n %}
 {% load static %}
 
@@ -7,69 +5,71 @@
     {{ form.media.js }}
 {% endblock %}
 
-{% block content %}
-	
-<div class="container center_div_full_screen">
-    <h3>{% trans "Profile" %}: {{ user.first_name }} {{ user.last_name }}</h3>
-    <hr>
-    {% for message in messages %}
-        {% if message.tags != "error" %}
-            <div class="alert alert-success" role="alert">{{ message }}</div>
-        {% else %}
-            <div class="alert alert-danger" role="alert">{{ message }}</div>
-        {% endif %}
-    {% endfor %}
-
-    <span style="color: green"> {% trans "Files allowed: jpg, png, gif, ico, bmp" %} </span>
-    <br>
-    <br>
-
-	<form method="POST" action="/edit_profile/" enctype="multipart/form-data">{% csrf_token %}
-		{% for field in form %}
-
-            {% if field.name == "photo" %}
-                <b>{% trans "Photo" %}</b>
-                {{ field }}
-                {% if form.photo.errors %}
-                    <div style="color: red">{{ form.photo.errors }}</div>
-                {% else %}
-                    <br>
-                {% endif %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Profile" %}: {{ user.first_name }} {{ user.last_name }}</h3>
+    </div>
+    <div class="panel-body">
+        {% for message in messages %}
+            {% if message.tags != "error" %}
+                <div class="alert alert-success" role="alert">{{ message }}</div>
+            {% else %}
+                <div class="alert alert-danger" role="alert">{{ message }}</div>
             {% endif %}
-
-            {% if field.name == "location" %}
-                <b>{% trans "Location" %}</b>
-                {{ field }}
-                {% if form.location.errors %}
-                    <div style="color: red">{{ form.location.errors }}</div>
-                {% else %}
-                    <br>
-                {% endif %}
-            {% endif %}
-
-            {% if field.name == "company" %}
-                <b>{% trans "Company" %}</b>
-                {{ field }}
-                {% if form.company.errors %}
-                    <div style="color: red">{{ form.company.errors }}</div>
-                {% else %}
-                    <br>
-                {% endif %}
-            {% endif %}
-
-            {% if field.name == "about" %}
-                <b>{% trans "About me" %}</b>
-                {{ field }}
-                {% if form.about.errors %}
-                    <div style="color: red">{{ form.about.errors }}</div>
-                {% else %}
-                    <br>
-                {% endif %}
-            {% endif %}
-
         {% endfor %}
-		<button type="submit" class="btn btn-success">{% trans "Save" %}</button>
-	</form>
+
+        <span style="color: green"> {% trans "Files allowed: jpg, png, gif, ico, bmp" %} </span>
+        <br>
+        <br>
+
+        <form method="POST" action="/settings/edit_profile/" enctype="multipart/form-data">{% csrf_token %}
+            {% for field in form %}
+
+                {% if field.name == "photo" %}
+                    <b>{% trans "Photo" %}</b>
+                    {{ field }}
+                    {% if form.photo.errors %}
+                        <div style="color: red">{{ form.photo.errors }}</div>
+                    {% else %}
+                        <br>
+                    {% endif %}
+                {% endif %}
+
+                {% if field.name == "location" %}
+                    <b>{% trans "Location" %}</b>
+                    {{ field }}
+                    {% if form.location.errors %}
+                        <div style="color: red">{{ form.location.errors }}</div>
+                    {% else %}
+                        <br>
+                    {% endif %}
+                {% endif %}
+
+                {% if field.name == "company" %}
+                    <b>{% trans "Company" %}</b>
+                    {{ field }}
+                    {% if form.company.errors %}
+                        <div style="color: red">{{ form.company.errors }}</div>
+                    {% else %}
+                        <br>
+                    {% endif %}
+                {% endif %}
+
+                {% if field.name == "about" %}
+                    <b>{% trans "About me" %}</b>
+                    {{ field }}
+                    {% if form.about.errors %}
+                        <div style="color: red">{{ form.about.errors }}</div>
+                    {% else %}
+                        <br>
+                    {% endif %}
+                {% endif %}
+
+            {% endfor %}
+            <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+        </form>
+
+    </div>
 </div>
 
-{% endblock %}
+	

@@ -1,12 +1,14 @@
 # -*- coding: UTF-8 -*-
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
 from django.views.generic.edit import FormView
 
-from apps.profiles.forms import FormProfile
+from apps.profiles.forms import FormProfile, AdminProfileForm
 from apps.profiles.models import Profile
 from apps.utils import remove_file
 
@@ -23,9 +25,9 @@ class ProfileView(View):
 
 class EditProfileView(FormView):
 
-	template_name = "profiles/edit_profile.html"
+	template_name = "profiles/settings.html"
 	form_class = FormProfile
-	success_url = '/edit_profile/'
+	success_url = '/settings/edit_profile/'
 
 	def get(self, request, *args, **kwargs):
 
@@ -78,3 +80,43 @@ class EditProfileView(FormView):
 			return self.form_invalid(form, **kwargs)
 
 
+'''
+	This view is part of the section of
+	settings, for change password
+'''
+class AdminView(FormView):
+
+	template_name = "profiles/settings.html"
+	form_class = AdminProfileForm
+	success_url = '/settings/admin/'
+
+	def post(self, request, *args, **kwargs):
+
+		form_class = self.get_form_class()
+		form = self.get_form(form_class)
+
+		if form.is_valid():
+
+			password = request.POST['password']
+			new_password = request.POST['new_password']
+			new_password2 = request.POST['new_password2']
+
+			if not request.user.check_password(password):
+				messages.error(request, _("Current password incorrect"))
+				return self.form_invalid(form, **kwargs)
+
+			if new_password != new_password2:
+				messages.error(request, _("New passwords do not match"))
+				return self.form_invalid(form, **kwargs)
+
+			#Save new password
+			new_password = make_password(new_password)
+			User.objects.filter(id=request.user.id).update(
+										password=new_password
+									)
+
+			messages.success(request, _("Changes saved correctly"))
+			return self.form_valid(form, **kwargs)
+		else:
+			messages.error(request, _("Form invalid"))
+			return self.form_invalid(form, **kwargs)
