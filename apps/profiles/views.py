@@ -118,7 +118,6 @@ class AdminView(FormView):
 										password=new_password
 									)
 
-			messages.success(request, _("Changes saved correctly"))
 			return self.form_valid(form, **kwargs)
 		else:
 			messages.error(request, _("Form invalid"))
