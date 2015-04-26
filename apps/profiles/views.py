@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
@@ -10,8 +11,12 @@ from django.views.generic.edit import FormView
 
 from apps.profiles.forms import FormProfile, AdminProfileForm
 from apps.profiles.models import Profile
-from apps.utils import remove_file
+from apps.utils import remove_file, helper_paginator
 
+'''
+	This view contains the form
+	of profile of user
+'''
 class ProfileView(View):
 
 	template_name = "profiles/profile.html"
@@ -20,12 +25,15 @@ class ProfileView(View):
 
 		us = User.objects.get(username=username)
 		iduser = us.id
-
 		profile = Profile.objects.get(iduser_id=iduser)
 
 		return render(request, self.template_name,
-					{'profile': profile, 'user_data': us})
+					{'profile': profile})
 
+'''
+	This view contains the form
+	for edit profile
+'''
 class EditProfileView(FormView):
 
 	template_name = "profiles/settings.html"
@@ -122,3 +130,22 @@ class AdminView(FormView):
 		else:
 			messages.error(request, _("Form invalid"))
 			return self.form_invalid(form, **kwargs)
+
+
+'''
+	This view display all profiles
+'''
+class UsersView(View):
+
+	template_name = "profiles/users.html"
+
+	def get(self, request, *args, **kwargs):
+
+		iduser = request.user.id
+		profiles = Profile.objects.filter(~Q(iduser_id=iduser))
+
+		pag = helper_paginator(self, request, profiles, 12, 'profiles')
+
+		return render(request, self.template_name,
+					{'profiles': pag['profiles'],
+					'paginator': pag})

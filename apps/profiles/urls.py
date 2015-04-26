@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 
 from apps.profiles.views import (EditProfileView, ProfileView,
-								AdminView)
+								AdminView, UsersView)
 
 urlpatterns = [
     url(r'^profile/(?P<username>.+)/$', 
@@ -11,4 +11,6 @@ urlpatterns = [
     	login_required(EditProfileView.as_view()), name='edit_profile'),
     url(r'^settings/admin/$', 
     	login_required(AdminView.as_view()), name='admin_password'),
+    url(r'^users/$', 
+    	login_required(UsersView.as_view()), name='users'),
 ]

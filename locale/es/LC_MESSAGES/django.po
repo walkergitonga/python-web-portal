@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-25 12:44-0300\n"
+"POT-Creation-Date: 2015-04-26 20:02-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,8 +47,8 @@ msgstr "El correo electrónico ya está registrado"
 msgid "Registration was successful"
 msgstr "El registro ha sido satisfactorio"
 
-#: apps/baseapp/views.py:94 apps/profiles/views.py:79
-#: apps/profiles/views.py:121
+#: apps/baseapp/views.py:94 apps/profiles/views.py:90
+#: apps/profiles/views.py:131
 msgid "Form invalid"
 msgstr "Formulario invalido"
 
@@ -56,15 +56,15 @@ msgstr "Formulario invalido"
 msgid "Files allowed: jpg, png, gif, ico, bmp"
 msgstr "Archivos permitidos: jpg, png, gif, ico, bmp"
 
-#: apps/profiles/views.py:76 apps/profiles/views.py:118
+#: apps/profiles/views.py:87
 msgid "Changes saved correctly"
 msgstr "Cambios guardados correctamente"
 
-#: apps/profiles/views.py:105
+#: apps/profiles/views.py:116
 msgid "Current password incorrect"
 msgstr "Contraseña actual incorrecta"
 
-#: apps/profiles/views.py:109
+#: apps/profiles/views.py:120
 msgid "New password do not match"
 msgstr "La nueva contraseña no coincide"
 
@@ -137,7 +137,7 @@ msgid ""
 "contribute."
 msgstr ""
 "Esta sección contendrá las aplicaciones open source para que la comunidad "
-"pueda contribuir"
+"pueda contribuir."
 
 #: templates/baseapp/index.html:26
 msgid "Feel free to upload the app you want."
@@ -166,7 +166,7 @@ msgstr "Usuarios"
 
 #: templates/baseapp/index.html:36
 msgid "This section contains users of the community."
-msgstr "Esta sección contiene los usuarios de la comunidad"
+msgstr "Esta sección contiene los usuarios de la comunidad."
 
 #: templates/profiles/admin.html:21
 msgid "Old password"
@@ -196,21 +196,25 @@ msgstr "Ubicación"
 msgid "Company"
 msgstr "Empresa"
 
-#: templates/profiles/edit_profile.html:59 templates/profiles/profile.html:30
+#: templates/profiles/edit_profile.html:59 templates/profiles/profile.html:32
 msgid "About me"
 msgstr "Acerca de mí"
 
-#: templates/profiles/profile.html:25 templates/profiles/settings.html:28
+#: templates/profiles/profile.html:26 templates/profiles/settings.html:28
 msgid "Edit profile"
 msgstr "Editar Perfil"
 
-#: templates/profiles/profile.html:38
+#: templates/profiles/profile.html:40
 msgid "Contributions"
 msgstr "Contribuciones"
 
 #: templates/profiles/settings.html:20
 msgid "Settings"
 msgstr "Ajustes"
+
+#: templates/profiles/users.html:10
+msgid "Users of Portal web python"
+msgstr "Usuarios de Portal web python"
 
 #~ msgid "Configuration"
 #~ msgstr "Configuración"

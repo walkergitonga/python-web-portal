@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+	
+<div class="container">
+    <div class="row">
+        <h3>{% trans "Users of Portal web python" %}</h3>
+        <hr>
+    </div>
+    <div class="row">
+        {% for profile in profiles %}
+            <div class="col-sm-3" style="margin-top: 5px">
+                <div class="card">
+                    <div class="avatar">
+                        {% if profile.photo %}
+                            <img src="{{MEDIA_URL}}{{profile.photo}}" class="img-thumbnail picture hidden-xs" width="100" hegiht="100" />
+                        {% else %}
+                            <img src="{% static 'img/profile.png' %}" class="img-thumbnail picture hidden-xs" width="100" hegiht="100" />
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <br>
+                        <a href="/profile/{{profile.iduser.username}}/">{{ profile.iduser.first_name }} {{ profile.iduser.last_name }}</a>
+                        <br>
+                        <p>{{profile.location}}</p>
+                        <p>{{profile.company}}</p>
+                        <p>{{profile.iduser.last_login}}</p>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <ul class="pagination" style="float: right">
+        <li> 
+            {% if paginator.has_prev %}
+            <a href="/users/?page={{ paginator.firstPage }}"> << </a>
+            <a href="/users/?page={{ paginator.prev_page }}"> < </a>
+            {% else %}
+            <a style="color:gray; cursor:not-allowed"> << </a>
+            <a style="color:gray; cursor:not-allowed"> < </a>
+            {% endif %}                  
+            {% if paginator.has_next %}
+            <a href="/users/?page={{ paginator.next_page }}"> > </a>
+            <a href="/users/?page={{ paginator.pages }}"> >> </a>
+            {% else %}
+            <a style="color:gray; cursor:not-allowed"> > </a>
+            <a style="color:gray; cursor:not-allowed"> >> </a>
+            {% endif %}
+        </li>
+        <p>Página <{{paginator.page}} de {{paginator.pages}}> </p>
+    </ul>
+</div>
+
+{% endblock %}

@@ -16,13 +16,13 @@
             {% endif %}
 
             <div class="header">
-                <h1>{{ user_data.first_name }} {{ user_data.last_name }}</h1>
+                <h1>{{ profile.iduser.first_name }} {{ profile.iduser.last_name }}</h1>
                 <h4>{{ profile.location }}</h4>
                 <h4>{{ profile.company }}</h4>
-                <h4>{{ user_data.date_joined }}</h4>
+                <h4>{{ profile.iduser.date_joined }}</h4>
             </div>
 
-            {% if user_data.id == user.id %}
+            {% if profile.iduser.id == user.id %}
                 <a href="/settings/edit_profile/" class="btn btn btn-success">{% trans "Edit profile" %}</a>
             {% endif %}
 
