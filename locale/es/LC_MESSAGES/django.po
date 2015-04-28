@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-27 22:16-0300\n"
+"POT-Creation-Date: 2015-04-28 15:16-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,18 +43,14 @@ msgstr "Las contraseñas no coinciden"
 msgid "Email addresses must be unique."
 msgstr "El correo electrónico ya está registrado"
 
-#: apps/baseapp/views.py:92
+#: apps/baseapp/views.py:95
 msgid "Registration was successful"
 msgstr "El registro ha sido satisfactorio"
 
-#: apps/baseapp/views.py:95 apps/baseapp/views.py:134
-#: apps/profiles/views.py:90 apps/profiles/views.py:131
+#: apps/baseapp/views.py:98 apps/profiles/views.py:90
+#: apps/profiles/views.py:131
 msgid "Form invalid"
 msgstr "Formulario invalido"
-
-#: apps/baseapp/views.py:131
-msgid "Please, check the email"
-msgstr "Por favor, revise su email"
 
 #: apps/profiles/validators.py:18 templates/profiles/edit_profile.html:21
 msgid "Files allowed: jpg, png, gif, ico, bmp"
@@ -97,7 +93,8 @@ msgid "Works"
 msgstr "Empleos"
 
 #: templates/base.html:41 templates/baseapp/login.html:20
-#: templates/baseapp/login.html.py:51 templates/baseapp/signup.html:80
+#: templates/baseapp/login.html.py:51
+#: templates/baseapp/signup.html:80
 msgid "Sign in"
 msgstr "Ingresar"
 
@@ -176,25 +173,90 @@ msgstr "Esta sección contiene los usuarios de la comunidad."
 msgid "Forgot password?"
 msgstr "¿Has olvidado tu contraseña?"
 
-#: templates/baseapp/login.html:67
-msgid "Forgot password"
-msgstr "Has olvidado tu contraseña"
+#: templates/baseapp/password_reset_complete.html:6
+msgid "Home"
+msgstr ""
 
-#: templates/baseapp/login.html:72
+#: templates/baseapp/password_reset_complete.html:7
+msgid "Password reset"
+msgstr "Resetear contraseña"
+
+#: templates/baseapp/password_reset_complete.html:15
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: templates/baseapp/password_reset_complete.html:17
+msgid "Log in"
+msgstr "Ingresar"
+
+#: templates/baseapp/password_reset_confirm.html:17
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: templates/baseapp/password_reset_confirm.html:22
+#: templates/profiles/admin.html:31
+msgid "New password"
+msgstr "Nueva contraseña"
+
+#: templates/baseapp/password_reset_confirm.html:29
+msgid "Confirm password"
+msgstr "Confirmar la nueva contraseña"
+
+#: templates/baseapp/password_reset_confirm.html:33
+msgid "Change my password"
+msgstr "Cambiar mi contraseña"
+
+#: templates/baseapp/password_reset_confirm.html:43
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: templates/baseapp/password_reset_done.html:7
+msgid "Please, check your email"
+msgstr "Por favor, revise su email"
+
+#: templates/baseapp/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: templates/baseapp/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: templates/baseapp/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: templates/baseapp/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: templates/baseapp/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: templates/baseapp/password_reset_form.html:11
+msgid "Reset password"
+msgstr "Resetear contraseña"
+
+#: templates/baseapp/password_reset_form.html:20
 msgid "Email"
 msgstr "Correo electrónico"
 
-#: templates/baseapp/login.html:74
+#: templates/baseapp/password_reset_form.html:30
 msgid "Submit"
 msgstr "Enviar"
 
 #: templates/profiles/admin.html:21
 msgid "Old password"
 msgstr "Contraseña anterior"
-
-#: templates/profiles/admin.html:31
-msgid "New password"
-msgstr "Nueva contraseña"
 
 #: templates/profiles/admin.html:41
 msgid "Confirm new password"
@@ -235,6 +297,9 @@ msgstr "Ajustes"
 #: templates/profiles/users.html:10
 msgid "Users of Portal web python"
 msgstr "Usuarios de Portal web python"
+
+#~ msgid "Forgot password"
+#~ msgstr "Has olvidado tu contraseña"
 
 #~ msgid "Configuration"
 #~ msgstr "Configuración"

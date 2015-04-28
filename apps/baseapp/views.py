@@ -2,11 +2,14 @@
 
 from django.contrib import messages
 from django.contrib.auth import login, logout
-from django.core.mail import EmailMultiAlternatives
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.views import (password_reset, password_reset_complete,
+								password_reset_done, password_reset_confirm)
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 
 from apps.baseapp.forms import FormLogin, FormSignup
@@ -97,39 +100,54 @@ class SignupView(FormView):
 		else:
 			return HttpResponseRedirect("/")
 
-class ResetPassView(View):
+'''
+	This view contains the form
+	for reset password of user
+'''
+def reset_password(request):
 
-	def post(self, request, *args, **kwargs):
+	return password_reset(request, is_admin_site=False,
+                   template_name='baseapp/password_reset_form.html',
+                   email_template_name='baseapp/password_reset_email.html',
+                   subject_template_name='baseapp/password_reset_subject.txt',
+                   password_reset_form=PasswordResetForm,
+                   token_generator=default_token_generator,
+                   post_reset_redirect=None,
+                   from_email=None,
+                   current_app=None,
+                   extra_context=None,
+                   html_email_template_name=None)
 
-		if request.POST.has_key('email'):
+'''
+	This view display messages
+	that successful send email
+'''
+def pass_reset_done(request):
 
-			#email = request.POST['email']
+	return password_reset_done(request,
+                        template_name='baseapp/password_reset_done.html',
+                        current_app=None, extra_context=None)
 
-			'''my_domain = "http://" + request.get_host() + "/"
+'''
+	This view display form reset confirm pass
+'''
+def reset_pass_confirm(request, uidb64, token):
 
-	        email_main = settings.EMAIL_MAIN
-	        msg = EmailMultiAlternatives(subject="Reset password",
-	                from_email = 'Portal web python <'+email_main+'>',
-	                to= [email])
+	return password_reset_confirm(request, uidb64=uidb64, token=token,
+                           template_name='baseapp/password_reset_confirm.html',
+                           token_generator=default_token_generator,
+                           set_password_form=SetPasswordForm,
+                           post_reset_redirect=None,
+                           current_app=None, extra_context=None)
 
-	        email64 = base64.b64encode(email)
 
-	        #Parametros para el html del email
-	        email_data = {
-	          'email64':email64,
-	          'nombre_destino': nombre_destino,
-	          'my_domain': my_domain,
-	        }
-	        email_data = RequestContext(request, email_data)
+'''
+	This view display messages
+	that successful reset pass
+'''
+def reset_done_pass(request):
 
-	        link = "<a href='/new_password/'>Link</a>" 
-	        text_email = "<p>Reset password: Please enter to link: " + link + " </p>"
+	return password_reset_complete(request,
+                            template_name='baseapp/password_reset_complete.html',
+                            current_app=None, extra_context=None)
 
-	        msg.attach_alternative(text_email, "text/html")
-	        msg.send()'''
-			
-			messages.success(request, _("Please, check the email"))
-			return HttpResponseRedirect("/login/")
-		else:
-			messages.error(request, _("Form invalid"))
-			return HttpResponseRedirect("/login/")

@@ -3,7 +3,6 @@ from django.conf import settings
 from django.contrib import admin
 
 urlpatterns = [
-    # Examples:
     url(r'^' , include('apps.baseapp.urls')),
     url(r'^' , include('apps.profiles.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),

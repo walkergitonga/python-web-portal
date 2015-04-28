@@ -130,8 +130,6 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 USE_I18N = True
 USE_L10N = True
 
-EMAIL_MAIN = "martinpeveri@gmail.com"
-
 '''Time Zone'''
 
 TIME_ZONE = 'America/Buenos_Aires'

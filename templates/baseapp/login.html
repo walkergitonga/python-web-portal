@@ -51,37 +51,13 @@
 				        	<button type="submit" class="btn btn-success">{% trans "Sign in" %}</button>
 				        </div>
 				        <div style="float: right">
-				        	<a href="#" data-toggle="modal" data-target="#ModalRecover">{% trans "Forgot password?" %}</a>
+				        	<a href="/reset_password/">{% trans "Forgot password?" %}</a>
 				        </div> 
 					</form>
 					
 	            </div>
 	        </div>
     	</div>
-
-    	<div class="modal fade" id="ModalRecover" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
-		  <div class="modal-dialog"> 
-		    <div class="modal-content"> 
-		      <div class="modal-header"> 
-		        <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
-		        <h4 class="modal-title">{% trans "Forgot password" %}</h4> 
-		      </div> 
-		      <div class="modal-body"> 
-		        	
-		        	<form class="form-horizontal" action="/reset_password/" method="POST">{% csrf_token%}
-		        		<input type="text" name="email" class="form-control" placeholder="{% trans "Email" %}" />
-		        		<br>
-		        		<button type="submit" class="btn btn-success">{% trans "Submit" %}</button>
-		        	</form>
-
-		      </div> 
-		      <div class="modal-footer"> 
-		        <center><p>Portal web python</p></center>
-		      </div> 
-		    </div> 
-		  </div> 
-		</div> 
-
 	</div>
 
 {% endblock %}
