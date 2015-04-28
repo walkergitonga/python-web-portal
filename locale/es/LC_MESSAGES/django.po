@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-27 22:14-0300\n"
+"POT-Creation-Date: 2015-04-27 22:16-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -174,7 +174,7 @@ msgstr "Esta sección contiene los usuarios de la comunidad."
 
 #: templates/baseapp/login.html:54
 msgid "Forgot password?"
-msgstr "Repita la contraseña"
+msgstr "¿Has olvidado tu contraseña?"
 
 #: templates/baseapp/login.html:67
 msgid "Forgot password"
@@ -182,7 +182,7 @@ msgstr "Has olvidado tu contraseña"
 
 #: templates/baseapp/login.html:72
 msgid "Email"
-msgstr "Correo eletrónico"
+msgstr "Correo electrónico"
 
 #: templates/baseapp/login.html:74
 msgid "Submit"
