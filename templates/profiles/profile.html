@@ -17,9 +17,9 @@
 
             <div class="header">
                 <h1>{{ profile.iduser.first_name }} {{ profile.iduser.last_name }}</h1>
-                <h4>{{ profile.location }}</h4>
-                <h4>{{ profile.company }}</h4>
-                <h4>{{ profile.iduser.date_joined }}</h4>
+                <h5>{{ profile.location }}</h5>
+                <h5>{{ profile.company }}</h5>
+                <h5>{{ profile.iduser.date_joined }}</h5>
             </div>
 
             {% if profile.iduser.id == user.id %}
@@ -29,7 +29,7 @@
 		</div>
         <div class="col-md-8  col-xs-12">
 
-            <h3>{% trans "About me" %}</h3>
+            <h4>{% trans "About me" %}</h4>
             <hr>
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -37,7 +37,7 @@
                 </div>
             </div>
                         
-            <h3>{% trans "Contributions" %}</h3>
+            <h4>{% trans "Contributions" %}</h4>
             <hr>
 
         </div>

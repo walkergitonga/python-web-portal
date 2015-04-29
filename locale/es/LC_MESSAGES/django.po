@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-28 15:16-0300\n"
+"POT-Creation-Date: 2015-04-29 20:41-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,8 +93,7 @@ msgid "Works"
 msgstr "Empleos"
 
 #: templates/base.html:41 templates/baseapp/login.html:20
-#: templates/baseapp/login.html.py:51
-#: templates/baseapp/signup.html:80
+#: templates/baseapp/login.html.py:51 templates/baseapp/signup.html:80
 msgid "Sign in"
 msgstr "Ingresar"
 
@@ -113,10 +112,10 @@ msgstr "Bienvenidos a Portal web python"
 
 #: templates/baseapp/index.html:10
 msgid ""
-"Python web portal is a community for the python programming language, where "
+"Portal web python is a community for the python programming language, where "
 "developers can share knowledge and make new friends."
 msgstr ""
-"Python web portal es una comunidad para el lenguaje de programación python,  "
+"Portal web python es una comunidad para el lenguaje de programación python,  "
 "donde los desarrolladores podrán compartir sus conocimientos y hacer nuevos "
 "amigos."
 
@@ -188,6 +187,12 @@ msgstr ""
 #: templates/baseapp/password_reset_complete.html:17
 msgid "Log in"
 msgstr "Ingresar"
+
+#: templates/baseapp/password_reset_confirm.html:13
+#, fuzzy
+#| msgid "Change my password"
+msgid "Change password"
+msgstr "Cambiar mi contraseña"
 
 #: templates/baseapp/password_reset_confirm.html:17
 msgid ""
