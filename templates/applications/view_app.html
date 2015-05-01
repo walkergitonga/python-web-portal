@@ -7,6 +7,9 @@
 <div class="container">
 
 	<h4>{% trans "Application" %}: {{app.name}}</h4>
+	{% if app.iduser.id == user.id %}
+	<a href="/application_edit/{{app.name}}/{{app.iduser.username}}" class="btn btn-success" style="margin-bottom: 15px">{% trans "Edit application" %}</a>
+	{% endif %}
 	<div class="panel panel-default">
 	  	<div class="panel-body">
 	    	

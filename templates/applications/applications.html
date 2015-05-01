@@ -6,7 +6,7 @@
 	
 <div class="container">
 	<h2>{% trans "Applications" %}</h2>
-	<p>{% trans "This section will contain open source applications for the community to contribute." %} </p>
+	<p>{% trans "This section will contain open source applications for the community to contribute." %} {% trans "If you are looking for people to assist with your project, this is the right place." %} </p>
 	<p>{% trans "Feel free to upload the app you want." %} </p>
 
 	<a href="/applications/add/" class="btn btn-success" style="margin-bottom: 15px; margin-top: 15px;">{% trans "Add" %}</a>
@@ -33,6 +33,27 @@
 		    </tbody>
 		</table>
 	</div>
+
+	<ul class="pagination" style="float: right">
+        <li> 
+            {% if paginator.has_prev %}
+            <a href="/applications/?page={{ paginator.firstPage }}"> << </a>
+            <a href="/applications/?page={{ paginator.prev_page }}"> < </a>
+            {% else %}
+            <a style="color:gray; cursor:not-allowed"> << </a>
+            <a style="color:gray; cursor:not-allowed"> < </a>
+            {% endif %}                  
+            {% if paginator.has_next %}
+            <a href="/applications/?page={{ paginator.next_page }}"> > </a>
+            <a href="/applications/?page={{ paginator.pages }}"> >> </a>
+            {% else %}
+            <a style="color:gray; cursor:not-allowed"> > </a>
+            <a style="color:gray; cursor:not-allowed"> >> </a>
+            {% endif %}
+        </li>
+        <p>Página <{{paginator.page}} de {{paginator.pages}}> </p>
+    </ul>
+
 </div>
 
 {% endblock %}

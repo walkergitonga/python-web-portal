@@ -6,9 +6,9 @@ from apps.widgets import TextareaWidget
 from apps.applications.models import Applications
 
 '''
-	Form for create one new application
+	Form for create/edit one new application
 '''
-class FormAddApplication(forms.ModelForm):
+class FormApplication(forms.ModelForm):
 
 	description = forms.CharField(widget=TextareaWidget)
 
@@ -18,7 +18,7 @@ class FormAddApplication(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 
-		super(FormAddApplication, self).__init__(*args, **kwargs)
+		super(FormApplication, self).__init__(*args, **kwargs)
 		class_css = 'form-control'
 
 		for key in self.fields:

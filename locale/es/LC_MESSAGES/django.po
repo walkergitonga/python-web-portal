@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-30 23:38-0300\n"
+"POT-Creation-Date: 2015-05-01 00:33-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/applications/views.py:56
+#: apps/applications/views.py:62
 msgid "Saved record"
 msgstr "Registro grabado"
 
-#: apps/applications/views.py:59 apps/baseapp/views.py:98
+#: apps/applications/views.py:65 apps/baseapp/views.py:98
 #: apps/profiles/views.py:90 apps/profiles/views.py:131
 msgid "Form invalid"
 msgstr "Formulario invalido"
@@ -102,6 +102,12 @@ msgstr ""
 "Esta sección contendrá las aplicaciones open source para que la comunidad "
 "pueda contribuir."
 
+#: templates/applications/applications.html:9
+msgid ""
+"If you are looking for people to assist with your project, this is the right "
+"place."
+msgstr "Si estas buscando gente para que colabore en tu proyecto, este es el lugar adecuado."
+
 #: templates/applications/applications.html:10 templates/baseapp/index.html:26
 msgid "Feel free to upload the app you want."
 msgstr "Sientete libre de subir tu aplicación cuando lo desees."
@@ -111,10 +117,12 @@ msgid "Name"
 msgstr "Nombre"
 
 #: templates/applications/applications.html:19
+#: templates/applications/view_app.html:13
 msgid "Description"
 msgstr "Descripción"
 
 #: templates/applications/applications.html:20
+#: templates/applications/view_app.html:16
 msgid "Repository"
 msgstr "Repositorio"
 
@@ -122,6 +130,18 @@ msgstr "Repositorio"
 #, fuzzy
 #| msgid "Users"
 msgid "User"
+msgstr "Usuarios"
+
+#: templates/applications/view_app.html:9
+#, fuzzy
+#| msgid "Applications"
+msgid "Application"
+msgstr "Aplicaciones"
+
+#: templates/applications/view_app.html:19
+#, fuzzy
+#| msgid "Users"
+msgid "Username"
 msgstr "Usuarios"
 
 #: templates/base.html:31

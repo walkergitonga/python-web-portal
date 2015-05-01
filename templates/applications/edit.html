@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+
+{% block extra_js %}
+    {{ form.media.js }}
+{% endblock %}
+	
+<div class="container">
+
+	<div class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+		{% for message in messages %}
+			{% if message.tags != "error" %}
+				<div class="alert alert-success" role="alert">{{ message }}</div>
+			{% else %}
+				<div class="alert alert-danger" role="alert">{{ message }}</div>
+			{% endif %}
+		{% endfor %}
+		<div class="panel panel-default" >
+            <div class="panel-heading">
+                <div class="panel-title text-center">{% trans "Edit app" %}</div>
+            </div>     
+
+            <div class="panel-body">
+            	<form class="form-horizontal" action="/application_edit/{{app.name}}/{{app.iduser.username}}/" method="POST">{% csrf_token%}
+            		{% for field in form %}
+			   			{% if field.name == "name" %}
+			   				<b>{{ field.label }}</b>
+			              	<input type="text" disabled class="form-control" name="{{field.name}}" id="id_{{field.name}}" value="{{app.name}}" >
+			              	{% if form.name.errors %}
+			              		<div style="color: red">{{ form.name.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "description" %}
+			            	<b>{{ field.label }}</b>
+			              	{{ field }}
+			              	{% if form.description.errors %}
+			              		<div style="color: red">{{ form.description.errors|safe }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "repository" %}
+			            	<b>{{ field.label }}</b>
+			              	{{ field }}
+			              	{% if form.repository.errors %}
+			              		<div style="color: red">{{ form.repository.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			        {% endfor %}
+			        <button type="submit" class="btn btn-success">{% trans "Update" %}</button>
+				</form>
+            </div>
+        </div>
+	</div>
+
+</div>
+
+
+{% endblock %}
