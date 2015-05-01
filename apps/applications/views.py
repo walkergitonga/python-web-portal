@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
@@ -21,7 +21,7 @@ class ApplicationsView(View):
 
 	def get(self, request, *args, **kwargs):
 
-		apps = Applications.objects.all()
+		apps = Applications.objects.all().order_by("name")
 
 		pag = helper_paginator(self, request, apps, 15, 'apps')
 
@@ -133,3 +133,25 @@ class ApplicationEditView(FormView):
 		else:
 			messages.error(request, _("Form invalid"))
 			return self.form_invalid(form, **kwargs)
+
+'''
+	This view will delete one application
+'''
+class ApplicationDeleteView(View):
+
+	def get(self, request, name, username, *args, **kwargs):
+
+		#Previouly verify that exists the app
+		us = get_object_or_404(User, username=username)
+		iduser = us.id
+		app = get_object_or_404(Applications, name=name, iduser_id=iduser)
+
+		iduser_app = app.iduser_id
+
+		#If my user delete
+		if request.user.id == iduser_app:
+			Applications.objects.filter(name=name, iduser_id=iduser).delete()
+		else:
+			raise Http404
+
+		return HttpResponseRedirect("/applications/")

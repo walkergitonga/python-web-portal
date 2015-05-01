@@ -7,9 +7,6 @@
 <div class="container">
 
 	<h4>{% trans "Application" %}: {{app.name}}</h4>
-	{% if app.iduser.id == user.id %}
-	<a href="/application_edit/{{app.name}}/{{app.iduser.username}}" class="btn btn-success" style="margin-bottom: 15px">{% trans "Edit application" %}</a>
-	{% endif %}
 	<div class="panel panel-default">
 	  	<div class="panel-body">
 	    	
@@ -24,6 +21,14 @@
 
 	  	</div>
 	</div>
+
+	{% if app.iduser.id == user.id %}
+		<h4>{% trans "Actions" %}</h4>
+		<hr>
+		<p>{% trans "These actions can only visualize you for who are responsible for implementation." %}</p>
+		<a href="/application_edit/{{app.name}}/{{app.iduser.username}}" class="btn btn-success" style="margin-bottom: 15px">{% trans "Edit application" %}</a>
+		<a href="/application_delete/{{app.name}}/{{app.iduser.username}}" class="btn btn-danger" style="margin-bottom: 15px">{% trans "Delete application" %}</a>
+	{% endif %}
 
 </div>
 
