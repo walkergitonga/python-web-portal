@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-01 10:21-0300\n"
+"POT-Creation-Date: 2015-05-01 16:48-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,13 +90,13 @@ msgstr "Nombre"
 
 #: templates/applications/add.html:39
 #: templates/applications/applications.html:19
-#: templates/applications/edit.html:39 templates/applications/view_app.html:16
+#: templates/applications/edit.html:39 templates/applications/view_app.html:13
 msgid "Description"
 msgstr "Descripción"
 
 #: templates/applications/add.html:48
 #: templates/applications/applications.html:20
-#: templates/applications/edit.html:48 templates/applications/view_app.html:19
+#: templates/applications/edit.html:48 templates/applications/view_app.html:16
 msgid "Repository"
 msgstr "Repositorio"
 
@@ -135,7 +135,7 @@ msgstr "Sientete libre de subir tu aplicación cuando lo desees."
 msgid "User"
 msgstr "Usuarios"
 
-#: templates/applications/edit.html:23 templates/applications/view_app.html:11
+#: templates/applications/edit.html:23 templates/applications/view_app.html:29
 msgid "Edit application"
 msgstr "Editar aplicación"
 
@@ -144,14 +144,26 @@ msgid "Update"
 msgstr "Actualizar"
 
 #: templates/applications/view_app.html:9
-#, fuzzy
-#| msgid "Applications"
 msgid "Application"
-msgstr "Aplicaciones"
+msgstr "Aplicación"
 
-#: templates/applications/view_app.html:22
+#: templates/applications/view_app.html:19
 msgid "Username"
 msgstr "Nombre de usuario"
+
+#: templates/applications/view_app.html:26
+msgid "Actions"
+msgstr "Acciones"
+
+#: templates/applications/view_app.html:28
+msgid ""
+"These actions can only visualize you for who are responsible for "
+"implementation."
+msgstr "Estas acciones solamente la visualizará el responsable de la aplicación."
+
+#: templates/applications/view_app.html:30
+msgid "Delete application"
+msgstr "Eliminar aplicación"
 
 #: templates/base.html:31
 msgid "Blog"
