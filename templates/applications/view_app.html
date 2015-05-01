@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+	
+<div class="container">
+
+	<h4>{% trans "Application" %}: {{app.name}}</h4>
+	<div class="panel panel-default">
+	  	<div class="panel-body">
+	    	
+	    	<h4>{% trans "Description" %}</h4>
+	    	<p>{{app.description|safe}}</p>
+
+	    	<h4>{% trans "Repository" %}</h4>
+	    	<p>{{app.repository}}</p>
+
+	    	<h4>{% trans "Username" %}</h4>
+	    	<p>{{app.iduser.username}}</p>
+
+	  	</div>
+	</div>
+
+</div>
+
+{% endblock %}

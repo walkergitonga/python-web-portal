@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-29 20:41-0300\n"
+"POT-Creation-Date: 2015-04-30 23:38-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps/applications/views.py:56
+msgid "Saved record"
+msgstr "Registro grabado"
+
+#: apps/applications/views.py:59 apps/baseapp/views.py:98
+#: apps/profiles/views.py:90 apps/profiles/views.py:131
+msgid "Form invalid"
+msgstr "Formulario invalido"
 
 #: apps/baseapp/forms.py:17
 msgid "Username or Email"
@@ -47,11 +56,6 @@ msgstr "El correo electrónico ya está registrado"
 msgid "Registration was successful"
 msgstr "El registro ha sido satisfactorio"
 
-#: apps/baseapp/views.py:98 apps/profiles/views.py:90
-#: apps/profiles/views.py:131
-msgid "Form invalid"
-msgstr "Formulario invalido"
-
 #: apps/profiles/validators.py:18 templates/profiles/edit_profile.html:21
 msgid "Files allowed: jpg, png, gif, ico, bmp"
 msgstr "Archivos permitidos: jpg, png, gif, ico, bmp"
@@ -68,13 +72,57 @@ msgstr "Contraseña actual incorrecta"
 msgid "New password do not match"
 msgstr "La nueva contraseña no coincide"
 
-#: portal/settings.py:115
+#: portal/settings.py:116
 msgid "English"
 msgstr "Ingles"
 
-#: portal/settings.py:116
+#: portal/settings.py:117
 msgid "Spanish"
 msgstr "Español"
+
+#: templates/applications/add.html:23
+#: templates/applications/applications.html:12
+msgid "Add"
+msgstr "Agregar"
+
+#: templates/applications/add.html:57 templates/profiles/admin.html:51
+#: templates/profiles/edit_profile.html:69
+msgid "Save"
+msgstr "Grabar"
+
+#: templates/applications/applications.html:8 templates/baseapp/index.html:24
+msgid "Applications"
+msgstr "Aplicaciones"
+
+#: templates/applications/applications.html:9 templates/baseapp/index.html:25
+msgid ""
+"This section will contain open source applications for the community to "
+"contribute."
+msgstr ""
+"Esta sección contendrá las aplicaciones open source para que la comunidad "
+"pueda contribuir."
+
+#: templates/applications/applications.html:10 templates/baseapp/index.html:26
+msgid "Feel free to upload the app you want."
+msgstr "Sientete libre de subir tu aplicación cuando lo desees."
+
+#: templates/applications/applications.html:18
+msgid "Name"
+msgstr "Nombre"
+
+#: templates/applications/applications.html:19
+msgid "Description"
+msgstr "Descripción"
+
+#: templates/applications/applications.html:20
+msgid "Repository"
+msgstr "Repositorio"
+
+#: templates/applications/applications.html:21
+#, fuzzy
+#| msgid "Users"
+msgid "User"
+msgstr "Usuarios"
 
 #: templates/base.html:31
 msgid "Blog"
@@ -126,22 +174,6 @@ msgstr "Registrarse"
 #: templates/baseapp/index.html:15
 msgid "Date joined: "
 msgstr "Fecha de Registro"
-
-#: templates/baseapp/index.html:24
-msgid "Applications"
-msgstr "Aplicaciones"
-
-#: templates/baseapp/index.html:25
-msgid ""
-"This section will contain open source applications for the community to "
-"contribute."
-msgstr ""
-"Esta sección contendrá las aplicaciones open source para que la comunidad "
-"pueda contribuir."
-
-#: templates/baseapp/index.html:26
-msgid "Feel free to upload the app you want."
-msgstr "Sientete libre de subir tu aplicación cuando lo desees."
 
 #: templates/baseapp/index.html:27 templates/baseapp/index.html.py:32
 #: templates/baseapp/index.html:37
@@ -266,10 +298,6 @@ msgstr "Contraseña anterior"
 #: templates/profiles/admin.html:41
 msgid "Confirm new password"
 msgstr "Confirmar la nueva contraseña"
-
-#: templates/profiles/admin.html:51 templates/profiles/edit_profile.html:69
-msgid "Save"
-msgstr "Grabar"
 
 #: templates/profiles/edit_profile.html:29
 msgid "Photo"
