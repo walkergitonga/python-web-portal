@@ -1,6 +1,7 @@
 #encoding:utf-8 
 
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 from apps.widgets import TextareaWidget
 from apps.applications.models import Applications
@@ -48,3 +49,20 @@ class FormEditApplication(forms.ModelForm):
 				self.fields[key].widget.attrs['readonly'] = True
 
 				
+	def clean(self):
+
+		try:
+			self.cleaned_data['name']
+		except Exception:
+			raise forms.ValidationError(_("This field name is required"))
+		
+		try:
+			self.cleaned_data['description']
+		except Exception:
+			raise forms.ValidationError(_("This field description is required"))
+		
+		try:
+			self.cleaned_data['repository']
+		except Exception:
+			raise forms.ValidationError(_("This field repository is required"))
+
