@@ -9,7 +9,7 @@ from django.views.generic.edit import FormView
 
 from apps.utils import helper_paginator
 from apps.applications.models import Applications
-from apps.applications.forms import FormApplication
+from apps.applications.forms import FormAddApplication, FormEditApplication
 
 '''
 	This view display the view
@@ -36,8 +36,8 @@ class ApplicationsView(View):
 class ApplicationsAddView(FormView):
 
 	template_name = "applications/add.html"
-	form_class = FormApplication
-	success_url = '/applications/add/'
+	form_class = FormAddApplication
+	success_url = '/applications/'
 
 	def get(self, request, *args, **kwargs):
 		
@@ -59,7 +59,6 @@ class ApplicationsAddView(FormView):
 								repository=repository)
 			app.save()
 
-			messages.success(request, _("Saved record"))
 			return self.form_valid(form, **kwargs)
 		else:
 			messages.error(request, _("Form invalid"))
@@ -90,7 +89,7 @@ class ApplicationSeeView(View):
 class ApplicationEditView(FormView):
 
 	template_name = "applications/edit.html"
-	form_class = FormApplication
+	form_class = FormEditApplication
 	success_url = '/applications/'
 
 	def get(self, request, name, username, *args, **kwargs):
@@ -102,7 +101,7 @@ class ApplicationEditView(FormView):
 		if iduser == request.user.id:
 
 			app = get_object_or_404(Applications, name=name, iduser=iduser)
-			form = FormApplication(initial={'name': app.name, 
+			form = FormEditApplication(initial={'name': app.name, 
 							'description': app.description, 
 							'repository': app.repository})
 
@@ -111,7 +110,7 @@ class ApplicationEditView(FormView):
 		else:
 			raise Http404
 
-	def post(self, request, *args, **kwargs):
+	def post(self, request, name, username, *args, **kwargs):
 
 		form_class = self.get_form_class()
 		form = self.get_form(form_class)
@@ -130,7 +129,6 @@ class ApplicationEditView(FormView):
 				messages.error(request, _("Form invalid"))
 				return self.form_invalid(form, **kwargs)
 
-			messages.success(request, _("Updated record"))
 			return self.form_valid(form, **kwargs)
 		else:
 			messages.error(request, _("Form invalid"))

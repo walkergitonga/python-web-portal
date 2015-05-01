@@ -20,15 +20,15 @@
 		{% endfor %}
 		<div class="panel panel-default" >
             <div class="panel-heading">
-                <div class="panel-title text-center">{% trans "Edit app" %}</div>
+                <div class="panel-title text-center">{% trans "Edit application" %}</div>
             </div>     
 
             <div class="panel-body">
             	<form class="form-horizontal" action="/application_edit/{{app.name}}/{{app.iduser.username}}/" method="POST">{% csrf_token%}
             		{% for field in form %}
 			   			{% if field.name == "name" %}
-			   				<b>{{ field.label }}</b>
-			              	<input type="text" disabled class="form-control" name="{{field.name}}" id="id_{{field.name}}" value="{{app.name}}" >
+			   				<label>{% trans "Name" %}</label>
+			              	{{ field }}
 			              	{% if form.name.errors %}
 			              		<div style="color: red">{{ form.name.errors }}</div>
 			              	{% else %}
@@ -36,7 +36,7 @@
 			              	{% endif %}
 			            {% endif %}
 			            {% if field.name == "description" %}
-			            	<b>{{ field.label }}</b>
+			            	<label>{% trans "Description" %}</label>
 			              	{{ field }}
 			              	{% if form.description.errors %}
 			              		<div style="color: red">{{ form.description.errors|safe }}</div>
@@ -45,7 +45,7 @@
 			              	{% endif %}
 			            {% endif %}
 			            {% if field.name == "repository" %}
-			            	<b>{{ field.label }}</b>
+			            	<label>{% trans "Repository" %}</label>
 			              	{{ field }}
 			              	{% if form.repository.errors %}
 			              		<div style="color: red">{{ form.repository.errors }}</div>
