@@ -4,85 +4,85 @@
 
 {% block content %}
 	
-	<div class="container">
+<div class="container">
 
-		<div class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-			{% for message in messages %}
-				{% if message.tags != "error" %}
-					<div class="alert alert-success" role="alert">{{ message }}</div>
-				{% else %}
-					<div class="alert alert-danger" role="alert">{{ message }}</div>
-				{% endif %}
-			{% endfor %}
-			<div class="panel panel-default" >
-	            <div class="panel-heading">
-	                <div class="panel-title text-center">{% trans "Sign up" %}</div>
-	            </div>     
+	<div class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+		{% for message in messages %}
+			{% if message.tags != "error" %}
+				<div class="alert alert-success" role="alert">{{ message }}</div>
+			{% else %}
+				<div class="alert alert-danger" role="alert">{{ message }}</div>
+			{% endif %}
+		{% endfor %}
+		<div class="panel panel-default" >
+            <div class="panel-heading">
+                <div class="panel-title text-center">{% trans "Sign up" %}</div>
+            </div>     
 
-	            <div class="panel-body">
-	            	<form class="form-horizontal" action="/join/" method="POST">{% csrf_token%}
-	            		{% for field in form %}
-				   			{% if field.name == "username" %}
-				   				<b>{{ field.label }}</b>
-				              	{{ field }}
-				              	{% if form.username.errors %}
-				              		<div style="color: red">{{ form.username.errors }}</div>
-				              	{% else %}
-				              		<br>
-				              	{% endif %}
-				            {% endif %}
-				            {% if field.name == "email" %}
-				            	<b>{{ field.label }}</b>
-				              	{{ field }}
-				              	{% if form.email.errors %}
-				              		<div style="color: red">{{ form.email.errors|safe }}</div>
-				              	{% else %}
-				              		<br>
-				              	{% endif %}
-				            {% endif %}
-				            {% if field.name == "first_name" %}
-				            	<b>{{ field.label }}</b>
-				              	{{ field }}
-				              	{% if form.first_name.errors %}
-				              		<div style="color: red">{{ form.first_name.errors }}</div>
-				              	{% else %}
-				              		<br>
-				              	{% endif %}
-				            {% endif %}
-				            {% if field.name == "last_name" %}
-				            	<b>{{ field.label }}</b>
-				              	{{ field }}
-				              	{% if form.last_name.errors %}
-				              		<div style="color: red">{{ form.last_name.errors }}</div>
-				              	{% else %}
-				              		<br>
-				              	{% endif %}
-				            {% endif %}
-				            {% if field.name == "password" %}
-				            	<b>{{ field.label }}</b>
-				              	{{ field }}
-				              	{% if form.password.errors %}
-				              		<div style="color: red">{{ form.password.errors }}</div>
-				              	{% else %}
-				              		<br>
-				              	{% endif %}
-				            {% endif %}
-				            {% if field.name == "password_confirm" %}
-				            	<b>{{ field.label }}</b>
-				              	{{ field }}
-				              	{% if form.password_confirm.errors %}
-				              		<div style="color: red">{{ form.password_confirm.errors }}</div>
-				              	{% else %}
-				              		<br>
-				              	{% endif %}
-				            {% endif %}
-				        {% endfor %}
-				        <button type="submit" class="btn btn-success">{% trans "Sign in" %}</button>
-					</form>
-	            </div>
-	        </div>
-    	</div>
-
+            <div class="panel-body">
+            	<form class="form-horizontal" action="/join/" method="POST">{% csrf_token%}
+            		{% for field in form %}
+			   			{% if field.name == "username" %}
+			   				<b>{{ field.label }}</b>
+			              	{{ field }}
+			              	{% if form.username.errors %}
+			              		<div style="color: red">{{ form.username.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "email" %}
+			            	<b>{{ field.label }}</b>
+			              	{{ field }}
+			              	{% if form.email.errors %}
+			              		<div style="color: red">{{ form.email.errors|safe }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "first_name" %}
+			            	<b>{{ field.label }}</b>
+			              	{{ field }}
+			              	{% if form.first_name.errors %}
+			              		<div style="color: red">{{ form.first_name.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "last_name" %}
+			            	<b>{{ field.label }}</b>
+			              	{{ field }}
+			              	{% if form.last_name.errors %}
+			              		<div style="color: red">{{ form.last_name.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "password" %}
+			            	<b>{{ field.label }}</b>
+			              	{{ field }}
+			              	{% if form.password.errors %}
+			              		<div style="color: red">{{ form.password.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "password_confirm" %}
+			            	<b>{{ field.label }}</b>
+			              	{{ field }}
+			              	{% if form.password_confirm.errors %}
+			              		<div style="color: red">{{ form.password_confirm.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			        {% endfor %}
+			        <button type="submit" class="btn btn-success">{% trans "Sign in" %}</button>
+				</form>
+            </div>
+        </div>
 	</div>
+
+</div>
 
 {% endblock %}

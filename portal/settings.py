@@ -40,6 +40,7 @@ THIRD_PARTY_APPS = ()
 LOCAL_APSS = (
     'apps.baseapp',
     'apps.profiles',
+    'apps.applications',
 )
 
 # Application definition

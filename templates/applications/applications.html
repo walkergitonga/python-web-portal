@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+	
+<div class="container">
+	<h2>{% trans "Applications" %}</h2>
+	<p>{% trans "This section will contain open source applications for the community to contribute." %} </p>
+	<p>{% trans "Feel free to upload the app you want." %} </p>
+
+	<a href="/applications/add/" class="btn btn-success" style="margin-bottom: 15px; margin-top: 15px;">{% trans "Add" %}</a>
+
+	<div class="table-responsive">          
+		<table class="table">
+		    <thead>
+		      <tr>
+		        <th>{% trans "Name" %}</th>
+		        <th>{% trans "Description" %}</th>
+		        <th>{% trans "Repository" %}</th>
+		        <th>{% trans "User" %}</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    	{% for app in apps %}
+				    <tr>
+				        <td>{{app.name}}</td>
+				        <td>{{app.description|safe|truncatechars:100}}</td>
+				        <td>{{app.repository}}</td>
+				        <td>{{app.iduser.username}}</td>
+				    </tr>
+			    {% endfor %}
+		    </tbody>
+		</table>
+	</div>
+</div>
+
+{% endblock %}
