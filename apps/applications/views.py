@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
 from django.views.generic.edit import FormView
@@ -50,9 +51,9 @@ class ApplicationsAddView(FormView):
 		form = self.get_form(form_class)
 
 		if form.is_valid():
-			name = request.POST['name']	
+			name = strip_tags(request.POST['name'])	
 			description = request.POST['description']	
-			repository = request.POST['repository']	
+			repository = strip_tags(request.POST['repository'])	
 
 			app = Applications(name=name, description=description,
 								iduser_id=request.user.id,
@@ -106,7 +107,7 @@ class ApplicationEditView(FormView):
 							'repository': app.repository})
 
 			return render(request, self.template_name, 
-							{'form': form, 'app': app})
+							{'form': form})
 		else:
 			raise Http404
 
@@ -118,7 +119,7 @@ class ApplicationEditView(FormView):
 		if form.is_valid():
 			name = request.POST['name']	
 			description = request.POST['description']	
-			repository = request.POST['repository']	
+			repository = strip_tags(request.POST['repository'])	
 
 			iduser = request.user.id
 			try:
