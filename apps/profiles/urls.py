@@ -12,5 +12,5 @@ urlpatterns = [
     url(r'^settings/admin/$', 
     	login_required(AdminView.as_view()), name='admin_password'),
     url(r'^users/$', 
-    	login_required(UsersView.as_view()), name='users'),
+    	UsersView.as_view(), name='users'),
 ]

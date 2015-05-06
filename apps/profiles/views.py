@@ -142,7 +142,10 @@ class UsersView(View):
 	def get(self, request, *args, **kwargs):
 
 		iduser = request.user.id
-		profiles = Profile.objects.filter(~Q(iduser_id=iduser))
+		if iduser is None:
+			profiles = Profile.objects.all()
+		else:
+			profiles = Profile.objects.filter(~Q(iduser_id=iduser))
 
 		pag = helper_paginator(self, request, profiles, 12, 'profiles')
 
