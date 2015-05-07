@@ -8,6 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
 from django.views.generic.edit import FormView
 
+from log.utils import set_error_to_log
+
 from apps.utils import helper_paginator
 from apps.applications.models import Applications
 from apps.applications.forms import FormAddApplication, FormEditApplication
@@ -109,6 +111,12 @@ class ApplicationEditView(FormView):
 			return render(request, self.template_name, 
 							{'form': form})
 		else:
+			error = ""
+			error = error + 'The user ' + str(request.user.id)
+			error = error + ' He is trying to modify the application ' + name 
+			error = error +	' of user ' + str(iduser)
+
+			set_error_to_log(request, error)
 			raise Http404
 
 	def post(self, request, name, username, *args, **kwargs):
@@ -153,6 +161,12 @@ class ApplicationDeleteView(View):
 		if request.user.id == iduser_app:
 			Applications.objects.filter(name=name, iduser_id=iduser).delete()
 		else:
+			error = ""
+			error = error + 'The user ' + str(request.user.id)
+			error = error + ' He is trying to remove the application ' + name 
+			error = error +	' of user ' + str(iduser_app)
+
+			set_error_to_log(request, error)
 			raise Http404
 
 		return HttpResponseRedirect("/applications/")

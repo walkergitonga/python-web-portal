@@ -1,3 +1,4 @@
 Django==1.8.1
 psycopg2==2.6
 django-seo-admin==0.2
+django-admin-log==0.2

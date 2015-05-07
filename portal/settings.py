@@ -37,6 +37,7 @@ DJANGO_APP = (
 
 THIRD_PARTY_APPS = (
     'seo',
+    'log',
 )
 
 LOCAL_APSS = (
