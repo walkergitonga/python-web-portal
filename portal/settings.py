@@ -35,7 +35,9 @@ DJANGO_APP = (
     'django.contrib.staticfiles',
 )
 
-THIRD_PARTY_APPS = ()
+THIRD_PARTY_APPS = (
+    'seo',
+)
 
 LOCAL_APSS = (
     'apps.baseapp',
