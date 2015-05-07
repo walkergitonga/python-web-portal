@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+	
+<div class="container">
+	<h2>{% trans "Jobs" %}</h2>
+	<p>{% trans "This section will contain the jobs loaded for the community, companies, etc." %} </p>
+	<p>{% trans "Feel free to post the job you need." %} </p>
+
+	<a href="/jobs/add/" class="btn btn-success" style="margin-bottom: 15px; margin-top: 15px;">{% trans "Add" %}</a>
+
+	{% for job in jobs %}
+	    <div class="container background_gray">
+	    	<div class="row-build">
+				<h1>{{job.title}}</h1>
+				<p>{{job.description|safe}}</p>
+				<span class="badge">{{job.date}}</span>
+
+				<div class="pull-right">
+					<span class="label label-default">{{job.labels}}</span>
+					<br>
+					<br> 
+				</div>
+			</div>         
+		</div>
+		<br>
+    {% endfor %}
+
+
+	<ul class="pagination" style="float: right">
+        <li> 
+            {% if paginator.has_prev %}
+            <a href="/jobs/?page={{ paginator.firstPage }}"> << </a>
+            <a href="/jobs/?page={{ paginator.prev_page }}"> < </a>
+            {% else %}
+            <a style="color:gray; cursor:not-allowed"> << </a>
+            <a style="color:gray; cursor:not-allowed"> < </a>
+            {% endif %}                  
+            {% if paginator.has_next %}
+            <a href="/jobs/?page={{ paginator.next_page }}"> > </a>
+            <a href="/jobs/?page={{ paginator.pages }}"> >> </a>
+            {% else %}
+            <a style="color:gray; cursor:not-allowed"> > </a>
+            <a style="color:gray; cursor:not-allowed"> >> </a>
+            {% endif %}
+        </li>
+        <p>Página <{{paginator.page}} de {{paginator.pages}}> </p>
+    </ul>
+
+</div>
+
+{% endblock %}

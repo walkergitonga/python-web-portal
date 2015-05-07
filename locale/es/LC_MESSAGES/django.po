@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-01 22:01-0300\n"
+"POT-Creation-Date: 2015-05-07 19:17-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,9 +30,9 @@ msgstr ""
 msgid "This field repository is required"
 msgstr ""
 
-#: apps/applications/views.py:64 apps/applications/views.py:129
-#: apps/applications/views.py:134 apps/baseapp/views.py:98
-#: apps/profiles/views.py:90 apps/profiles/views.py:131
+#: apps/applications/views.py:67 apps/applications/views.py:138
+#: apps/applications/views.py:143 apps/baseapp/views.py:98
+#: apps/jobs/views.py:53 apps/profiles/views.py:90 apps/profiles/views.py:131
 msgid "Form invalid"
 msgstr "Formulario invalido"
 
@@ -81,16 +81,17 @@ msgstr "Contraseña actual incorrecta"
 msgid "New password do not match"
 msgstr "La nueva contraseña no coincide"
 
-#: portal/settings.py:116
+#: portal/settings.py:121
 msgid "English"
 msgstr "Ingles"
 
-#: portal/settings.py:117
+#: portal/settings.py:122
 msgid "Spanish"
 msgstr "Español"
 
 #: templates/applications/add.html:23
-#: templates/applications/applications.html:12
+#: templates/applications/applications.html:12 templates/jobs/add.html:23
+#: templates/jobs/jobs.html:12
 msgid "Add"
 msgstr "Agregar"
 
@@ -103,6 +104,7 @@ msgstr "Nombre"
 #: templates/applications/add.html:39
 #: templates/applications/applications.html:19
 #: templates/applications/edit.html:39 templates/applications/view_app.html:13
+#: templates/jobs/add.html:75
 msgid "Description"
 msgstr "Descripción"
 
@@ -112,8 +114,8 @@ msgstr "Descripción"
 msgid "Repository"
 msgstr "Repositorio"
 
-#: templates/applications/add.html:57 templates/profiles/admin.html:51
-#: templates/profiles/edit_profile.html:69
+#: templates/applications/add.html:57 templates/jobs/add.html:84
+#: templates/profiles/admin.html:51 templates/profiles/edit_profile.html:69
 msgid "Save"
 msgstr "Grabar"
 
@@ -185,33 +187,33 @@ msgstr "¿Desea eliminar esta aplicación?"
 msgid "Delete"
 msgstr "Eliminar"
 
-#: templates/base.html:31
+#: templates/base.html:32
 msgid "Blog"
 msgstr "Blog"
 
-#: templates/base.html:32
+#: templates/base.html:33
 msgid "Forum"
 msgstr "Foro"
 
-#: templates/base.html:33
+#: templates/base.html:34
 msgid "Tutorials"
 msgstr "Tutoriales"
 
-#: templates/base.html:34
-msgid "Works"
+#: templates/base.html:35 templates/jobs/jobs.html:8
+msgid "Jobs"
 msgstr "Empleos"
 
-#: templates/base.html:41 templates/baseapp/login.html:20
+#: templates/base.html:42 templates/baseapp/login.html:20
 #: templates/baseapp/login.html.py:51 templates/baseapp/signup.html:80
 msgid "Sign in"
 msgstr "Ingresar"
 
-#: templates/base.html:52 templates/profiles/admin.html:6
+#: templates/base.html:53 templates/profiles/admin.html:6
 #: templates/profiles/edit_profile.html:10
 msgid "Profile"
 msgstr "Perfil"
 
-#: templates/base.html:58
+#: templates/base.html:59
 msgid "Sign out"
 msgstr "Salir"
 
@@ -342,13 +344,39 @@ msgstr ""
 msgid "Reset password"
 msgstr "Resetear contraseña"
 
-#: templates/baseapp/password_reset_form.html:20
+#: templates/baseapp/password_reset_form.html:20 templates/jobs/add.html:57
 msgid "Email"
 msgstr "Correo electrónico"
 
 #: templates/baseapp/password_reset_form.html:30
 msgid "Submit"
 msgstr "Enviar"
+
+#: templates/jobs/add.html:30
+msgid "Title"
+msgstr "Título"
+
+#: templates/jobs/add.html:39 templates/profiles/edit_profile.html:49
+msgid "Company"
+msgstr "Empresa"
+
+#: templates/jobs/add.html:48
+msgid "Country"
+msgstr "País"
+
+#: templates/jobs/add.html:66
+msgid "Labels"
+msgstr "Etiquetas"
+
+#: templates/jobs/jobs.html:9
+msgid ""
+"This section will contain the jobs loaded for the community, companies, etc."
+msgstr ""
+"Esta sección contendrá los empleos cargados por la comunidad, empresas, etc. "
+
+#: templates/jobs/jobs.html:10
+msgid "Feel free to post the job you need."
+msgstr "Siéntase libre de publicar el trabajo que usted necesita."
 
 #: templates/profiles/admin.html:21
 msgid "Old password"
@@ -365,10 +393,6 @@ msgstr "Foto"
 #: templates/profiles/edit_profile.html:39
 msgid "Location"
 msgstr "Ubicación"
-
-#: templates/profiles/edit_profile.html:49
-msgid "Company"
-msgstr "Empresa"
 
 #: templates/profiles/edit_profile.html:59 templates/profiles/profile.html:32
 msgid "About me"
@@ -389,6 +413,9 @@ msgstr "Ajustes"
 #: templates/profiles/users.html:10
 msgid "Users of Portal web python"
 msgstr "Usuarios de Portal web python"
+
+#~ msgid "Works"
+#~ msgstr "Empleos"
 
 #~ msgid "Saved record"
 #~ msgstr "Registro grabado"

@@ -38,12 +38,14 @@ DJANGO_APP = (
 THIRD_PARTY_APPS = (
     'seo',
     'log',
+    'django_countries',
 )
 
 LOCAL_APSS = (
     'apps.baseapp',
     'apps.profiles',
     'apps.applications',
+    'apps.jobs',
 )
 
 # Application definition
