@@ -24,6 +24,9 @@ class FormAddJob(forms.ModelForm):
 		class_css = 'form-control'
 
 		for key in self.fields:
-			self.fields[key].required = True
+			if key != "company":
+				self.fields[key].required = True
+			else:
+				self.fields[key].required = False
 			self.fields[key].widget.attrs['class'] = class_css
 

@@ -2,6 +2,8 @@
 import datetime
 
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.http import Http404
 from django.shortcuts import render
 from django.views.generic import View
 from django.views.generic.edit import FormView
@@ -21,7 +23,7 @@ class JobsView(View):
 
 	def get(self, request, *args, **kwargs):
 
-		jobs = Jobs.objects.all().order_by("date")
+		jobs = Jobs.objects.all().order_by("-date")
 
 		pag = helper_paginator(self, request, jobs, 15, 'jobs')
 
@@ -69,3 +71,22 @@ class JobsAddView(FormView):
 		else:
 			messages.error(request, _("Form invalid"))
 			return self.form_invalid(form, **kwargs)
+
+'''
+	This view display information of one job
+'''
+class JobSeeView(View):
+
+	template_name = "jobs/view_job.html"
+
+	def get(self, request, idjob, username, *args, **kwargs):
+
+		try:
+			us = User.objects.get(username=username)
+			iduser = us.id
+			job = Jobs.objects.get(idjob=idjob, iduser_id=iduser)
+		except Exception:
+			raise Http404
+
+		return render(request, self.template_name, 
+						{'job': job})

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load tag_labels %}
 
 {% block content %}
 	
@@ -14,12 +15,20 @@
 	{% for job in jobs %}
 	    <div class="container background_gray">
 	    	<div class="row-build">
-				<h1>{{job.title}}</h1>
-				<p>{{job.description|safe}}</p>
+				<h3><a href="/job/{{job.idjob}}/{{job.iduser.username}}/">{{job.title}}</a></h3>
+				<p>{{job.description|truncatechars:300|safe}}</p>
+				<hr>
+				<p><strong>{% trans "Country" %}:<strong> {{ job.country.name }} <img src="{{ job.country.flag }}" /></p>
+				<p><strong>{% trans "Contact" %}:</strong> {{job.email}}</p>
+				{% if job.company != "" and job.company != None %}
+					<p><strong>{% trans "Published by" %}:</strong> {{job.company}}</p>
+				{% else %}
+					<p><strong>{% trans "Published by" %}:</strong> {{job.iduser.last_name}} {{job.iduser.first_name}}</p>
+				{% endif %}
 				<span class="badge">{{job.date}}</span>
 
 				<div class="pull-right">
-					<span class="label label-default">{{job.labels}}</span>
+					{% labels job.labels %}
 					<br>
 					<br> 
 				</div>

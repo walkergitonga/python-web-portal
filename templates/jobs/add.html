@@ -65,6 +65,7 @@
 			            {% if field.name == "labels" %}
 			            	<label>{% trans "Labels" %}</label>
 			              	{{ field }}
+			              	<p> {% trans "This value is separated for commas, for example: python, web, django" %} </p>
 			              	{% if form.labels.errors %}
 			              		<div style="color: red">{{ form.labels.errors }}</div>
 			              	{% else %}
