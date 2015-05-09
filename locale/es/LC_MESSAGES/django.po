@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-08 00:22-0300\n"
+"POT-Creation-Date: 2015-05-09 10:59-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: apps/applications/views.py:67 apps/applications/views.py:138
 #: apps/applications/views.py:143 apps/baseapp/views.py:98
-#: apps/jobs/views.py:70 apps/profiles/views.py:90 apps/profiles/views.py:131
+#: apps/jobs/views.py:74 apps/profiles/views.py:90 apps/profiles/views.py:131
 msgid "Form invalid"
 msgstr "Formulario invalido"
 
@@ -163,11 +163,11 @@ msgstr "Aplicación"
 msgid "Username"
 msgstr "Nombre de usuario"
 
-#: templates/applications/view_app.html:26
+#: templates/applications/view_app.html:26 templates/jobs/view_job.html:33
 msgid "Actions"
 msgstr "Acciones"
 
-#: templates/applications/view_app.html:28
+#: templates/applications/view_app.html:28 templates/jobs/view_job.html:35
 msgid ""
 "These actions can only visualize you for who are responsible for "
 "implementation."
@@ -183,7 +183,7 @@ msgstr "Eliminar aplicación"
 msgid "Do you want to remove the application?"
 msgstr "¿Desea eliminar esta aplicación?"
 
-#: templates/applications/view_app.html:45
+#: templates/applications/view_app.html:45 templates/jobs/view_job.html:52
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -361,6 +361,7 @@ msgid "Company"
 msgstr "Empresa"
 
 #: templates/jobs/add.html:48 templates/jobs/jobs.html:21
+#: templates/jobs/view_job.html:15
 msgid "Country"
 msgstr "País"
 
@@ -382,13 +383,30 @@ msgstr ""
 msgid "Feel free to post the job you need."
 msgstr "Siéntase libre de publicar el trabajo que usted necesita."
 
-#: templates/jobs/jobs.html:22
+#: templates/jobs/jobs.html:22 templates/jobs/view_job.html:16
 msgid "Contact"
 msgstr "Contacto"
 
 #: templates/jobs/jobs.html:24 templates/jobs/jobs.html.py:26
+#: templates/jobs/view_job.html:18 templates/jobs/view_job.html.py:20
 msgid "Published by"
 msgstr "Publicado por"
+
+#: templates/jobs/view_job.html:12
+msgid "Job"
+msgstr "Empleo"
+
+#: templates/jobs/view_job.html:36
+msgid "Edit job"
+msgstr "Editar Empleo"
+
+#: templates/jobs/view_job.html:37 templates/jobs/view_job.html.py:45
+msgid "Delete job"
+msgstr "Eliminar empleo"
+
+#: templates/jobs/view_job.html:48
+msgid "Do you want to remove the job?"
+msgstr "¿Desea eliminar este empleo?"
 
 #: templates/profiles/admin.html:21
 msgid "Old password"

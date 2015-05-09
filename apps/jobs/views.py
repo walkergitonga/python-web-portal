@@ -3,12 +3,14 @@ import datetime
 
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http import Http404
-from django.shortcuts import render
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
 from django.views.generic.edit import FormView
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
+
+from log.utils import set_error_to_log
 
 from apps.utils import helper_paginator
 from apps.jobs.models import Jobs
@@ -90,3 +92,32 @@ class JobSeeView(View):
 
 		return render(request, self.template_name, 
 						{'job': job})
+
+
+'''
+	This view will delete one job
+'''
+class JobDeleteView(View):
+
+	def get(self, request, idjob, username, *args, **kwargs):
+
+		#Previouly verify that exists the app
+		us = get_object_or_404(User, username=username)
+		iduser = us.id
+		job = get_object_or_404(Jobs, idjob=idjob, iduser_id=iduser)
+
+		iduser_job = job.iduser_id
+
+		#If my user delete
+		if request.user.id == iduser_job:
+			Jobs.objects.filter(idjob=idjob, iduser_id=iduser).delete()
+		else:
+			error = ""
+			error = error + 'The user ' + str(request.user.id)
+			error = error + ' He is trying to remove the job ' + str(idjob)
+			error = error +	' of user ' + str(iduser_job)
+
+			set_error_to_log(request, error)
+			raise Http404
+
+		return HttpResponseRedirect("/jobs/")

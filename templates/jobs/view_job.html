@@ -29,6 +29,35 @@
 		</div>         
 	</div>
 
+	{% if job.iduser.id == user.id %}
+		<h4>{% trans "Actions" %}</h4>
+		<hr>
+		<p>{% trans "These actions can only visualize you for who are responsible for implementation." %}</p>
+		<a href="/job_edit/{{job.idjob}}/{{job.iduser.username}}" class="btn btn-success" style="margin-bottom: 15px">{% trans "Edit job" %}</a>
+		<a class="btn btn-danger" style="margin-bottom: 15px; cursor: pointer" data-toggle="modal" data-target="#myModal">{% trans "Delete job" %}</a>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">{% trans "Delete job" %}</h4>
+		      </div>
+		      <div class="modal-body">
+		        {% trans "Do you want to remove the job?" %}
+		      </div>
+		      <div class="modal-footer">
+		        <form accept-charset="UTF-8" action="/job_delete/{{job.idjob}}/{{job.iduser.username}}/" method="GET">
+		        	<input type="submit" class="btn btn-danger" value='{% trans "Delete" %}' />
+		   		</form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+	{% endif %}
+
 </div>
 
 {% endblock %}
