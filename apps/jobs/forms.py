@@ -30,3 +30,24 @@ class FormAddJob(forms.ModelForm):
 				self.fields[key].required = False
 			self.fields[key].widget.attrs['class'] = class_css
 
+'''
+	Form for edit one new job
+'''
+class FormEditJob(forms.ModelForm):
+
+	description = forms.CharField(widget=TextareaWidget)
+
+	class Meta:
+		model = Jobs
+		exclude = ('iduser', "idjob", 'date')
+
+	def __init__(self, *args, **kwargs):
+
+		super(FormEditJob, self).__init__(*args, **kwargs)
+		class_css = 'form-control'
+
+		for key in self.fields:
+			self.fields[key].required = True
+			self.fields[key].widget.attrs['class'] = class_css
+
+			

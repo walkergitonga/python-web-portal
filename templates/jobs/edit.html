@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+
+{% block extra_js %}
+    {{ form.media.js }}
+{% endblock %}
+	
+<div class="container">
+
+	<div class="mainbox col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">
+		{% for message in messages %}
+			{% if message.tags != "error" %}
+				<div class="alert alert-success" role="alert">{{ message }}</div>
+			{% else %}
+				<div class="alert alert-danger" role="alert">{{ message }}</div>
+			{% endif %}
+		{% endfor %}
+		<div class="panel panel-default" >
+            <div class="panel-heading">
+                <div class="panel-title text-center">{% trans "Edit job" %}</div>
+            </div>     
+
+            <div class="panel-body">
+            	{{ form.errors}}
+            	<form class="form-horizontal" action="{{request.get_full_path}}" method="POST">{% csrf_token%}
+            		{% for field in form %}
+			   			{% if field.name == "title" %}
+			   				<label>{% trans "Title" %}</label>
+			              	{{ field }}
+			              	{% if form.title.errors %}
+			              		<div style="color: red">{{ form.title.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "company" %}
+			            	<label>{% trans "Company" %}</label>
+			              	{{ field }}
+			              	{% if form.company.errors %}
+			              		<div style="color: red">{{ form.company.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "country" %}
+			            	<label>{% trans "Country" %}</label>
+			              	{{ field }}
+			              	{% if form.country.errors %}
+			              		<div style="color: red">{{ form.country.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "email" %}
+			            	<label>{% trans "Email" %}</label>
+			              	{{ field }}
+			              	{% if form.email.errors %}
+			              		<div style="color: red">{{ form.email.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "labels" %}
+			            	<label>{% trans "Labels" %}</label>
+			              	{{ field }}
+			              	<p> {% trans "This value is separated for commas, for example: python, web, django" %} </p>
+			              	{% if form.labels.errors %}
+			              		<div style="color: red">{{ form.labels.errors }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			            {% if field.name == "description" %}
+			            	<label>{% trans "Description" %}</label>
+			              	{{ field }}
+			              	{% if form.description.errors %}
+			              		<div style="color: red">{{ form.description.errors|safe }}</div>
+			              	{% else %}
+			              		<br>
+			              	{% endif %}
+			            {% endif %}
+			        {% endfor %}
+			        <button type="submit" class="btn btn-success">{% trans "Save" %}</button>
+				</form>
+            </div>
+        </div>
+	</div>
+
+</div>
+
+
+{% endblock %}

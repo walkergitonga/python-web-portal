@@ -14,7 +14,7 @@ from log.utils import set_error_to_log
 
 from apps.utils import helper_paginator
 from apps.jobs.models import Jobs
-from apps.jobs.forms import FormAddJob
+from apps.jobs.forms import FormAddJob, FormEditJob
 
 '''
 	This view display in template the jobs
@@ -121,3 +121,68 @@ class JobDeleteView(View):
 			raise Http404
 
 		return HttpResponseRedirect("/jobs/")
+
+
+'''
+	This view will update one job
+'''
+class JobEditView(FormView):
+
+	template_name = "jobs/edit.html"
+	form_class = FormEditJob
+	success_url = '/jobs/'
+
+	def get(self, request, idjob, username, *args, **kwargs):
+		
+		us = get_object_or_404(User, username=username)
+		iduser = us.id
+
+		#Only the user that created the app
+		if iduser == request.user.id:
+
+			job = get_object_or_404(Jobs, idjob=idjob, iduser=iduser)
+			form = FormEditJob(initial={'title': job.title, 
+							'description': job.description, 
+							'company': job.company,
+							'country': job.country,
+							'labels': job.labels,
+							'email': job.email})
+
+			return render(request, self.template_name, 
+							{'form': form})
+		else:
+			error = ""
+			error = error + 'The user ' + str(request.user.id)
+			error = error + ' He is trying to modify the application ' + str(idjob) 
+			error = error +	' of user ' + str(iduser)
+
+			set_error_to_log(request, error)
+			raise Http404
+
+	def post(self, request, idjob, username, *args, **kwargs):
+
+		form_class = self.get_form_class()
+		form = self.get_form(form_class)
+
+		if form.is_valid():
+			try:
+				iduser = request.user.id
+				title = strip_tags(request.POST.get('title'))
+				description = request.POST.get('description')
+				company = strip_tags(request.POST.get('company'))
+				country = request.POST.get('country')
+				email = request.POST.get('email')
+				labels = strip_tags(request.POST.get('labels'))
+
+				Jobs.objects.filter(idjob=idjob, iduser=iduser).update(title=title, 
+						description=description,
+						country=country, company=company,
+						email=email, labels=labels)
+			except Exception:
+				messages.error(request, _("Form invalid"))
+				return self.form_invalid(form, **kwargs)
+
+			return self.form_valid(form, **kwargs)
+		else:
+			messages.error(request, _("Form invalid"))
+			return self.form_invalid(form, **kwargs)
