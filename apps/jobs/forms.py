@@ -39,7 +39,7 @@ class FormEditJob(forms.ModelForm):
 
 	class Meta:
 		model = Jobs
-		exclude = ('iduser', "idjob", 'date')
+		exclude = ('iduser', "idjob")
 
 	def __init__(self, *args, **kwargs):
 
