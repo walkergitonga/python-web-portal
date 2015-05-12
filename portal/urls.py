@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^' , include('apps.profiles.urls')),
     url(r'^' , include('apps.applications.urls')),
     url(r'^' , include('apps.jobs.urls')),
+    url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/', include(admin.site.urls)),
 ] 
