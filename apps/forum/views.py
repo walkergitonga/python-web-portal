@@ -13,25 +13,26 @@ from log.utils import set_error_to_log
 from apps.utils import helper_paginator
 from apps.forum.models import Category, Forum, Post
 
-'''
-	This view display all forum registered
-'''
+
 class ForumsView(View):
-	
+	'''
+	This view display all forum registered
+	'''
 	template_name = "forum/index.html"
 
 	def get(self, request, *args, **kwargs):
 
 		categories = Category.objects.filter(hidden=False)
 
-		return render(request, self.template_name, 
-						{'categories': categories})
+		data = {'categories': categories}
 
-'''
-	This view display one forum registered
-'''
+		return render(request, self.template_name, data)
+
+
 class ForumView(View):
-	
+	'''
+	This view display one forum registered
+	'''
 	template_name = "forum/forum.html"
 
 	def get(self, request, forum, *args, **kwargs):
@@ -41,7 +42,10 @@ class ForumView(View):
 
 		pag = helper_paginator(self, request, posts, 15, 'posts')
 
-		return render(request, self.template_name, 
-						{'forum': forum,
-						'posts': pag['posts'],
-						'paginator': pag})
+		data = {
+			'forum': forum,
+			'posts': pag['posts'],
+			'paginator': pag
+		}
+
+		return render(request, self.template_name, data)
