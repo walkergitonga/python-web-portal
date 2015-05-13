@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-09 10:59-0300\n"
+"POT-Creation-Date: 2015-05-12 22:55-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,8 @@ msgstr ""
 
 #: apps/applications/views.py:67 apps/applications/views.py:138
 #: apps/applications/views.py:143 apps/baseapp/views.py:98
-#: apps/jobs/views.py:74 apps/profiles/views.py:90 apps/profiles/views.py:131
+#: apps/jobs/views.py:74 apps/jobs/views.py:182 apps/jobs/views.py:187
+#: apps/profiles/views.py:90 apps/profiles/views.py:131
 msgid "Form invalid"
 msgstr "Formulario invalido"
 
@@ -65,6 +66,98 @@ msgstr "El correo electrónico ya está registrado"
 msgid "Registration was successful"
 msgstr "El registro ha sido satisfactorio"
 
+#: apps/forum/models.py:16
+msgid "If checked, this category will be visible only for staff"
+msgstr ""
+
+#: apps/forum/models.py:20 apps/forum/models.py:30
+#: templates/forum/index.html:15
+msgid "Category"
+msgstr "Categoría"
+
+#: apps/forum/models.py:21
+msgid "Categories"
+msgstr "Categorías"
+
+#: apps/forum/models.py:31
+msgid "Parent forum"
+msgstr "Foro padre"
+
+#: apps/forum/models.py:33 templates/applications/add.html:30
+#: templates/applications/applications.html:18
+#: templates/applications/edit.html:30
+msgid "Name"
+msgstr "Nombre"
+
+#: apps/forum/models.py:34
+msgid "Position"
+msgstr "Posición"
+
+#: apps/forum/models.py:35 apps/forum/models.py:61 apps/forum/models.py:79
+#: templates/applications/add.html:39
+#: templates/applications/applications.html:19
+#: templates/applications/edit.html:39 templates/applications/view_app.html:13
+#: templates/forum/forum.html:21 templates/jobs/add.html:76
+#: templates/jobs/edit.html:77
+msgid "Description"
+msgstr "Descripción"
+
+#: apps/forum/models.py:36
+msgid "Moderators"
+msgstr "Moderadores"
+
+#: apps/forum/models.py:37 apps/forum/models.py:60 apps/forum/models.py:78
+#: templates/forum/forum.html:23
+msgid "Date"
+msgstr "Fecha"
+
+#: apps/forum/models.py:38
+msgid "Post count"
+msgstr "Total de post"
+
+#: apps/forum/models.py:39
+msgid "Hidden"
+msgstr "Oculto"
+
+#: apps/forum/models.py:43 apps/forum/models.py:57 templates/base.html:33
+#: templates/forum/forum.html:11 templates/forum/index.html:11
+msgid "Forum"
+msgstr "Foro"
+
+#: apps/forum/models.py:44
+msgid "Forums"
+msgstr "Foros"
+
+#: apps/forum/models.py:58 apps/forum/models.py:77
+#: templates/applications/applications.html:21
+msgid "User"
+msgstr "Usuario"
+
+#: apps/forum/models.py:59 templates/forum/forum.html:20
+#: templates/jobs/add.html:30 templates/jobs/edit.html:31
+msgid "Title"
+msgstr "Título"
+
+#: apps/forum/models.py:62
+msgid "File"
+msgstr "Archivo"
+
+#: apps/forum/models.py:66 apps/forum/models.py:76
+msgid "Post"
+msgstr ""
+
+#: apps/forum/models.py:67
+msgid "Posts"
+msgstr ""
+
+#: apps/forum/models.py:83
+msgid "Comment"
+msgstr "Comentario"
+
+#: apps/forum/models.py:84
+msgid "Comments"
+msgstr "Comentarios"
+
 #: apps/profiles/validators.py:18 templates/profiles/edit_profile.html:21
 msgid "Files allowed: jpg, png, gif, ico, bmp"
 msgstr "Archivos permitidos: jpg, png, gif, ico, bmp"
@@ -81,11 +174,11 @@ msgstr "Contraseña actual incorrecta"
 msgid "New password do not match"
 msgstr "La nueva contraseña no coincide"
 
-#: portal/settings.py:121
+#: portal/settings.py:123
 msgid "English"
 msgstr "Ingles"
 
-#: portal/settings.py:122
+#: portal/settings.py:124
 msgid "Spanish"
 msgstr "Español"
 
@@ -95,19 +188,6 @@ msgstr "Español"
 msgid "Add"
 msgstr "Agregar"
 
-#: templates/applications/add.html:30
-#: templates/applications/applications.html:18
-#: templates/applications/edit.html:30
-msgid "Name"
-msgstr "Nombre"
-
-#: templates/applications/add.html:39
-#: templates/applications/applications.html:19
-#: templates/applications/edit.html:39 templates/applications/view_app.html:13
-#: templates/jobs/add.html:76
-msgid "Description"
-msgstr "Descripción"
-
 #: templates/applications/add.html:48
 #: templates/applications/applications.html:20
 #: templates/applications/edit.html:48 templates/applications/view_app.html:16
@@ -115,7 +195,8 @@ msgid "Repository"
 msgstr "Repositorio"
 
 #: templates/applications/add.html:57 templates/jobs/add.html:85
-#: templates/profiles/admin.html:51 templates/profiles/edit_profile.html:69
+#: templates/jobs/edit.html:86 templates/profiles/admin.html:51
+#: templates/profiles/edit_profile.html:69
 msgid "Save"
 msgstr "Grabar"
 
@@ -143,10 +224,6 @@ msgstr ""
 msgid "Feel free to upload the app you want."
 msgstr "Sientete libre de subir tu aplicación cuando lo desees."
 
-#: templates/applications/applications.html:21
-msgid "User"
-msgstr "Usuario"
-
 #: templates/applications/edit.html:23 templates/applications/view_app.html:29
 msgid "Edit application"
 msgstr "Editar aplicación"
@@ -159,7 +236,7 @@ msgstr "Actualizar"
 msgid "Application"
 msgstr "Aplicación"
 
-#: templates/applications/view_app.html:19
+#: templates/applications/view_app.html:19 templates/forum/forum.html:22
 msgid "Username"
 msgstr "Nombre de usuario"
 
@@ -190,10 +267,6 @@ msgstr "Eliminar"
 #: templates/base.html:32
 msgid "Blog"
 msgstr "Blog"
-
-#: templates/base.html:33
-msgid "Forum"
-msgstr "Foro"
 
 #: templates/base.html:34
 msgid "Tutorials"
@@ -345,6 +418,7 @@ msgid "Reset password"
 msgstr "Resetear contraseña"
 
 #: templates/baseapp/password_reset_form.html:20 templates/jobs/add.html:57
+#: templates/jobs/edit.html:58
 msgid "Email"
 msgstr "Correo electrónico"
 
@@ -352,26 +426,39 @@ msgstr "Correo electrónico"
 msgid "Submit"
 msgstr "Enviar"
 
-#: templates/jobs/add.html:30
-msgid "Title"
-msgstr "Título"
+#: templates/forum/forum.html:14
+msgid "Created"
+msgstr "Creado"
 
-#: templates/jobs/add.html:39 templates/profiles/edit_profile.html:49
+#: templates/forum/forum.html:56
+msgid "Page"
+msgstr "Página"
+
+#: templates/forum/forum.html:56
+msgid "of"
+msgstr "de"
+
+#: templates/jobs/add.html:39 templates/jobs/edit.html:40
+#: templates/profiles/edit_profile.html:49
 msgid "Company"
 msgstr "Empresa"
 
-#: templates/jobs/add.html:48 templates/jobs/jobs.html:21
-#: templates/jobs/view_job.html:15
+#: templates/jobs/add.html:48 templates/jobs/edit.html:49
+#: templates/jobs/jobs.html:21 templates/jobs/view_job.html:15
 msgid "Country"
 msgstr "País"
 
-#: templates/jobs/add.html:66
+#: templates/jobs/add.html:66 templates/jobs/edit.html:67
 msgid "Labels"
 msgstr "Etiquetas"
 
-#: templates/jobs/add.html:68
+#: templates/jobs/add.html:68 templates/jobs/edit.html:69
 msgid "This value is separated for commas, for example: python, web, django"
 msgstr "Este valor se separa por comas, por ejemplo: python, web, django"
+
+#: templates/jobs/edit.html:23 templates/jobs/view_job.html:36
+msgid "Edit job"
+msgstr "Editar Empleo"
 
 #: templates/jobs/jobs.html:10
 msgid ""
@@ -395,10 +482,6 @@ msgstr "Publicado por"
 #: templates/jobs/view_job.html:12
 msgid "Job"
 msgstr "Empleo"
-
-#: templates/jobs/view_job.html:36
-msgid "Edit job"
-msgstr "Editar Empleo"
 
 #: templates/jobs/view_job.html:37 templates/jobs/view_job.html.py:45
 msgid "Delete job"

@@ -27,6 +27,7 @@ SITE_ID = 1
 SECRET_KEY = 'dx4pv9i)lulsom%b@=1$13x6z$844^8*toe4x9ivs#7$v3ccc2'
 
 DJANGO_APP = (
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +40,6 @@ THIRD_PARTY_APPS = (
     'seo',
     'log',
     'django_countries',
-    'pybb',
 )
 
 LOCAL_APSS = (
@@ -47,6 +47,7 @@ LOCAL_APSS = (
     'apps.profiles',
     'apps.applications',
     'apps.jobs',
+    'apps.forum',
 )
 
 # Application definition
@@ -62,7 +63,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'pybb.middleware.PybbMiddleware',
 )
 
 ROOT_URLCONF = 'portal.urls'
@@ -133,7 +133,6 @@ LOCALE_PATHS = (
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     "django.core.context_processors.i18n",
     "django.core.context_processors.request",
-    'pybb.context_processors.processor',
 )
 
 USE_I18N = True
@@ -145,10 +144,6 @@ TIME_ZONE = 'America/Buenos_Aires'
 USE_TZ = True
 
 WSGI_APPLICATION = 'portal.wsgi.application'
-
-# Pybb
-PYBB_TEMPLATE = "base.html"
-PYBB_ATTACHMENT_ENABLE = True
 
 # Import local settings
 try:

@@ -51,7 +51,7 @@
             <a style="color:gray; cursor:not-allowed"> >> </a>
             {% endif %}
         </li>
-        <p>Página <{{paginator.page}} de {{paginator.pages}}> </p>
+        <p>{% trans "Page" %} <{{paginator.page}} {% trans "of" %} {{paginator.pages}}> </p>
     </ul>
 
 </div>
