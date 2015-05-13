@@ -67,13 +67,13 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'portal.urls'
 
-#Backend of login
+# Backend of login
 AUTHENTICATION_BACKENDS = (
     'apps.baseapp.backends.EmailOrUsernameModelBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-#For login required
+# For login required
 LOGIN_URL = "/"
 
 TEMPLATES = [
@@ -100,36 +100,35 @@ TEMPLATES = [
 
 STATIC_URL = '/static/'
 
-#Root absolute for static files
+# Root absolute for static files
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'static'),
 )
 
-#Static root for deployment with collectstatic
+# Static root for deployment with collectstatic
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-#Media files
+# Media files
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-'''Internationalization'''
-
-#Working Lenguage 
+# Internationalization
+# Working Lenguage 
 LANGUAGE_CODE = 'es'
 
-#Lenguage support 
+# Lenguage support 
 LANGUAGES = (
     ('en', _('English')),
     ('es', _('Spanish')),
 )
 
-#Path of the folder locale
+# Path of the folder locale
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
-#Defined processor of contexto
+# Defined processor of contexto
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     "django.core.context_processors.i18n",
     "django.core.context_processors.request",
@@ -148,8 +147,5 @@ WSGI_APPLICATION = 'portal.wsgi.application'
 # Import local settings
 try:
     from settings_local import *
-except Exception:
+except ImportError:
     pass
-
-
-

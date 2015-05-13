@@ -13,12 +13,12 @@ from apps.profiles.forms import FormProfile, AdminProfileForm
 from apps.profiles.models import Profile
 from apps.utils import remove_file, helper_paginator
 
-'''
+
+class ProfileView(View):
+	'''
 	This view contains the form
 	of profile of user
-'''
-class ProfileView(View):
-
+	'''
 	template_name = "profiles/profile.html"
 
 	def get(self, request, username, *args, **kwargs):
@@ -27,15 +27,16 @@ class ProfileView(View):
 		iduser = us.id
 		profile = Profile.objects.get(iduser_id=iduser)
 
-		return render(request, self.template_name,
-					{'profile': profile})
+		data = {'profile': profile}
 
-'''
+		return render(request, self.template_name, data)
+
+
+class EditProfileView(FormView):
+	'''
 	This view contains the form
 	for edit profile
-'''
-class EditProfileView(FormView):
-
+	'''
 	template_name = "profiles/settings.html"
 	form_class = FormProfile
 	success_url = '/settings/edit_profile/'
@@ -50,8 +51,9 @@ class EditProfileView(FormView):
 					"about": profile.about
 				})
 
-		return render(request, self.template_name,
-					{'form': form, 'profile': profile})
+		data = {'form': form, 'profile': profile}
+
+		return render(request, self.template_name, data)
 
 	def post(self, request, *args, **kwargs):
 
@@ -66,14 +68,14 @@ class EditProfileView(FormView):
 			if 'photo' in request.FILES:
 				photo = request.FILES['photo']
 
-				#Route previous file, if not exists display error
+				# Route previous file, if not exists display error
 				try:
 					route_file = file_path + "/" + file_name.name
 				except Exception:
 					pass
 
 				try:
-					#If a previous file exists it removed
+					# If a previous file exists it removed
 					remove_file(route_file)
 				except Exception:
 					pass
@@ -91,12 +93,11 @@ class EditProfileView(FormView):
 			return self.form_invalid(form, **kwargs)
 
 
-'''
+class AdminView(FormView):
+	'''
 	This view is part of the section of
 	settings, for change password
-'''
-class AdminView(FormView):
-
+	'''
 	template_name = "profiles/settings.html"
 	form_class = AdminProfileForm
 	success_url = '/settings/admin/'
@@ -120,7 +121,7 @@ class AdminView(FormView):
 				messages.error(request, _("New password do not match"))
 				return self.form_invalid(form, **kwargs)
 
-			#Save new password
+			# Save new password
 			new_password = make_password(new_password)
 			User.objects.filter(id=request.user.id).update(
 										password=new_password
@@ -132,11 +133,10 @@ class AdminView(FormView):
 			return self.form_invalid(form, **kwargs)
 
 
-'''
-	This view display all profiles
-'''
 class UsersView(View):
-
+	'''
+	This view display all profiles
+	'''
 	template_name = "profiles/users.html"
 
 	def get(self, request, *args, **kwargs):
@@ -149,6 +149,9 @@ class UsersView(View):
 
 		pag = helper_paginator(self, request, profiles, 12, 'profiles')
 
-		return render(request, self.template_name,
-					{'profiles': pag['profiles'],
-					'paginator': pag})
+		data = {
+				'profiles': pag['profiles'],
+				'paginator': pag
+			}
+
+		return render(request, self.template_name, data)
