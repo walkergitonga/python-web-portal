@@ -18,7 +18,7 @@
 				<h3><a href="/job/{{job.idjob}}/{{job.iduser.username}}/">{{job.title}}</a></h3>
 				<p>{{job.description|truncatechars:300|safe}}</p>
 				<hr>
-				<p><strong>{% trans "Country" %}:<strong> {{ job.country.name }} <img src="{{ job.country.flag }}" /></p>
+				<p><strong>{% trans "Country" %}:</strong> {{ job.country.name }} <img src="{{ job.country.flag }}" /></p>
 				<p><strong>{% trans "Contact" %}:</strong> {{job.email}}</p>
 				{% if job.company != "" and job.company != None %}
 					<p><strong>{% trans "Published by" %}:</strong> {{job.company}}</p>

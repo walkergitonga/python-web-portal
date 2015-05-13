@@ -12,7 +12,7 @@
     		<h4>{% trans "Job" %}: {{job.title}}</h4>
 			<p>{{job.description|safe}}</p>
 			<hr>
-			<p><strong>{% trans "Country" %}:<strong> {{ job.country.name }} <img src="{{ job.country.flag }}" /></p>
+			<p><strong>{% trans "Country" %}:</strong> {{ job.country.name }} <img src="{{ job.country.flag }}" /></p>
 			<p><strong>{% trans "Contact" %}:</strong> {{job.email}}</p>
 			{% if job.company != "" and job.company != None %}
 				<p><strong>{% trans "Published by" %}:</strong> {{job.company}}</p>

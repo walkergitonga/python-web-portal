@@ -16,11 +16,11 @@ from apps.utils import helper_paginator
 from apps.jobs.models import Jobs
 from apps.jobs.forms import FormAddJob, FormEditJob
 
-'''
-	This view display in template the jobs
-'''
-class JobsView(View):
 
+class JobsView(View):
+	'''
+	This view display in template the jobs
+	'''
 	template_name = "jobs/jobs.html"
 
 	def get(self, request, *args, **kwargs):
@@ -29,24 +29,26 @@ class JobsView(View):
 
 		pag = helper_paginator(self, request, jobs, 15, 'jobs')
 
-		return render(request, self.template_name, 
-						{'jobs': pag['jobs'],
-						'paginator': pag})
+		data = {
+			'jobs': pag['jobs'],
+			'paginator': pag
+		}
 
-'''
+		return render(request, self.template_name, data)
+
+
+class JobsAddView(FormView):
+	'''
 	This view display the form for
 	create one new job
-'''
-class JobsAddView(FormView):
-
+	'''
 	template_name = "jobs/add.html"
 	form_class = FormAddJob
 	success_url = '/jobs/'
 
 	def get(self, request, *args, **kwargs):
-		
-		return render(request, self.template_name, 
-						{'form': self.form_class})
+		data = {'form': self.form_class}
+		return render(request, self.template_name, data)
 
 	def post(self, request, *args, **kwargs):
 
@@ -63,22 +65,24 @@ class JobsAddView(FormView):
 			labels = strip_tags(request.POST.get('labels'))
 			date = datetime.datetime.now()
 
-			job = Jobs(iduser_id=iduser, title=title, description=description,
-					country=country, company=company,
-					email=email, labels=labels, date=date)
+			job = Jobs(
+				iduser_id=iduser, title=title, 
+				description=description,
+				country=country, company=company,
+				email=email, labels=labels, date=date
+			)
 
 			job.save()
-			
 			return self.form_valid(form, **kwargs)
 		else:
 			messages.error(request, _("Form invalid"))
 			return self.form_invalid(form, **kwargs)
 
-'''
-	This view display information of one job
-'''
-class JobSeeView(View):
 
+class JobSeeView(View):
+	'''
+	This view display information of one job
+	'''
 	template_name = "jobs/view_job.html"
 
 	def get(self, request, idjob, username, *args, **kwargs):
@@ -90,25 +94,25 @@ class JobSeeView(View):
 		except Exception:
 			raise Http404
 
-		return render(request, self.template_name, 
-						{'job': job})
+		data = {'job': job}
+
+		return render(request, self.template_name, data)
 
 
-'''
-	This view will delete one job
-'''
 class JobDeleteView(View):
-
+	'''
+	This view will delete one job
+	'''
 	def get(self, request, idjob, username, *args, **kwargs):
 
-		#Previouly verify that exists the app
+		# Previouly verify that exists the app
 		us = get_object_or_404(User, username=username)
 		iduser = us.id
 		job = get_object_or_404(Jobs, idjob=idjob, iduser_id=iduser)
 
 		iduser_job = job.iduser_id
 
-		#If my user delete
+		# If my user delete
 		if request.user.id == iduser_job:
 			Jobs.objects.filter(idjob=idjob, iduser_id=iduser).delete()
 		else:
@@ -123,11 +127,10 @@ class JobDeleteView(View):
 		return HttpResponseRedirect("/jobs/")
 
 
-'''
-	This view will update one job
-'''
 class JobEditView(FormView):
-
+	'''
+	This view will update one job
+	'''
 	template_name = "jobs/edit.html"
 	form_class = FormEditJob
 	success_url = '/jobs/'
@@ -137,19 +140,23 @@ class JobEditView(FormView):
 		us = get_object_or_404(User, username=username)
 		iduser = us.id
 
-		#Only the user that created the app
+		# Only the user that created the app
 		if iduser == request.user.id:
 
 			job = get_object_or_404(Jobs, idjob=idjob, iduser=iduser)
-			form = FormEditJob(initial={'title': job.title, 
+
+			form = FormEditJob(initial={
+							'title': job.title, 
 							'description': job.description, 
 							'company': job.company,
 							'country': job.country,
 							'labels': job.labels,
-							'email': job.email})
+							'email': job.email
+						})
 
-			return render(request, self.template_name, 
-							{'form': form})
+			data = {'form': form}
+
+			return render(request, self.template_name, data)
 		else:
 			error = ""
 			error = error + 'The user ' + str(request.user.id)
@@ -174,10 +181,12 @@ class JobEditView(FormView):
 				email = request.POST.get('email')
 				labels = strip_tags(request.POST.get('labels'))
 
-				Jobs.objects.filter(idjob=idjob, iduser=iduser).update(title=title, 
+				Jobs.objects.filter(idjob=idjob, iduser=iduser).update(
+						title=title, 
 						description=description,
 						country=country, company=company,
-						email=email, labels=labels)
+						email=email, labels=labels
+					)
 			except Exception:
 				messages.error(request, _("Form invalid"))
 				return self.form_invalid(form, **kwargs)

@@ -1,4 +1,4 @@
-#encoding:utf-8 
+# encoding:utf-8 
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
@@ -6,17 +6,18 @@ from django.utils.translation import ugettext_lazy as _
 from apps.widgets import TextareaWidget
 from apps.jobs.models import Jobs
 
-'''
-	Form for create one new application
-'''
+
 class FormAddJob(forms.ModelForm):
+	'''
+	Form for create one new application
+	'''
 
 	class Meta:
 		model = Jobs
 		exclude = ('iduser', "idjob", "date")
 		widgets = { 
-            'description': TextareaWidget,
-        }  
+			'description': TextareaWidget,
+		}  
 
 	def __init__(self, *args, **kwargs):
 
@@ -30,11 +31,11 @@ class FormAddJob(forms.ModelForm):
 				self.fields[key].required = False
 			self.fields[key].widget.attrs['class'] = class_css
 
-'''
-	Form for edit one new job
-'''
-class FormEditJob(forms.ModelForm):
 
+class FormEditJob(forms.ModelForm):
+	'''
+	Form for edit one new job
+	'''
 	description = forms.CharField(widget=TextareaWidget)
 
 	class Meta:
@@ -49,5 +50,3 @@ class FormEditJob(forms.ModelForm):
 		for key in self.fields:
 			self.fields[key].required = True
 			self.fields[key].widget.attrs['class'] = class_css
-
-			

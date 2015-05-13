@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 from django_countries.fields import CountryField
 
+
 class Jobs(models.Model):
 
 	idjob = models.AutoField(primary_key=True)

@@ -1,16 +1,16 @@
-#encoding:utf-8
+# encoding:utf-8
 from django import template
 
 register = template.Library()
 
 
-'''
+@register.simple_tag
+def labels(value):	
+	'''
 	This tag generate the labels in
 	base string separated for commas
-'''
-@register.simple_tag
-def labels(value):
-	
+	'''
+
 	html = ""
 
 	listValue = value.split(",")
