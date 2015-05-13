@@ -1,4 +1,4 @@
-#encoding:utf-8 
+# encoding:utf-8 
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
@@ -6,11 +6,12 @@ from django.utils.translation import ugettext_lazy as _
 from apps.widgets import TextareaWidget
 from apps.applications.models import Applications
 
-'''
-	Form for create one new application
-'''
+
 class FormAddApplication(forms.ModelForm):
 
+	'''
+	Form for create one new application
+	'''
 	description = forms.CharField(widget=TextareaWidget)
 
 	class Meta:
@@ -26,11 +27,12 @@ class FormAddApplication(forms.ModelForm):
 			self.fields[key].required = True
 			self.fields[key].widget.attrs['class'] = class_css
 
-'''
-	Form for edit one new application
-'''
+
 class FormEditApplication(forms.ModelForm):
 
+	'''
+	Form for edit one new application
+	'''
 	description = forms.CharField(widget=TextareaWidget)
 
 	class Meta:
@@ -47,8 +49,7 @@ class FormEditApplication(forms.ModelForm):
 			self.fields[key].widget.attrs['class'] = class_css
 			if key is "name":
 				self.fields[key].widget.attrs['readonly'] = True
-
-				
+								
 	def clean(self):
 
 		try:
@@ -65,4 +66,3 @@ class FormEditApplication(forms.ModelForm):
 			self.cleaned_data['repository']
 		except Exception:
 			raise forms.ValidationError(_("This field repository is required"))
-

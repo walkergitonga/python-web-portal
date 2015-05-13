@@ -14,12 +14,13 @@ from apps.utils import helper_paginator
 from apps.applications.models import Applications
 from apps.applications.forms import FormAddApplication, FormEditApplication
 
-'''
-	This view display the view
-	for display applicatios
-'''
+
 class ApplicationsView(View):
 
+	'''
+	This view display the view
+	for display applicatios
+	'''
 	template_name = "applications/applications.html"
 
 	def get(self, request, *args, **kwargs):
@@ -28,24 +29,26 @@ class ApplicationsView(View):
 
 		pag = helper_paginator(self, request, apps, 15, 'apps')
 
-		return render(request, self.template_name, 
-						{'apps': pag['apps'],
-						'paginator': pag})
+		data = {
+			'apps': pag['apps'],
+			'paginator': pag
+		}
+		return render(request, self.template_name, data)
 
-'''
-	This view display the form for
-	create one new application
-'''
+
 class ApplicationsAddView(FormView):
 
+	'''
+	This view display the form for
+	create one new application
+	'''
 	template_name = "applications/add.html"
 	form_class = FormAddApplication
 	success_url = '/applications/'
 
 	def get(self, request, *args, **kwargs):
-		
-		return render(request, self.template_name, 
-						{'form': self.form_class})
+		data = {'form': self.form_class}
+		return render(request, self.template_name, data)
 
 	def post(self, request, *args, **kwargs):
 
@@ -57,9 +60,12 @@ class ApplicationsAddView(FormView):
 			description = request.POST['description']	
 			repository = strip_tags(request.POST['repository'])	
 
-			app = Applications(name=name, description=description,
-								iduser_id=request.user.id,
-								repository=repository)
+			app = Applications(
+				name=name, description=description,
+				iduser_id=request.user.id,
+				repository=repository
+			)
+
 			app.save()
 
 			return self.form_valid(form, **kwargs)
@@ -67,11 +73,12 @@ class ApplicationsAddView(FormView):
 			messages.error(request, _("Form invalid"))
 			return self.form_invalid(form, **kwargs)
 
-'''
-	This view display information of one app
-'''
+
 class ApplicationSeeView(View):
 
+	'''
+	This view display information of one app
+	'''
 	template_name = "applications/view_app.html"
 
 	def get(self, request, name, username, *args, **kwargs):
@@ -83,33 +90,35 @@ class ApplicationSeeView(View):
 		except Exception:
 			raise Http404
 
-		return render(request, self.template_name, 
-						{'app': app})
+		data = {'app': app}
+		return render(request, self.template_name, data)
 
-'''
-	This view will update one application
-'''
+
 class ApplicationEditView(FormView):
 
+	'''
+	This view will update one application
+	'''
 	template_name = "applications/edit.html"
 	form_class = FormEditApplication
 	success_url = '/applications/'
 
 	def get(self, request, name, username, *args, **kwargs):
-		
 		us = get_object_or_404(User, username=username)
 		iduser = us.id
 
-		#Only the user that created the app
+		# Only the user that created the app
 		if iduser == request.user.id:
 
 			app = get_object_or_404(Applications, name=name, iduser=iduser)
-			form = FormEditApplication(initial={'name': app.name, 
-							'description': app.description, 
-							'repository': app.repository})
+			form = FormEditApplication(initial={
+				'name': app.name, 
+				'description': app.description, 
+				'repository': app.repository
+			})
 
-			return render(request, self.template_name, 
-							{'form': form})
+			data = {'form': form}
+			return render(request, self.template_name, data)
 		else:
 			error = ""
 			error = error + 'The user ' + str(request.user.id)
@@ -131,9 +140,10 @@ class ApplicationEditView(FormView):
 
 			iduser = request.user.id
 			try:
-				Applications.objects.filter(name=name, 
-					iduser_id=iduser).update(description=description,
-					repository=repository)
+				Applications.objects.filter(name=name, iduser_id=iduser).update(
+					description=description,
+					repository=repository
+				)
 			except Exception:
 				messages.error(request, _("Form invalid"))
 				return self.form_invalid(form, **kwargs)
@@ -143,21 +153,22 @@ class ApplicationEditView(FormView):
 			messages.error(request, _("Form invalid"))
 			return self.form_invalid(form, **kwargs)
 
-'''
-	This view will delete one application
-'''
+
 class ApplicationDeleteView(View):
 
+	'''
+	This view will delete one application
+	'''
 	def get(self, request, name, username, *args, **kwargs):
 
-		#Previouly verify that exists the app
+		# Previouly verify that exists the app
 		us = get_object_or_404(User, username=username)
 		iduser = us.id
 		app = get_object_or_404(Applications, name=name, iduser_id=iduser)
 
 		iduser_app = app.iduser_id
 
-		#If my user delete
+		# If my user delete
 		if request.user.id == iduser_app:
 			Applications.objects.filter(name=name, iduser_id=iduser).delete()
 		else:
