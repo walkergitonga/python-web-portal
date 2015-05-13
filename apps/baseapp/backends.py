@@ -1,11 +1,12 @@
 from django.contrib.auth.models import User
 
-'''
-    This backend allow login with username
-    or email depending of user.
-'''
+
 class EmailOrUsernameModelBackend(object):
 
+    '''
+    This backend allow login with username
+    or email depending of user.
+    '''
     def authenticate(self, username=None, password=None):
         if '@' in username:
             kwargs = {'email': username}
