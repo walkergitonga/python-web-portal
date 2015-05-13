@@ -3,14 +3,13 @@ import os
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-'''
-Function that valid extension
-when upload file in form
-'''
-
 
 def valid_extension(value):
 
+	'''
+	Function that valid extension
+	when upload file in form
+	'''
 	list_file_allow = [
 		'.png', '.jpg', '.gif', 
 		'.ico', '.jpeg', '.bmp'

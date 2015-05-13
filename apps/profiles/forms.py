@@ -5,13 +5,12 @@ from django import forms
 from apps.profiles.models import Profile
 from apps.widgets import TextareaWidget
 
-'''
-Form of edit profile
-'''
-
 
 class FormProfile(forms.ModelForm):
 
+	'''
+	Form of edit profile
+	'''
 	about = forms.CharField(widget=TextareaWidget)
 
 	class Meta:
@@ -31,13 +30,11 @@ class FormProfile(forms.ModelForm):
 				self.fields[key].widget.attrs['class'] = class_css
 
 
-'''
-Form of admin account profile
-'''
-
-
 class AdminProfileForm(forms.Form):
 
+	'''
+	Form of admin account profile
+	'''
 	widgetPass = forms.PasswordInput(attrs={'class': 'form-control'})
 
 	password = forms.CharField(
