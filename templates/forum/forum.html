@@ -24,12 +24,12 @@
 					      </tr>
 					    </thead>
 					    <tbody>
-					    	{% for post in posts %}
+					    	{% for topic in topics %}
 							    <tr>
-							        <td><a href="#">{{post.title}}</a></td>
-							        <td>{{post.description|safe|truncatechars:100}}</td>
-							        <td><a href="/profile/{{post.user.username}}">{{post.user.username}}</a></td>
-							        <td>{{post.date}}</td>
+							        <td><a href="/topic/{{forum.name}}/{{topic.slug}}/{{topic.idtopic}}/">{{topic.title}}</a></td>
+							        <td>{{topic.description|safe|truncatechars:100}}</td>
+							        <td><a href="/profile/{{post.user.username}}">{{topic.user.username}}</a></td>
+							        <td>{{topic.date}}</td>
 							    </tr>
 						    {% endfor %}
 					    </tbody>

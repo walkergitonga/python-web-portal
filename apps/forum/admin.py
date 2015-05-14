@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from apps.forum.models import (
 	Category, Forum, 
-	Post, Comment
+	Topic, Comment
 )
 
 
@@ -13,5 +13,5 @@ class ForumAdmin(admin.ModelAdmin):
 
 admin.site.register(Category)
 admin.site.register(Forum, ForumAdmin)
-admin.site.register(Post)
+admin.site.register(Topic)
 admin.site.register(Comment)

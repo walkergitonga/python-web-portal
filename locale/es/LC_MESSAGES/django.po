@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-12 22:55-0300\n"
+"POT-Creation-Date: 2015-05-14 17:26-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,82 +18,82 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/applications/forms.py:57
+#: apps/applications/forms.py:58
 msgid "This field name is required"
 msgstr ""
 
-#: apps/applications/forms.py:62
+#: apps/applications/forms.py:63
 msgid "This field description is required"
 msgstr ""
 
-#: apps/applications/forms.py:67
+#: apps/applications/forms.py:68
 msgid "This field repository is required"
 msgstr ""
 
-#: apps/applications/views.py:67 apps/applications/views.py:138
-#: apps/applications/views.py:143 apps/baseapp/views.py:98
-#: apps/jobs/views.py:74 apps/jobs/views.py:182 apps/jobs/views.py:187
-#: apps/profiles/views.py:90 apps/profiles/views.py:131
+#: apps/applications/views.py:73 apps/applications/views.py:148
+#: apps/applications/views.py:153 apps/baseapp/views.py:103
+#: apps/jobs/views.py:78 apps/jobs/views.py:191 apps/jobs/views.py:196
+#: apps/profiles/views.py:92 apps/profiles/views.py:132
 msgid "Form invalid"
 msgstr "Formulario invalido"
 
-#: apps/baseapp/forms.py:17
+#: apps/baseapp/forms.py:19
 msgid "Username or Email"
 msgstr "Usuario o Email"
 
-#: apps/baseapp/forms.py:19 apps/baseapp/forms.py:51
+#: apps/baseapp/forms.py:23 apps/baseapp/forms.py:62
 #: templates/profiles/settings.html:34
 msgid "Password"
 msgstr "Contraseña"
 
-#: apps/baseapp/forms.py:40
+#: apps/baseapp/forms.py:49
 msgid "Incorrect username or password."
 msgstr "Nombre de usuario o contraseña incorrecta"
 
-#: apps/baseapp/forms.py:53
+#: apps/baseapp/forms.py:66
 msgid "Repeat password"
 msgstr "Repita la contraseña"
 
-#: apps/baseapp/forms.py:77
+#: apps/baseapp/forms.py:90
 msgid "Passwords don't match"
 msgstr "Las contraseñas no coinciden"
 
-#: apps/baseapp/forms.py:87
+#: apps/baseapp/forms.py:101
 msgid "Email addresses must be unique."
 msgstr "El correo electrónico ya está registrado"
 
-#: apps/baseapp/views.py:95
+#: apps/baseapp/views.py:100
 msgid "Registration was successful"
 msgstr "El registro ha sido satisfactorio"
 
-#: apps/forum/models.py:16
+#: apps/forum/models.py:18
 msgid "If checked, this category will be visible only for staff"
 msgstr ""
 
-#: apps/forum/models.py:20 apps/forum/models.py:30
+#: apps/forum/models.py:23 apps/forum/models.py:36
 #: templates/forum/index.html:15
 msgid "Category"
 msgstr "Categoría"
 
-#: apps/forum/models.py:21
+#: apps/forum/models.py:24
 msgid "Categories"
 msgstr "Categorías"
 
-#: apps/forum/models.py:31
+#: apps/forum/models.py:39
 msgid "Parent forum"
 msgstr "Foro padre"
 
-#: apps/forum/models.py:33 templates/applications/add.html:30
+#: apps/forum/models.py:42 templates/applications/add.html:30
 #: templates/applications/applications.html:18
 #: templates/applications/edit.html:30
 msgid "Name"
 msgstr "Nombre"
 
-#: apps/forum/models.py:34
+#: apps/forum/models.py:43
 msgid "Position"
 msgstr "Posición"
 
-#: apps/forum/models.py:35 apps/forum/models.py:61 apps/forum/models.py:79
+#: apps/forum/models.py:44 apps/forum/models.py:80 apps/forum/models.py:109
 #: templates/applications/add.html:39
 #: templates/applications/applications.html:19
 #: templates/applications/edit.html:39 templates/applications/view_app.html:13
@@ -102,83 +102,83 @@ msgstr "Posición"
 msgid "Description"
 msgstr "Descripción"
 
-#: apps/forum/models.py:36
+#: apps/forum/models.py:47
 msgid "Moderators"
 msgstr "Moderadores"
 
-#: apps/forum/models.py:37 apps/forum/models.py:60 apps/forum/models.py:78
+#: apps/forum/models.py:49 apps/forum/models.py:79 apps/forum/models.py:108
 #: templates/forum/forum.html:23
 msgid "Date"
 msgstr "Fecha"
 
-#: apps/forum/models.py:38
-msgid "Post count"
-msgstr "Total de post"
+#: apps/forum/models.py:50
+msgid "Topics count"
+msgstr "Total de temas"
 
-#: apps/forum/models.py:39
+#: apps/forum/models.py:52
 msgid "Hidden"
 msgstr "Oculto"
 
-#: apps/forum/models.py:43 apps/forum/models.py:57 templates/base.html:33
+#: apps/forum/models.py:57 apps/forum/models.py:74 templates/base.html:33
 #: templates/forum/forum.html:11 templates/forum/index.html:11
 msgid "Forum"
 msgstr "Foro"
 
-#: apps/forum/models.py:44
+#: apps/forum/models.py:58
 msgid "Forums"
 msgstr "Foros"
 
-#: apps/forum/models.py:58 apps/forum/models.py:77
+#: apps/forum/models.py:76 apps/forum/models.py:106
 #: templates/applications/applications.html:21
 msgid "User"
 msgstr "Usuario"
 
-#: apps/forum/models.py:59 templates/forum/forum.html:20
+#: apps/forum/models.py:78 templates/forum/forum.html:20
 #: templates/jobs/add.html:30 templates/jobs/edit.html:31
 msgid "Title"
 msgstr "Título"
 
-#: apps/forum/models.py:62
+#: apps/forum/models.py:82
 msgid "File"
 msgstr "Archivo"
 
-#: apps/forum/models.py:66 apps/forum/models.py:76
-msgid "Post"
-msgstr ""
+#: apps/forum/models.py:87 apps/forum/models.py:103
+msgid "Topic"
+msgstr "Tema"
 
-#: apps/forum/models.py:67
-msgid "Posts"
-msgstr ""
+#: apps/forum/models.py:88
+msgid "Topics"
+msgstr "Temas"
 
-#: apps/forum/models.py:83
+#: apps/forum/models.py:113
 msgid "Comment"
 msgstr "Comentario"
 
-#: apps/forum/models.py:84
+#: apps/forum/models.py:114
 msgid "Comments"
 msgstr "Comentarios"
 
-#: apps/profiles/validators.py:18 templates/profiles/edit_profile.html:21
+#: apps/profiles/validators.py:21 templates/profiles/edit_profile.html:21
 msgid "Files allowed: jpg, png, gif, ico, bmp"
 msgstr "Archivos permitidos: jpg, png, gif, ico, bmp"
 
-#: apps/profiles/views.py:87
+#: apps/profiles/views.py:89
 msgid "Changes saved correctly"
 msgstr "Cambios guardados correctamente"
 
-#: apps/profiles/views.py:116
+#: apps/profiles/views.py:117
 msgid "Current password incorrect"
 msgstr "Contraseña actual incorrecta"
 
-#: apps/profiles/views.py:120
+#: apps/profiles/views.py:121
 msgid "New password do not match"
 msgstr "La nueva contraseña no coincide"
 
-#: portal/settings.py:123
+#: portal/settings.py:122
 msgid "English"
 msgstr "Ingles"
 
-#: portal/settings.py:124
+#: portal/settings.py:123
 msgid "Spanish"
 msgstr "Español"
 
@@ -223,6 +223,16 @@ msgstr ""
 #: templates/applications/applications.html:10 templates/baseapp/index.html:32
 msgid "Feel free to upload the app you want."
 msgstr "Sientete libre de subir tu aplicación cuando lo desees."
+
+#: templates/applications/applications.html:54 templates/forum/forum.html:56
+#: templates/jobs/jobs.html:58 templates/profiles/users.html:56
+msgid "Page"
+msgstr "Página"
+
+#: templates/applications/applications.html:54 templates/forum/forum.html:56
+#: templates/jobs/jobs.html:58 templates/profiles/users.html:56
+msgid "of"
+msgstr "de"
 
 #: templates/applications/edit.html:23 templates/applications/view_app.html:29
 msgid "Edit application"
@@ -429,14 +439,6 @@ msgstr "Enviar"
 #: templates/forum/forum.html:14
 msgid "Created"
 msgstr "Creado"
-
-#: templates/forum/forum.html:56
-msgid "Page"
-msgstr "Página"
-
-#: templates/forum/forum.html:56
-msgid "of"
-msgstr "de"
 
 #: templates/jobs/add.html:39 templates/jobs/edit.html:40
 #: templates/profiles/edit_profile.html:49

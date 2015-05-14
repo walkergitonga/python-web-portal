@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.template import defaultfilters
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
@@ -46,7 +47,7 @@ class Forum(models.Model):
 		verbose_name=_('Moderators')
 	)
 	date = models.DateTimeField(_('Date'), blank=True, null=True)
-	post_count = models.IntegerField(_('Post count'), blank=True, default=0)
+	topics_count = models.IntegerField(_('Topics count'), blank=True, default=0)
 	hidden = models.BooleanField(
 		_('Hidden'), blank=False, null=False, default=False
 	)
@@ -61,18 +62,19 @@ class Forum(models.Model):
 
 
 def generate_path(instance, filename):
-	folder = "forum_" + str(instance.forum_id) + "_post_" + str(instance.idpost)
+	folder = "forum_" + str(instance.forum_id) + "_topic_" + str(instance.idtopic)
 	return os.path.join("forum", folder, filename)
 
 
 @python_2_unicode_compatible
-class Post(models.Model):
+class Topic(models.Model):
 
-	idpost = models.AutoField(primary_key=True)
+	idtopic = models.AutoField(primary_key=True)
 	forum = models.ForeignKey(
-		Forum, related_name='posts', verbose_name=_('Forum')
+		Forum, related_name='topic', verbose_name=_('Forum')
 	)
-	user = models.ForeignKey(User, related_name='posts', verbose_name=_('User'))
+	user = models.ForeignKey(User, related_name='Topic', verbose_name=_('User'))
+	slug = models.SlugField(max_length=100)
 	title = models.CharField(_('Title'), max_length=80)
 	date = models.DateTimeField(_('Date'), blank=True, db_index=True)
 	description = models.TextField(_('Description'), blank=True)
@@ -82,19 +84,23 @@ class Post(models.Model):
 
 	class Meta(object):
 		ordering = ['date']
-		verbose_name = _('Post')
-		verbose_name_plural = _('Posts')
+		verbose_name = _('Topic')
+		verbose_name_plural = _('Topics')
 
 	def __str__(self):
 		return self.title
 
+	def save(self, *args, **kwargs):
+		if not self.idtopic:
+			self.slug = defaultfilters.slugify(self.title)
+		super(Topic, self).save(*args, **kwargs)
 
 @python_2_unicode_compatible
 class Comment(models.Model):
 
 	idcomment = models.AutoField(primary_key=True)
-	post = models.ForeignKey(
-		Post, related_name='comments', verbose_name=_('Post')
+	topic = models.ForeignKey(
+		Topic, related_name='comments', verbose_name=_('Topic')
 	)
 	user = models.ForeignKey(
 		User, related_name='comments', verbose_name=_('User')

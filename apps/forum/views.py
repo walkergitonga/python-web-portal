@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from log.utils import set_error_to_log
 
 from apps.utils import helper_paginator
-from apps.forum.models import Category, Forum, Post
+from apps.forum.models import Category, Forum, Topic
 
 
 class ForumsView(View):
@@ -38,14 +38,32 @@ class ForumView(View):
 	def get(self, request, forum, *args, **kwargs):
 
 		forum = get_object_or_404(Forum, name=forum, hidden=False)
-		posts = Post.objects.filter(forum_id=forum.idforum)
+		topics = Topic.objects.filter(forum_id=forum.idforum)
 
-		pag = helper_paginator(self, request, posts, 15, 'posts')
+		pag = helper_paginator(self, request, topics, 15, 'topics')
 
 		data = {
 			'forum': forum,
-			'posts': pag['posts'],
+			'topics': pag['topics'],
 			'paginator': pag
+		}
+
+		return render(request, self.template_name, data)
+
+
+class TopicView(View):
+	'''
+	This view display one Topic of forum
+	'''
+	template_name = "forum/topic.html"
+
+	def get(self, request, forum, slug, idtopic, *args, **kwargs):
+
+		forum = get_object_or_404(Forum, name=forum, hidden=False)
+		topic = get_object_or_404(Topic, idtopic=idtopic, slug=slug)
+
+		data = {
+			'topic': topic,
 		}
 
 		return render(request, self.template_name, data)
