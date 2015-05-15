@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+
+{% block content %}
+	
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <h2>{% trans "Forum" %}: {{topic.forum.name}}</h2>
+        <p>{{topic.forum.description}}</p>
+        <hr>
+        <section class="comment-list">
+          <!-- First Comment -->
+          <article class="row">
+            <div class="col-md-2 col-sm-2 hidden-xs">
+              <figure class="thumbnail">
+              	{% if profile.photo %}
+	                <img src="{{MEDIA_URL}}{{profile.photo}}" class="img-responsive" width="150" hegiht="150" />
+	            {% else %}
+	                <img src="{% static 'img/profile.png' %}" class="img-responsive" width="150" hegiht="150" />
+	            {% endif %}
+                <figcaption class="text-center"><a href="/profile/{{profile.iduser.username}}/">{{topic.user.username}}</a></figcaption>
+              </figure>
+            </div>
+            <div class="col-md-10 col-sm-10">
+              <div class="panel panel-default arrow left">
+                <div class="panel-body">
+                  <header class="text-left">
+                    <h4><i class="fa fa-clock-o"></i> {{topic.title}}</h4>
+                  </header>
+                  <div class="comment-post">
+                    <p>
+                      {{topic.description}}
+                    </p>
+                  </div>
+                  <hr>
+                  <p class="pull-right">{{topic.date}}</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

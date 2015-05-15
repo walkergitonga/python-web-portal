@@ -27,7 +27,7 @@
 				        <td><a href="/application/{{app.name}}/{{app.iduser.username}}/">{{app.name}}</a></td>
 				        <td>{{app.description|safe|truncatechars:100}}</td>
 				        <td><a href="{{app.repository}}" target="_blank">{{app.repository}}</a></td>
-				        <td>{{app.iduser.username}}</td>
+				        <td><a href="/profile/{{app.iduser.username}}/">{{app.iduser.username}}</a></td>
 				    </tr>
 			    {% endfor %}
 		    </tbody>

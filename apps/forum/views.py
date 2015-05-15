@@ -11,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from log.utils import set_error_to_log
 
 from apps.utils import helper_paginator
+from apps.profiles.models import Profile
 from apps.forum.models import Category, Forum, Topic
 
 
@@ -61,9 +62,11 @@ class TopicView(View):
 
 		forum = get_object_or_404(Forum, name=forum, hidden=False)
 		topic = get_object_or_404(Topic, idtopic=idtopic, slug=slug)
+		profile = get_object_or_404(Profile, iduser_id=topic.user_id)
 
 		data = {
 			'topic': topic,
+			'profile': profile,
 		}
 
 		return render(request, self.template_name, data)
