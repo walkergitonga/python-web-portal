@@ -24,7 +24,6 @@
             </div>     
 
             <div class="panel-body">
-            	{{ form.errors}}
             	<form class="form-horizontal" action="{{request.get_full_path}}" method="POST">{% csrf_token%}
             		{% for field in form %}
 			   			{% if field.name == "title" %}

@@ -76,8 +76,8 @@ class Topic(models.Model):
 	user = models.ForeignKey(User, related_name='Topic', verbose_name=_('User'))
 	slug = models.SlugField(max_length=100)
 	title = models.CharField(_('Title'), max_length=80)
-	date = models.DateTimeField(_('Date'), blank=True, db_index=True)
-	description = models.TextField(_('Description'), blank=True)
+	date = models.DateTimeField(_('Date'), blank=False, db_index=False)
+	description = models.TextField(_('Description'), blank=False, null=False)
 	attachment = models.FileField(
 		_('File'), blank=True, null=True, upload_to=generate_path
 	)
@@ -93,7 +93,20 @@ class Topic(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.idtopic:
 			self.slug = defaultfilters.slugify(self.title)
+
+			self.update_forum_topics(self.forum)
 		super(Topic, self).save(*args, **kwargs)
+
+	def update_forum_topics(self, forum):
+		
+		f = Forum.objects.get(name=forum)
+		tot_topics = f.topics_count
+		tot_topics = tot_topics + 1
+
+		Forum.objects.filter(name=forum).update(
+			topics_count=tot_topics
+		)
+
 
 @python_2_unicode_compatible
 class Comment(models.Model):
