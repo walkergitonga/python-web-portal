@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 import datetime
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponseRedirect
@@ -17,7 +18,7 @@ from log.utils import set_error_to_log
 from apps.forum.forms import FormAddTopic
 from apps.forum.models import Category, Forum, Topic
 from apps.profiles.models import Profile
-from apps.utils import helper_paginator
+from apps.utils import remove_file, helper_paginator
 
 
 class ForumsView(View):
@@ -97,8 +98,7 @@ class NewTopicView(FormView):
 
 	def post(self, request, forum, *args, **kwargs):
 
-		form_class = self.get_form_class()
-		form = self.get_form(form_class)
+		form = FormAddTopic(request.POST, request.FILES)
 
 		if form.is_valid():
 			obj = form.save(commit=False)
@@ -111,6 +111,24 @@ class NewTopicView(FormView):
 			obj.user = user
 			obj.forum = forum
 			obj.slug = defaultfilters.slugify(request.POST['title'])
+
+			if 'attachment' in request.FILES:
+				file_path = settings.MEDIA_ROOT
+				file_name = request.FILES['attachment']
+				obj.attachment = file_name
+
+				# Route previous file, if not exists display error
+				try:
+					route_file = file_path + "/" + file_name.name
+				except Exception:
+					pass
+
+				try:
+					# If a previous file exists it removed
+					remove_file(route_file)
+				except Exception:
+					pass
+
 
 			obj.save()
 			return self.form_valid(form, **kwargs)
