@@ -7,6 +7,8 @@ from django.template import defaultfilters
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
+from apps.forum.validators import valid_extension
+
 
 @python_2_unicode_compatible
 class Category(models.Model):
@@ -63,7 +65,11 @@ class Forum(models.Model):
 
 
 def generate_path(instance, filename):
-	folder = "forum_" + str(instance.forum_id) + "_topic_" + str(instance.idtopic)
+
+	folder = ""
+	folder = "forum_" + str(instance.forum_id) 
+	folder = folder + "_user_" + str(instance.user) 
+	folder = folder + "_topic_" + str(instance.date)
 	return os.path.join("forum", folder, filename)
 
 
@@ -80,7 +86,8 @@ class Topic(models.Model):
 	date = models.DateTimeField(_('Date'), blank=False, db_index=False)
 	description = models.TextField(_('Description'), blank=False, null=False)
 	attachment = models.FileField(
-		_('File'), blank=True, null=True, upload_to=generate_path
+		_('File'), blank=True, null=True, upload_to=generate_path,
+		validators=[valid_extension]
 	)
 
 	class Meta(object):
