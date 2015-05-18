@@ -1,6 +1,8 @@
 # encoding:utf-8 
 
 from django import forms
+from django.forms.widgets import ClearableFileInput
+
 from apps.widgets import TextareaWidget
 from apps.forum.models import Topic
 
@@ -45,7 +47,7 @@ class FormAddTopic(forms.ModelForm):
 '''
   Changes order fields
 '''
-class CustomClearableFileInput(forms.ClearableFileInput):
+class CustomClearableFileInput(ClearableFileInput):
 	template_with_clear = '<br>  <label for="%(clear_checkbox_id)s">%(clear_checkbox_label)s</label> %(clear)s'
 
 
@@ -73,5 +75,3 @@ class FormEditTopic(forms.ModelForm):
 				self.fields[key].widget.attrs['class'] = class_css
 			else:
 				self.fields[key].required = False
-
-			
