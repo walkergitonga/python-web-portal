@@ -15,7 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from log.utils import set_error_to_log
 
-from apps.forum.forms import FormAddTopic
+from apps.forum.forms import FormAddTopic, FormEditTopic
 from apps.forum.models import Category, Forum, Topic
 from apps.profiles.models import Profile
 from apps.utils import remove_file, helper_paginator
@@ -80,7 +80,7 @@ class TopicView(View):
 
 class NewTopicView(FormView):
 	'''
-		This view allowe add new topic
+		This view allowed add new topic
 	'''
 	template_name = "forum/new_topic.html"
 	form_class = FormAddTopic
@@ -131,6 +131,73 @@ class NewTopicView(FormView):
 
 
 			obj.save()
+			return self.form_valid(form, **kwargs)
+		else:
+			messages.error(request, _("Form invalid"))
+			return self.form_invalid(form, **kwargs)
+
+class EditTopicView(FormView):
+	'''
+		This view allowed edit topic
+	'''
+	template_name = "forum/edit_topic.html"
+	form_class = FormEditTopic
+
+	def get_success_url(self):
+		return '/forum/' + self.kwargs['forum']
+
+	def get(self, request, forum, idtopic, *args, **kwargs):
+		
+		topic = get_object_or_404(Topic, idtopic=idtopic, user_id=request.user.id)
+
+		form = FormEditTopic(initial={
+					'title': topic.title, 
+					'description': topic.description,
+				})
+
+		data = {
+			'form': form,
+			'topic': topic,
+		}
+
+		return render(request, self.template_name, data)
+
+	def post(self, request, forum, idtopic, *args, **kwargs):
+
+		form = FormEditTopic(request.POST, request.FILES)
+
+		if form.is_valid():
+			
+			title = strip_tags(request.POST['title'])
+			description = strip_tags(request.POST['description'])
+			slug = defaultfilters.slugify(request.POST['title'])
+
+			kwargs2 = {}
+			kwargs2['title'] = title
+			kwargs2['description'] = description
+			kwargs2['slug'] = slug
+
+			if 'attachment' in request.FILES:
+				file_path = settings.MEDIA_ROOT
+				file_name = request.FILES['attachment']
+				kwargs2['attachment'] = file_name
+
+				# Route previous file, if not exists display error
+				try:
+					route_file = file_path + "/" + file_name.name
+				except Exception:
+					pass
+
+				try:
+					# If a previous file exists it removed
+					remove_file(route_file)
+				except Exception:
+					pass
+
+			Topic.objects.filter(
+				idtopic=idtopic, user_id=request.user.id
+			).update(**kwargs2)
+			
 			return self.form_valid(form, **kwargs)
 		else:
 			messages.error(request, _("Form invalid"))

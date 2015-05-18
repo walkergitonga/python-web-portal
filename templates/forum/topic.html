@@ -24,6 +24,7 @@
 	            {% endif %}
                 <figcaption class="text-center"><a href="/profile/{{profile.iduser.username}}/">{{topic.user.username}}</a></figcaption>
               </figure>
+              <a href="/edit_topic/{{topic.forum.name}}/{{topic.idtopic}}/" class="btn btn-success btn-xs">{% trans "Edit topic" %}</a>
             </div>
             <div class="col-md-10 col-sm-10">
               <div class="panel panel-default arrow left">

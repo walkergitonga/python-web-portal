@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-16 23:18-0300\n"
+"POT-Creation-Date: 2015-05-17 21:49-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,8 +32,9 @@ msgstr ""
 
 #: apps/applications/views.py:73 apps/applications/views.py:148
 #: apps/applications/views.py:153 apps/baseapp/views.py:103
-#: apps/forum/views.py:136 apps/jobs/views.py:78 apps/jobs/views.py:191
-#: apps/jobs/views.py:196 apps/profiles/views.py:92 apps/profiles/views.py:132
+#: apps/forum/views.py:136 apps/forum/views.py:203 apps/jobs/views.py:78
+#: apps/jobs/views.py:191 apps/jobs/views.py:196 apps/profiles/views.py:92
+#: apps/profiles/views.py:132
 msgid "Form invalid"
 msgstr "Formulario invalido"
 
@@ -97,8 +98,9 @@ msgstr "Posición"
 #: templates/applications/add.html:39
 #: templates/applications/applications.html:19
 #: templates/applications/edit.html:39 templates/applications/view_app.html:13
-#: templates/forum/forum.html:21 templates/forum/new_topic.html:39
-#: templates/jobs/add.html:76 templates/jobs/edit.html:76
+#: templates/forum/edit_topic.html:39 templates/forum/forum.html:21
+#: templates/forum/new_topic.html:39 templates/jobs/add.html:76
+#: templates/jobs/edit.html:76
 msgid "Description"
 msgstr "Descripción"
 
@@ -134,9 +136,9 @@ msgstr "Foros"
 msgid "User"
 msgstr "Usuario"
 
-#: apps/forum/models.py:85 templates/forum/forum.html:20
-#: templates/forum/new_topic.html:30 templates/jobs/add.html:30
-#: templates/jobs/edit.html:30
+#: apps/forum/models.py:85 templates/forum/edit_topic.html:30
+#: templates/forum/forum.html:20 templates/forum/new_topic.html:30
+#: templates/jobs/add.html:30 templates/jobs/edit.html:30
 msgid "Title"
 msgstr "Título"
 
@@ -201,9 +203,10 @@ msgstr "Agregar"
 msgid "Repository"
 msgstr "Repositorio"
 
-#: templates/applications/add.html:57 templates/forum/new_topic.html:57
-#: templates/jobs/add.html:85 templates/jobs/edit.html:85
-#: templates/profiles/admin.html:51 templates/profiles/edit_profile.html:69
+#: templates/applications/add.html:57 templates/forum/edit_topic.html:57
+#: templates/forum/new_topic.html:57 templates/jobs/add.html:85
+#: templates/jobs/edit.html:85 templates/profiles/admin.html:51
+#: templates/profiles/edit_profile.html:69
 msgid "Save"
 msgstr "Grabar"
 
@@ -443,6 +446,16 @@ msgstr "Correo electrónico"
 msgid "Submit"
 msgstr "Enviar"
 
+#: templates/forum/edit_topic.html:23
+#, fuzzy
+#| msgid "Edit job"
+msgid "Edit"
+msgstr "Editar Empleo"
+
+#: templates/forum/edit_topic.html:48 templates/forum/new_topic.html:48
+msgid "Attachment"
+msgstr "Adjunto"
+
 #: templates/forum/forum.html:14
 msgid "New topic"
 msgstr "Nuevo tema"
@@ -451,9 +464,9 @@ msgstr "Nuevo tema"
 msgid "Created"
 msgstr "Creado"
 
-#: templates/forum/new_topic.html:48
-msgid "Attachment"
-msgstr "Adjunto"
+#: templates/forum/topic.html:27
+msgid "Edit topic"
+msgstr "Editar tema"
 
 #: templates/jobs/add.html:39 templates/jobs/edit.html:39
 #: templates/profiles/edit_profile.html:49
