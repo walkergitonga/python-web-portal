@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 import datetime
+import os
 
 from django.conf import settings
 from django.contrib import messages
@@ -18,7 +19,10 @@ from log.utils import set_error_to_log
 from apps.forum.forms import FormAddTopic, FormEditTopic
 from apps.forum.models import Category, Forum, Topic
 from apps.profiles.models import Profile
-from apps.utils import remove_file, helper_paginator
+from apps.utils import (
+	remove_file, helper_paginator, 
+	get_route_file, remove_folder
+)
 
 
 class ForumsView(View):
@@ -106,35 +110,24 @@ class NewTopicView(FormView):
 			now = datetime.datetime.now()
 			user = User.objects.get(id=request.user.id)
 			forum = get_object_or_404(Forum, name=forum)
+			title = strip_tags(request.POST['title'])
 
 			obj.date = now
 			obj.user = user
 			obj.forum = forum
+			obj.title = title
 			obj.slug = defaultfilters.slugify(request.POST['title'])
 
 			if 'attachment' in request.FILES:
-				file_path = settings.MEDIA_ROOT
 				file_name = request.FILES['attachment']
 				obj.attachment = file_name
-
-				# Route previous file, if not exists display error
-				try:
-					route_file = file_path + "/" + file_name.name
-				except Exception:
-					pass
-
-				try:
-					# If a previous file exists it removed
-					remove_file(route_file)
-				except Exception:
-					pass
-
 
 			obj.save()
 			return self.form_valid(form, **kwargs)
 		else:
 			messages.error(request, _("Form invalid"))
 			return self.form_invalid(form, **kwargs)
+
 
 class EditTopicView(FormView):
 	'''
@@ -150,10 +143,8 @@ class EditTopicView(FormView):
 		
 		topic = get_object_or_404(Topic, idtopic=idtopic, user_id=request.user.id)
 
-		form = FormEditTopic(initial={
-					'title': topic.title, 
-					'description': topic.description,
-				})
+		# Init fields form
+		form = FormEditTopic(instance=topic)
 
 		data = {
 			'form': form,
@@ -164,29 +155,39 @@ class EditTopicView(FormView):
 
 	def post(self, request, forum, idtopic, *args, **kwargs):
 
-		form = FormEditTopic(request.POST, request.FILES)
+		topic = get_object_or_404(Topic, idtopic=idtopic, user_id=request.user.id)
+		file_name = topic.attachment
+
+		form = FormEditTopic(request.POST, request.FILES, instance=topic)
+		file_path = settings.MEDIA_ROOT
 
 		if form.is_valid():
-			
+
+			obj = form.save(commit=False)
+
 			title = strip_tags(request.POST['title'])
 			description = strip_tags(request.POST['description'])
 			slug = defaultfilters.slugify(request.POST['title'])
 
-			kwargs2 = {}
-			kwargs2['title'] = title
-			kwargs2['description'] = description
-			kwargs2['slug'] = slug
+			obj.title = title
+			obj.description = description
+			obj.slug = slug
 
-			if 'attachment' in request.FILES:
-				file_path = settings.MEDIA_ROOT
-				file_name = request.FILES['attachment']
-				kwargs2['attachment'] = file_name
+			# If check field clear, remove file when update 
+			if 'attachment-clear' in request.POST:
+				route_file = get_route_file(file_path, file_name.name)
 
-				# Route previous file, if not exists display error
 				try:
-					route_file = file_path + "/" + file_name.name
+					remove_file(route_file)
 				except Exception:
 					pass
+
+			if 'attachment' in request.FILES:
+				file_name = request.FILES['attachment']
+				obj.attachment = file_name
+
+				# Route previous file
+				route_file = get_route_file(file_path, file_name.name)
 
 				try:
 					# If a previous file exists it removed
@@ -194,9 +195,8 @@ class EditTopicView(FormView):
 				except Exception:
 					pass
 
-			Topic.objects.filter(
-				idtopic=idtopic, user_id=request.user.id
-			).update(**kwargs2)
+			# Update topic
+			form.save()
 			
 			return self.form_valid(form, **kwargs)
 		else:

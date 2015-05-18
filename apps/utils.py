@@ -1,4 +1,5 @@
 import os
+import shutil
 
 from django.core.paginator import Paginator
 
@@ -23,6 +24,28 @@ def create_folder(route):
 	'''
 	if not exists_folder(route):
 		os.makedirs(route)
+
+
+def remove_folder(route_folder):
+	'''
+		This methodo remove one folder
+	'''
+	try:
+		shutil.rmtree(route_folder)
+	except Exception:
+		pass
+
+
+def get_route_file(file_path, file_name):
+	'''
+		This method build the path for a file MEDIA
+	'''
+	try:
+		route_file = file_path + "/" + file_name
+	except Exception:
+		route_file = ""
+
+	return route_file
 
 
 def remove_file(route_file):
