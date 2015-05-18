@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-17 21:49-0300\n"
+"POT-Creation-Date: 2015-05-18 14:11-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: apps/applications/views.py:73 apps/applications/views.py:148
 #: apps/applications/views.py:153 apps/baseapp/views.py:103
-#: apps/forum/views.py:136 apps/forum/views.py:203 apps/jobs/views.py:78
+#: apps/forum/views.py:128 apps/forum/views.py:203 apps/jobs/views.py:78
 #: apps/jobs/views.py:191 apps/jobs/views.py:196 apps/profiles/views.py:92
 #: apps/profiles/views.py:132
 msgid "Form invalid"
@@ -446,11 +446,9 @@ msgstr "Correo electrónico"
 msgid "Submit"
 msgstr "Enviar"
 
-#: templates/forum/edit_topic.html:23
-#, fuzzy
-#| msgid "Edit job"
-msgid "Edit"
-msgstr "Editar Empleo"
+#: templates/forum/edit_topic.html:23 templates/forum/topic.html:27
+msgid "Edit topic"
+msgstr "Editar tema"
 
 #: templates/forum/edit_topic.html:48 templates/forum/new_topic.html:48
 msgid "Attachment"
@@ -463,10 +461,6 @@ msgstr "Nuevo tema"
 #: templates/forum/forum.html:42
 msgid "Created"
 msgstr "Creado"
-
-#: templates/forum/topic.html:27
-msgid "Edit topic"
-msgstr "Editar tema"
 
 #: templates/jobs/add.html:39 templates/jobs/edit.html:39
 #: templates/profiles/edit_profile.html:49
@@ -556,6 +550,11 @@ msgstr "Ajustes"
 #: templates/profiles/users.html:10
 msgid "Users of Portal web python"
 msgstr "Usuarios de Portal web python"
+
+#, fuzzy
+#~| msgid "Edit job"
+#~ msgid "Edit"
+#~ msgstr "Editar Empleo"
 
 #~ msgid "Works"
 #~ msgstr "Empleos"

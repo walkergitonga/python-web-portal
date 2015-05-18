@@ -89,3 +89,11 @@ def helper_paginator(self, request, model, tot_record, nonRecPag):
 			'firstPage': 1,
 		}
 		return Contexto
+
+
+def basename(value):
+	'''
+		This method return basename 
+		of one path
+	'''
+	return os.path.basename(value)

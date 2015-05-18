@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 import datetime
-import os
 
 from django.conf import settings
 from django.contrib import messages
@@ -21,7 +20,7 @@ from apps.forum.models import Category, Forum, Topic
 from apps.profiles.models import Profile
 from apps.utils import (
 	remove_file, helper_paginator, 
-	get_route_file, remove_folder
+	get_route_file
 )
 
 
@@ -183,8 +182,8 @@ class EditTopicView(FormView):
 					pass
 
 			if 'attachment' in request.FILES:
-				file_name = request.FILES['attachment']
-				obj.attachment = file_name
+				file_name_post = request.FILES['attachment']
+				obj.attachment = file_name_post
 
 				# Route previous file
 				route_file = get_route_file(file_path, file_name.name)
