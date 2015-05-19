@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-18 14:11-0300\n"
+"POT-Creation-Date: 2015-05-19 12:07-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: apps/applications/views.py:73 apps/applications/views.py:148
 #: apps/applications/views.py:153 apps/baseapp/views.py:103
-#: apps/forum/views.py:128 apps/forum/views.py:203 apps/jobs/views.py:78
+#: apps/forum/views.py:127 apps/forum/views.py:202 apps/jobs/views.py:78
 #: apps/jobs/views.py:191 apps/jobs/views.py:196 apps/profiles/views.py:92
 #: apps/profiles/views.py:132
 msgid "Form invalid"
@@ -280,7 +280,8 @@ msgstr "Eliminar aplicación"
 msgid "Do you want to remove the application?"
 msgstr "¿Desea eliminar esta aplicación?"
 
-#: templates/applications/view_app.html:45 templates/jobs/view_job.html:52
+#: templates/applications/view_app.html:45 templates/forum/topic.html:71
+#: templates/jobs/view_job.html:52
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -461,6 +462,14 @@ msgstr "Nuevo tema"
 #: templates/forum/forum.html:42
 msgid "Created"
 msgstr "Creado"
+
+#: templates/forum/topic.html:28 templates/forum/topic.html.py:64
+msgid "Delete topic"
+msgstr "Eliminar tema"
+
+#: templates/forum/topic.html:67
+msgid "Do you want to remove the topic?"
+msgstr "¿Desea eliminar este tema?"
 
 #: templates/jobs/add.html:39 templates/jobs/edit.html:39
 #: templates/profiles/edit_profile.html:49

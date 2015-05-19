@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from apps.forum.views import (
 	ForumsView, ForumView,
 	TopicView, NewTopicView,
-	EditTopicView
+	EditTopicView, DeleteTopicView
 )
 
 urlpatterns = [
@@ -21,6 +21,11 @@ urlpatterns = [
 		r'^newtopic/(?P<forum>.+)/$', login_required(NewTopicView.as_view()), name='newtopic'
 	),
 	url(
-		r'^edit_topic/(?P<forum>.+)/(?P<idtopic>\d+)/$', login_required(EditTopicView.as_view()), name='edittopic'
+		r'^edit_topic/(?P<forum>.+)/(?P<idtopic>\d+)/$', login_required(EditTopicView.as_view()), 
+		name='edittopic'
+	),
+	url(
+		r'^delete_topic/(?P<forum>.+)/(?P<idtopic>\d+)/$', login_required(DeleteTopicView.as_view()), 
+		name='deletetopic'
 	),
 ]

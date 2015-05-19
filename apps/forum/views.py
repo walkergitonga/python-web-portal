@@ -4,8 +4,8 @@ import datetime
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.http import Http404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template import defaultfilters
 from django.views.generic import View
 from django.views.generic.edit import FormView
@@ -201,3 +201,29 @@ class EditTopicView(FormView):
 		else:
 			messages.error(request, _("Form invalid"))
 			return self.form_invalid(form, **kwargs)
+
+
+class DeleteTopicView(View):
+	'''
+	This view will delete one topic
+	'''
+	def get(self, request, forum, idtopic, *args, **kwargs):
+
+		# Previouly verify that exists the topic
+		topic = get_object_or_404(Topic, idtopic=idtopic, user_id=request.user.id)
+
+		iduser_topic = topic.user_id
+
+		# If my user delete
+		if request.user.id == iduser_topic:
+			Topic.objects.filter(idtopic=idtopic, user_id=iduser_topic).delete()
+		else:
+			error = ""
+			error = error + 'The user ' + str(request.user.id)
+			error = error + ' He is trying to remove the job ' + str(idtopic)
+			error = error +	' of user ' + str(iduser_topic)
+
+			set_error_to_log(request, error)
+			raise Http404
+
+		return redirect('forum', forum)
