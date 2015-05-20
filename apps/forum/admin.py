@@ -1,10 +1,15 @@
 from django.contrib import admin
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext_lazy as _
 
 from apps.forum.forms import FormAdminTopic
 from apps.forum.models import (
 	Category, Forum, 
 	Topic, Comment
+)
+from apps.utils import (
+	remove_folder, exists_folder, 
+	get_folder_attachment
 )
 
 
@@ -21,6 +26,7 @@ class TopicAdmin(admin.ModelAdmin):
 		return actions
 
 	def delete(self, request, queryset):
+		# Subtract one topic
 		idtopic = request.POST.get('_selected_action')
 		topic = get_object_or_404(Topic, idtopic=idtopic)
 		forum = get_object_or_404(Forum, name=topic.forum, hidden=False)
@@ -30,8 +36,16 @@ class TopicAdmin(admin.ModelAdmin):
 			topics_count=tot
 		)
 
+		# Delete record
 		for obj in queryset:
 			obj.delete()
+
+		path = get_folder_attachment(topic)
+			
+		# Remove attachment if exists
+		if exists_folder(path):
+			remove_folder(path)
+	delete.short_description = _('You want to delete the record?')
 			
 	
 class ForumAdmin(admin.ModelAdmin):

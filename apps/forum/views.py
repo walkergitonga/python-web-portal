@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 import datetime
-import os
 
 from django.conf import settings
 from django.contrib import messages
@@ -23,7 +22,7 @@ from apps.profiles.models import Profile
 from apps.utils import (
 	remove_file, helper_paginator, 
 	get_route_file, remove_folder,
-	exists_folder
+	exists_folder, get_folder_attachment
 )
 
 
@@ -229,19 +228,13 @@ class DeleteTopicView(View):
 		if request.user.id == iduser_topic:
 			Topic.objects.filter(idtopic=idtopic, user_id=iduser_topic).delete()
 			
-			folder = ""
-			folder = "forum_" + str(topic.forum_id) 
-			folder = folder + "_user_" + str(topic.user.username) 
-			folder = folder + "_topic_" + str(topic.id_attachment)
-			path_folder = os.path.join("forum", folder)
-			media_path = settings.MEDIA_ROOT
-			path = media_path + "/" +  path_folder
+			path = get_folder_attachment(topic)
 			
 			# Remove attachment if exists
 			if exists_folder(path):
 				remove_folder(path)
 
-			#Update topic count 
+			# Subtract one topic
 			forum = get_object_or_404(Forum, name=forum, hidden=False)
 			tot = forum.topics_count
 			tot = tot - 1
