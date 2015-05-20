@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.template import defaultfilters
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
 from apps.forum.validators import valid_extension
@@ -69,7 +70,7 @@ def generate_path(instance, filename):
 	folder = ""
 	folder = "forum_" + str(instance.forum_id) 
 	folder = folder + "_user_" + str(instance.user) 
-	folder = folder + "_topic_" + str(instance.date)
+	folder = folder + "_topic_" + str(instance.id_attachment)
 	return os.path.join("forum", folder, filename)
 
 
@@ -85,13 +86,14 @@ class Topic(models.Model):
 	title = models.CharField(_('Title'), max_length=80)
 	date = models.DateTimeField(_('Date'), blank=False, db_index=False)
 	description = models.TextField(_('Description'), blank=False, null=False)
+	id_attachment = models.CharField(max_length=200, null=True, blank=True)
 	attachment = models.FileField(
 		_('File'), blank=True, null=True, upload_to=generate_path,
 		validators=[valid_extension]
 	)
 
 	class Meta(object):
-		ordering = ['date']
+		ordering = ['date', 'title', 'forum']
 		verbose_name = _('Topic')
 		verbose_name_plural = _('Topics')
 
@@ -99,10 +101,12 @@ class Topic(models.Model):
 		return self.title
 
 	def save(self, *args, **kwargs):
+
 		if not self.idtopic:
 			self.slug = defaultfilters.slugify(self.title)
-
 			self.update_forum_topics(self.forum)
+
+		self.generate_id_attachment(self.id_attachment)
 		super(Topic, self).save(*args, **kwargs)
 
 	def update_forum_topics(self, forum):
@@ -114,6 +118,10 @@ class Topic(models.Model):
 		Forum.objects.filter(name=forum).update(
 			topics_count=tot_topics
 		)
+
+	def generate_id_attachment(self, value):
+		if not value:
+			self.id_attachment = get_random_string(length=32)
 
 
 @python_2_unicode_compatible

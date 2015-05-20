@@ -22,7 +22,7 @@
 					  	{% endif %}
 					  		<span class="badge">{{ forum.topics_count }}</span>
 					    	<h4 class="list-group-item-heading">{{ forum.name }}</h4>
-					    	<p class="list-group-item-text">{{ forum.description }}</p>
+					    	<p class="list-group-item-text">{{ forum.description|safe }}</p>
 					  	</a>
 				  	{% endfor %}
 				</div>

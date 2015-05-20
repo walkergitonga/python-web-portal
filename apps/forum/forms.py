@@ -16,7 +16,7 @@ class FormAdminTopic(forms.ModelForm):
 	'''
 	class Meta:
 		model = Topic
-		exclude = ('slug',)
+		exclude = ('slug', 'id_attachment')
 		widgets = { 
 			'description': TextareaWidget,
 		}  
@@ -29,7 +29,7 @@ class FormAddTopic(forms.ModelForm):
 
 	class Meta:
 		model = Topic
-		exclude = ('forum', "user", "slug", "date")
+		exclude = ('forum', "user", "slug", "date", "id_attachment")
 		widgets = { 
 			'description': TextareaWidget,
 		}  
@@ -93,7 +93,7 @@ class FormEditTopic(forms.ModelForm):
 
 	class Meta:
 		model = Topic
-		exclude = ('forum', "user", "slug", "date")
+		exclude = ('forum', "user", "slug", "date", "id_attachment")
 		widgets = { 
 			'description': TextareaWidget,
 			'attachment': CustomClearableFileInput,

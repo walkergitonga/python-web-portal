@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 import datetime
+import os
 
 from django.conf import settings
 from django.contrib import messages
@@ -9,6 +10,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template import defaultfilters
 from django.views.generic import View
 from django.views.generic.edit import FormView
+from django.utils.crypto import get_random_string
 from django.utils.html import strip_tags
 
 from django.utils.translation import ugettext_lazy as _
@@ -20,7 +22,8 @@ from apps.forum.models import Category, Forum, Topic
 from apps.profiles.models import Profile
 from apps.utils import (
 	remove_file, helper_paginator, 
-	get_route_file
+	get_route_file, remove_folder,
+	exists_folder
 )
 
 
@@ -110,7 +113,7 @@ class NewTopicView(FormView):
 			user = User.objects.get(id=request.user.id)
 			forum = get_object_or_404(Forum, name=forum)
 			title = strip_tags(request.POST['title'])
-
+			
 			obj.date = now
 			obj.user = user
 			obj.forum = forum
@@ -118,6 +121,9 @@ class NewTopicView(FormView):
 			obj.slug = defaultfilters.slugify(request.POST['title'])
 
 			if 'attachment' in request.FILES:
+				id_attachment = get_random_string(length=32)
+				obj.id_attachment = id_attachment
+
 				file_name = request.FILES['attachment']
 				obj.attachment = file_name
 
@@ -182,6 +188,11 @@ class EditTopicView(FormView):
 					pass
 
 			if 'attachment' in request.FILES:
+
+				if not topic.id_attachment:
+					id_attachment = get_random_string(length=32)
+					obj.id_attachment = id_attachment
+
 				file_name_post = request.FILES['attachment']
 				obj.attachment = file_name_post
 
@@ -217,6 +228,26 @@ class DeleteTopicView(View):
 		# If my user delete
 		if request.user.id == iduser_topic:
 			Topic.objects.filter(idtopic=idtopic, user_id=iduser_topic).delete()
+			
+			folder = ""
+			folder = "forum_" + str(topic.forum_id) 
+			folder = folder + "_user_" + str(topic.user.username) 
+			folder = folder + "_topic_" + str(topic.id_attachment)
+			path_folder = os.path.join("forum", folder)
+			media_path = settings.MEDIA_ROOT
+			path = media_path + "/" +  path_folder
+			
+			# Remove attachment if exists
+			if exists_folder(path):
+				remove_folder(path)
+
+			#Update topic count 
+			forum = get_object_or_404(Forum, name=forum, hidden=False)
+			tot = forum.topics_count
+			tot = tot - 1
+			Forum.objects.filter(name=forum, hidden=False).update(
+				topics_count=tot
+			)
 		else:
 			error = ""
 			error = error + 'The user ' + str(request.user.id)

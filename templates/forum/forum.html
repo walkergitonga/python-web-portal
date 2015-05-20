@@ -10,7 +10,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading"><h4>{% trans "Forum" %}: {{forum.name}}</h4></div>
 	  	<div class="panel-body">
-	    	<p>{{forum.description}}</p>
+	    	<p>{{forum.description|safe}}</p>
     		<a href="/newtopic/{{forum.name}}/" class="btn btn-success">{% trans "New topic" %}</a>
     		<hr>
     		<div class="table-responsive">          
