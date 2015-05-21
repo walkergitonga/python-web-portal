@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load forum_filter %}
+
+{% block content %}
+	
+<div class="container">
+
+	<div class="panel panel-default">
+		<div class="panel-heading"><h4>{% trans "Forum" %}</h4></div>
+	  	<div class="panel-body">
+	    	
+	    	{% for category in categories %}
+	    		<h4>{% trans "Category" %}: {{category.name}}</h4>
+		    	<div class="list-group">
+				  	{% for forum in category.idcategory|in_category %}
+				  		{% if forloop.counter|divisibleby:2 %}
+					  	<a href="/forum/{{ forum.name }}/" class="list-group-item active">
+					  	{% else %}
+					  	<a href="/forum/{{ forum.name }}/" class="list-group-item">
+					  	{% endif %}
+					  		<span class="badge">{{ forum.topics_count }}</span>
+					    	<h4 class="list-group-item-heading">{{ forum.name }}</h4>
+					    	<p class="list-group-item-text">{{ forum.description|safe }}</p>
+					  	</a>
+				  	{% endfor %}
+				</div>
+			{% endfor %}
+
+	  	</div>
+	</div>
+
+</div>
+
+{% endblock %}
