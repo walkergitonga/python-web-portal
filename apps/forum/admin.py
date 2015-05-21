@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 
@@ -22,7 +22,8 @@ class TopicAdmin(admin.ModelAdmin):
 
 	def get_actions(self, request):
 		actions = super(TopicAdmin, self).get_actions(request)
-		del actions['delete_selected']
+		if 'delete_selected' in actions:
+			del actions['delete_selected']
 		return actions
 
 	def delete(self, request, queryset):
@@ -45,7 +46,11 @@ class TopicAdmin(admin.ModelAdmin):
 		# Remove attachment if exists
 		if exists_folder(path):
 			remove_folder(path)
-	delete.short_description = _('You want to delete the record?')
+
+		n = queryset.count()
+		self.message_user(request, _("Successfully deleted %(count)d record/s.") % {
+                "count": n, }, messages.SUCCESS)
+	delete.short_description = _("Delete selected %(verbose_name_plural)s")
 			
 	
 class ForumAdmin(admin.ModelAdmin):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-20 20:35-0300\n"
+"POT-Creation-Date: 2015-05-20 23:02-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,9 +67,14 @@ msgstr "El correo electrónico ya está registrado"
 msgid "Registration was successful"
 msgstr "El registro ha sido satisfactorio"
 
-#: apps/forum/admin.py:48
-msgid "You want to delete the record?"
-msgstr "¿Desea eliminar el registo?"
+#: apps/forum/admin.py:51
+msgid "Successfully deleted %(count)d record/s."
+msgstr "Se eliminó correctamente %(count)d registro/s."
+
+#: apps/forum/admin.py:53
+#, python-format
+msgid "Delete selected %(verbose_name_plural)s"
+msgstr ""
 
 #: apps/forum/models.py:22
 msgid "If checked, this category will be visible only for staff"
@@ -564,19 +569,3 @@ msgstr "Ajustes"
 msgid "Users of Portal web python"
 msgstr "Usuarios de Portal web python"
 
-#, fuzzy
-#~| msgid "Edit job"
-#~ msgid "Edit"
-#~ msgstr "Editar Empleo"
-
-#~ msgid "Works"
-#~ msgstr "Empleos"
-
-#~ msgid "Saved record"
-#~ msgstr "Registro grabado"
-
-#~ msgid "Forgot password"
-#~ msgstr "Has olvidado tu contraseña"
-
-#~ msgid "Configuration"
-#~ msgstr "Configuración"
