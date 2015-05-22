@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 import datetime
 
+from django.db.models import get_model
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -18,8 +19,11 @@ from log.utils import set_error_to_log
 
 from apps.forum.forms import FormAddTopic, FormEditTopic
 from apps.forum.models import Category, Forum, Topic
+from apps.forum.settings import (
+	APP_PROFILE, MODEL_PROFILE,
+	URL_PROFILE, FIELD_PHOTO_PROFILE
+)
 from apps.forum.utils import remove_folder_attachment
-from apps.profiles.models import Profile
 from apps.utils import (
 	remove_file, helper_paginator, 
 	get_route_file, remove_folder,
@@ -74,11 +78,17 @@ class TopicView(View):
 
 		forum = get_object_or_404(Forum, name=forum, hidden=False)
 		topic = get_object_or_404(Topic, idtopic=idtopic, slug=slug)
+
+		Profile = get_model(APP_PROFILE, MODEL_PROFILE)
+
 		profile = get_object_or_404(Profile, iduser_id=topic.user_id)
+		field_photo = getattr(profile, FIELD_PHOTO_PROFILE)
 
 		data = {
 			'topic': topic,
 			'profile': profile,
+			'URL_PROFILE': URL_PROFILE,
+			'field_photo': field_photo,
 		}
 
 		return render(request, self.template_name, data)

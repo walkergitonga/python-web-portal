@@ -17,12 +17,12 @@
           <article class="row">
             <div class="col-md-2 col-sm-2 hidden-xs">
               <figure class="thumbnail">
-              	{% if profile.photo %}
-	                <img src="{{MEDIA_URL}}{{profile.photo}}" class="img-responsive" width="150" hegiht="150" />
-	            {% else %}
+              	{% if field_photo %}
+	                <img src="{{MEDIA_URL}}{{field_photo}}" class="img-responsive" width="150" hegiht="150" />
+	              {% else %}
 	                <img src="{% static 'img/profile.png' %}" class="img-responsive" width="150" hegiht="150" />
-	            {% endif %}
-                <figcaption class="text-center"><a href="/profile/{{profile.iduser.username}}/">{{topic.user.username}}</a></figcaption>
+	              {% endif %}
+                <figcaption class="text-center"><a href="{{URL_PROFILE}}{{topic.user.username}}/">{{topic.user.username}}</a></figcaption>
               </figure>
               <a href="/edit_topic/{{topic.forum.name}}/{{topic.idtopic}}/" class="btn btn-success btn-xs">{% trans "Edit topic" %}</a>
               <a style="cursor: pointer" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs">{% trans "Delete topic" %}</a>

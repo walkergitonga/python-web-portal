@@ -144,6 +144,12 @@ USE_TZ = True
 
 WSGI_APPLICATION = 'portal.wsgi.application'
 
+# App and Model for apps forum
+APP_PROFILE = 'profiles'
+MODEL_PROFILE = 'Profile'
+FIELD_PHOTO_PROFILE = "photo"
+URL_PROFILE = '/profile/'
+
 # Import local settings
 try:
     from settings_local import *
