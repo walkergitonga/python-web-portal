@@ -18,11 +18,12 @@ from log.utils import set_error_to_log
 
 from apps.forum.forms import FormAddTopic, FormEditTopic
 from apps.forum.models import Category, Forum, Topic
+from apps.forum.utils import remove_folder_attachment
 from apps.profiles.models import Profile
 from apps.utils import (
 	remove_file, helper_paginator, 
 	get_route_file, remove_folder,
-	exists_folder, get_folder_attachment
+	exists_folder
 )
 
 
@@ -226,21 +227,8 @@ class DeleteTopicView(View):
 
 		# If my user delete
 		if request.user.id == iduser_topic:
+			remove_folder_attachment(idtopic)
 			Topic.objects.filter(idtopic=idtopic, user_id=iduser_topic).delete()
-			
-			path = get_folder_attachment(topic)
-			
-			# Remove attachment if exists
-			if exists_folder(path):
-				remove_folder(path)
-
-			# Subtract one topic
-			forum = get_object_or_404(Forum, name=forum, hidden=False)
-			tot = forum.topics_count
-			tot = tot - 1
-			Forum.objects.filter(name=forum, hidden=False).update(
-				topics_count=tot
-			)
 		else:
 			error = ""
 			error = error + 'The user ' + str(request.user.id)

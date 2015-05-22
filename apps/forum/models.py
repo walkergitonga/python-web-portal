@@ -1,15 +1,19 @@
 from __future__ import unicode_literals
 import os
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.shortcuts import get_object_or_404
 from django.template import defaultfilters
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
 from apps.forum.validators import valid_extension
-
+from apps.utils import (
+	remove_folder, exists_folder
+)
 
 @python_2_unicode_compatible
 class Category(models.Model):
@@ -43,7 +47,7 @@ class Forum(models.Model):
 		'self', related_name='child_forums', verbose_name=_('Parent forum'),
 		blank=True, null=True
 	)
-	name = models.CharField(_('Name'), max_length=80)
+	name = models.CharField(_('Name'), max_length=80, unique=True)
 	position = models.IntegerField(_('Position'), blank=True, default=0)
 	description = models.TextField(_('Description'), blank=True)
 	moderators = models.ForeignKey(
@@ -100,20 +104,44 @@ class Topic(models.Model):
 	def __str__(self):
 		return self.title
 
+	def delete(self, *args, **kwargs):
+		idtopic = self.idtopic
+		forum = self.forum_id
+
+		topic = get_object_or_404(Topic, idtopic=idtopic)
+
+		folder = ""
+		folder = "forum_" + str(forum) 
+		folder = folder + "_user_" + str(topic.user.username) 
+		folder = folder + "_topic_" + str(topic.id_attachment)
+		path_folder = os.path.join("forum", folder)
+		media_path = settings.MEDIA_ROOT
+		path = media_path + "/" +  path_folder
+
+		# Remove attachment if exists
+		if exists_folder(path):
+			remove_folder(path)
+
+		Topic.objects.filter(idtopic=idtopic).delete()
+		self.update_forum_topics(self.forum, "subtraction")
+		
 	def save(self, *args, **kwargs):
 
 		if not self.idtopic:
 			self.slug = defaultfilters.slugify(self.title)
-			self.update_forum_topics(self.forum)
+			self.update_forum_topics(self.forum, "sum")
 
 		self.generate_id_attachment(self.id_attachment)
 		super(Topic, self).save(*args, **kwargs)
 
-	def update_forum_topics(self, forum):
+	def update_forum_topics(self, forum, action):
 		
 		f = Forum.objects.get(name=forum)
 		tot_topics = f.topics_count
-		tot_topics = tot_topics + 1
+		if action == "sum":
+			tot_topics = tot_topics + 1
+		elif action == "subtraction":
+			tot_topics = tot_topics - 1
 
 		Forum.objects.filter(name=forum).update(
 			topics_count=tot_topics

@@ -3,7 +3,6 @@ from django.contrib import admin, messages
 from django.contrib.admin import helpers
 from django.contrib.admin.utils import get_deleted_objects
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import get_object_or_404
 from django.template.response import TemplateResponse
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
@@ -13,10 +12,7 @@ from apps.forum.models import (
 	Category, Forum, 
 	Topic, Comment
 )
-from apps.utils import (
-	remove_folder, exists_folder, 
-	get_folder_attachment
-)
+from apps.forum.utils import remove_folder_attachment
 
 
 class TopicAdmin(admin.ModelAdmin):
@@ -33,31 +29,21 @@ class TopicAdmin(admin.ModelAdmin):
 		return actions
 
 	def delete_topic(self, request, queryset):
-
+		'''
+			This method remove topic's selected
+			in the admin django. Can remove one 
+			o more records.
+		'''
 		if not self.has_delete_permission(request):
 			raise PermissionDenied
 
 		if request.POST.get("post"):
-			# Delete record
 			for obj in queryset:
 				idtopic = obj.idtopic
-	
-				# Subtract one topic
-				topic = get_object_or_404(Topic, idtopic=idtopic)
-				forum = get_object_or_404(Forum, name=topic.forum, hidden=False)
-				tot = forum.topics_count
-				tot = tot - 1
-				Forum.objects.filter(name=topic.forum, hidden=False).update(
-					topics_count=tot
-				)
-
-				obj.delete()
-
-				path = get_folder_attachment(topic)
-					
-				# Remove attachment if exists
-				if exists_folder(path):
-					remove_folder(path)
+				#Remove folder attachment
+				remove_folder_attachment(idtopic)
+				# Delete record
+				Topic.objects.filter(idtopic=idtopic).delete()
 
 			n = queryset.count()
 			self.message_user(request, _("Successfully deleted %(count)d record/s.") % {
