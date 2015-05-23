@@ -6,7 +6,7 @@ from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 
 from apps.utils import basename
-from apps.forum.models import Topic
+from apps.forum.models import Topic, Comment
 from apps.widgets import TextareaWidget
 
 
@@ -110,3 +110,24 @@ class FormEditTopic(forms.ModelForm):
 				self.fields[key].widget.attrs['class'] = class_css
 			else:
 				self.fields[key].required = False
+
+
+class FormAddComment(forms.ModelForm):
+	'''
+	Form for add comment to topic
+	'''
+	class Meta:
+		model = Comment
+		fields = ['description']
+		widgets = { 
+			'description': TextareaWidget,
+		}
+
+	def __init__(self, *args, **kwargs):
+
+		super(FormAddComment, self).__init__(*args, **kwargs)
+
+		for key in self.fields:
+			if key == "description":
+				self.fields[key].required = True
+				self.fields[key].widget.attrs['style'] = "width: 100%"

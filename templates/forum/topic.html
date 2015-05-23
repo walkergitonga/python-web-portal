@@ -3,6 +3,9 @@
 {% load i18n %}
 {% load static %}
 
+{% block extra_js %}
+    {{form_comment.media.js}}
+{% endblock %}
 
 {% block content %}
 	
@@ -51,6 +54,34 @@
         </section>
     </div>
   </div>
+
+  <hr>
+
+  {% if user.id != None %}
+    <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <form class="form-horizontal" action="/newcomment/{{topic.forum.name}}/{{topic.slug}}/{{topic.idtopic}}/" method="POST">{% csrf_token%}
+        <center>
+        {% for field in form_comment %}
+          {% if field.name == "description" %}
+              {{ field }}
+              {% if form_comment.description.errors %}
+                <div style="color: red">{{ form_comment.description.errors }}</div>
+
+              {% endif %}
+          {% endif %}
+        {% endfor %}
+        </center>
+        <br>
+        <input type="submit" class="btn btn-success" value='{% trans "New comment" %}' />
+      </form>
+    </div>
+    <div class="col-md-2"></div>
+    </div>
+  {% endif %}
+  
+
 </div>
 
 {% if topic.user.id == user.id %}

@@ -5,7 +5,7 @@ from django.db.models import get_model
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import defaultfilters
 from django.views.generic import View
@@ -17,8 +17,11 @@ from django.utils.translation import ugettext_lazy as _
 
 from log.utils import set_error_to_log
 
-from apps.forum.forms import FormAddTopic, FormEditTopic
-from apps.forum.models import Category, Forum, Topic
+from apps.forum.forms import (
+	FormAddTopic, FormEditTopic,
+	FormAddComment
+)
+from apps.forum.models import Category, Forum, Topic, Comment
 from apps.forum.settings import (
 	APP_PROFILE, MODEL_PROFILE,
 	URL_PROFILE, FIELD_PHOTO_PROFILE
@@ -84,11 +87,14 @@ class TopicView(View):
 		profile = get_object_or_404(Profile, iduser_id=topic.user_id)
 		field_photo = getattr(profile, FIELD_PHOTO_PROFILE)
 
+		form_comment = FormAddComment()
+
 		data = {
 			'topic': topic,
 			'profile': profile,
 			'URL_PROFILE': URL_PROFILE,
 			'field_photo': field_photo,
+			'form_comment': form_comment,
 		}
 
 		return render(request, self.template_name, data)
@@ -249,3 +255,37 @@ class DeleteTopicView(View):
 			raise Http404
 
 		return redirect('forum', forum)
+
+
+class NewCommentView(View):
+	'''
+		This view allowed add new comment to topic
+	'''
+	def get(self, request, forum, slug, idtopic, *args, **kwargs):
+		return Http404()
+
+	def post(self, request, forum, slug, idtopic, *args, **kwargs):
+
+		form = FormAddComment(request.POST)
+
+		param = ""
+		param = forum + "/" + slug 
+		param = param + "/" + str(idtopic) + "/"
+		url = '/topic/' + param
+
+		if form.is_valid():
+			obj = form.save(commit=False)
+
+			now = datetime.datetime.now()
+			user = User.objects.get(id=request.user.id)
+			topic = get_object_or_404(Topic, idtopic=idtopic)
+			
+			obj.date = now
+			obj.user = user
+			obj.topic = topic.idtopic
+
+			obj.save()
+			return HttpResponseRedirect(url)
+		else:
+			messages.error(request, _("Form invalid"))
+			return HttpResponseRedirect(url)
