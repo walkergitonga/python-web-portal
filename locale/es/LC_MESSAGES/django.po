@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-20 23:02-0300\n"
+"POT-Creation-Date: 2015-05-23 23:21-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: apps/applications/views.py:73 apps/applications/views.py:148
 #: apps/applications/views.py:153 apps/baseapp/views.py:103
-#: apps/forum/views.py:132 apps/forum/views.py:212 apps/jobs/views.py:78
+#: apps/forum/views.py:152 apps/forum/views.py:232 apps/jobs/views.py:78
 #: apps/jobs/views.py:191 apps/jobs/views.py:196 apps/profiles/views.py:92
 #: apps/profiles/views.py:132
 msgid "Form invalid"
@@ -67,43 +67,44 @@ msgstr "El correo electrónico ya está registrado"
 msgid "Registration was successful"
 msgstr "El registro ha sido satisfactorio"
 
-#: apps/forum/admin.py:51
+#: apps/forum/admin.py:49
+#, python-format
 msgid "Successfully deleted %(count)d record/s."
 msgstr "Se eliminó correctamente %(count)d registro/s."
 
-#: apps/forum/admin.py:53
+#: apps/forum/admin.py:82
 #, python-format
 msgid "Delete selected %(verbose_name_plural)s"
 msgstr ""
 
-#: apps/forum/models.py:22
+#: apps/forum/models.py:26
 msgid "If checked, this category will be visible only for staff"
 msgstr ""
 
-#: apps/forum/models.py:27 apps/forum/models.py:40
+#: apps/forum/models.py:31 apps/forum/models.py:44
 #: templates/forum/index.html:15
 msgid "Category"
 msgstr "Categoría"
 
-#: apps/forum/models.py:28
+#: apps/forum/models.py:32
 msgid "Categories"
 msgstr "Categorías"
 
-#: apps/forum/models.py:43
+#: apps/forum/models.py:47
 msgid "Parent forum"
 msgstr "Foro padre"
 
-#: apps/forum/models.py:46 templates/applications/add.html:30
+#: apps/forum/models.py:50 templates/applications/add.html:30
 #: templates/applications/applications.html:18
 #: templates/applications/edit.html:30
 msgid "Name"
 msgstr "Nombre"
 
-#: apps/forum/models.py:47
+#: apps/forum/models.py:51
 msgid "Position"
 msgstr "Posición"
 
-#: apps/forum/models.py:48 apps/forum/models.py:88 apps/forum/models.py:138
+#: apps/forum/models.py:52 apps/forum/models.py:92 apps/forum/models.py:166
 #: templates/applications/add.html:39
 #: templates/applications/applications.html:19
 #: templates/applications/edit.html:39 templates/applications/view_app.html:13
@@ -113,67 +114,71 @@ msgstr "Posición"
 msgid "Description"
 msgstr "Descripción"
 
-#: apps/forum/models.py:51
+#: apps/forum/models.py:55
 msgid "Moderators"
 msgstr "Moderadores"
 
-#: apps/forum/models.py:53 apps/forum/models.py:87 apps/forum/models.py:137
+#: apps/forum/models.py:57 apps/forum/models.py:91 apps/forum/models.py:165
 #: templates/forum/forum.html:23
 msgid "Date"
 msgstr "Fecha"
 
-#: apps/forum/models.py:54
+#: apps/forum/models.py:58
 msgid "Topics count"
 msgstr "Total de temas"
 
-#: apps/forum/models.py:56
+#: apps/forum/models.py:60
 msgid "Hidden"
 msgstr "Oculto"
 
-#: apps/forum/models.py:61 apps/forum/models.py:82 templates/base.html:33
+#: apps/forum/models.py:65 apps/forum/models.py:86 templates/base.html:33
 #: templates/forum/forum.html:11 templates/forum/index.html:11
-#: templates/forum/topic.html:12
+#: templates/forum/topic.html:16
 msgid "Forum"
 msgstr "Foro"
 
-#: apps/forum/models.py:62
+#: apps/forum/models.py:66
 msgid "Forums"
 msgstr "Foros"
 
-#: apps/forum/models.py:84 apps/forum/models.py:135
+#: apps/forum/models.py:88 apps/forum/models.py:163
 #: templates/applications/applications.html:21
 msgid "User"
 msgstr "Usuario"
 
-#: apps/forum/models.py:86 templates/forum/edit_topic.html:30
+#: apps/forum/models.py:90 templates/forum/edit_topic.html:30
 #: templates/forum/forum.html:20 templates/forum/new_topic.html:30
 #: templates/jobs/add.html:30 templates/jobs/edit.html:30
 msgid "Title"
 msgstr "Título"
 
-#: apps/forum/models.py:91
+#: apps/forum/models.py:95
 msgid "File"
 msgstr "Archivo"
 
-#: apps/forum/models.py:97 apps/forum/models.py:132
+#: apps/forum/models.py:101 apps/forum/models.py:160
 msgid "Topic"
 msgstr "Tema"
 
-#: apps/forum/models.py:98 templates/forum/forum.html:40
+#: apps/forum/models.py:102 templates/forum/forum.html:40
 msgid "Topics"
 msgstr "Temas"
 
-#: apps/forum/models.py:142
+#: apps/forum/models.py:170
 msgid "Comment"
 msgstr "Comentario"
 
-#: apps/forum/models.py:143
+#: apps/forum/models.py:171
 msgid "Comments"
 msgstr "Comentarios"
 
 #: apps/forum/validators.py:15
 msgid "Files allowed"
 msgstr "Archivos permitidos"
+
+#: apps/forum/views.py:293
+msgid "Field required"
+msgstr "Campo requerido"
 
 #: apps/profiles/validators.py:21 templates/profiles/edit_profile.html:21
 msgid "Files allowed: jpg, png, gif, ico, bmp"
@@ -289,7 +294,7 @@ msgstr "Eliminar aplicación"
 msgid "Do you want to remove the application?"
 msgstr "¿Desea eliminar esta aplicación?"
 
-#: templates/applications/view_app.html:45 templates/forum/topic.html:71
+#: templates/applications/view_app.html:45 templates/forum/topic.html:146
 #: templates/jobs/view_job.html:52
 msgid "Delete"
 msgstr "Eliminar"
@@ -371,6 +376,7 @@ msgid "Forgot password?"
 msgstr "¿Has olvidado tu contraseña?"
 
 #: templates/baseapp/password_reset_complete.html:6
+#: templates/forum/admin/confirm_delete.html:7
 msgid "Home"
 msgstr ""
 
@@ -456,7 +462,41 @@ msgstr "Correo electrónico"
 msgid "Submit"
 msgstr "Enviar"
 
-#: templates/forum/edit_topic.html:23 templates/forum/topic.html:27
+#: templates/forum/admin/confirm_delete.html:15
+msgid "Delete multiple objects"
+msgstr ""
+
+#: templates/forum/admin/confirm_delete.html:23
+#, python-format
+msgid ""
+"Deleting the selected %(objects_name)s would result in deleting related "
+"objects, but your account doesn't have permission to delete the following "
+"types of objects:"
+msgstr ""
+
+#: templates/forum/admin/confirm_delete.html:33
+#, python-format
+msgid ""
+"Deleting the selected %(objects_name)s would require deleting the following "
+"protected related objects:"
+msgstr ""
+
+#: templates/forum/admin/confirm_delete.html:45
+msgid "Confirm deletion"
+msgstr ""
+
+#: templates/forum/admin/confirm_delete.html:47
+#, python-format
+msgid ""
+"Are you sure you want to delete the selected %(objects_name)s? All of the "
+"following objects and their related items will be deleted:"
+msgstr ""
+
+#: templates/forum/admin/confirm_delete.html:59
+msgid "Yes, I'm sure"
+msgstr ""
+
+#: templates/forum/edit_topic.html:23 templates/forum/topic.html:31
 msgid "Edit topic"
 msgstr "Editar tema"
 
@@ -472,11 +512,19 @@ msgstr "Nuevo tema"
 msgid "Created"
 msgstr "Creado"
 
-#: templates/forum/topic.html:28 templates/forum/topic.html.py:64
+#: templates/forum/topic.html:32 templates/forum/topic.html.py:139
 msgid "Delete topic"
 msgstr "Eliminar tema"
 
-#: templates/forum/topic.html:67
+#: templates/forum/topic.html:80
+msgid "Edit"
+msgstr "Editar"
+
+#: templates/forum/topic.html:121
+msgid "New comment"
+msgstr "Nuevo comentario"
+
+#: templates/forum/topic.html:142
 msgid "Do you want to remove the topic?"
 msgstr "¿Desea eliminar este tema?"
 
@@ -568,4 +616,3 @@ msgstr "Ajustes"
 #: templates/profiles/users.html:10
 msgid "Users of Portal web python"
 msgstr "Usuarios de Portal web python"
-

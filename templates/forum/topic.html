@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load static %}
+{% load photo %}
 
 {% block extra_js %}
     {{form_comment.media.js}}
@@ -12,7 +13,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-        <h2>{% trans "Forum" %}: {{topic.forum.name}}</h2>
+        <h2>{% trans "Forum" %}: <a href="/forum/{{topic.forum.name}}">{{topic.forum.name}}</a></h2>
         <p>{{topic.forum.description|safe}}</p>
         <hr>
         <section class="comment-list">
@@ -57,10 +58,53 @@
 
   <hr>
 
+  {% for comment in comments %}
+    <article class="row">
+      <div class="col-md-1 col-sm-1 hidden-xs">
+        <figure class="thumbnail">
+          <img class="img-responsive" src="{{comment.user.id|get_photo}}"/>
+          <figcaption class="text-center"><a href="{{URL_PROFILE}}{{comment.user.username}}">{{comment.user.username}}</a></figcaption>
+        </figure>
+      </div>
+      <div class="col-md-10 col-sm-10">
+        <div class="panel panel-default arrow left">
+          <div class="panel-body">
+            <header class="text-left">
+              <time class="comment-date" datetime="16-12-2014 01:05"><i class="glyphicon glyphicon-time"></i> {{comment.date}}</time>
+            </header>
+            <div class="comment-post">
+              <p>
+                {{comment.description|safe}}
+              </p>
+            </div>
+            <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-hand-up"></i> {% trans "Edit" %}</a></p>
+          </div>
+        </div>
+      </div>
+    </article>
+  {% endfor %}
+
+  {% if comments.count > 0 %}
+  <hr>
+  {% endif %}
+
   {% if user.id != None %}
     <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
+      {% for message in messages %}
+        {% if message.tags != "error" %}
+          <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            {{ message }}
+          </div>
+        {% else %}
+          <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            {{ message }}
+          </div>
+        {% endif %}
+      {% endfor %}
       <form class="form-horizontal" action="/newcomment/{{topic.forum.name}}/{{topic.slug}}/{{topic.idtopic}}/" method="POST">{% csrf_token%}
         <center>
         {% for field in form_comment %}

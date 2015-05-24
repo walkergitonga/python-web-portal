@@ -89,12 +89,15 @@ class TopicView(View):
 
 		form_comment = FormAddComment()
 
+		comments = Comment.objects.filter(topic_id=idtopic)
+
 		data = {
 			'topic': topic,
 			'profile': profile,
 			'URL_PROFILE': URL_PROFILE,
 			'field_photo': field_photo,
 			'form_comment': form_comment,
+			'comments': comments,
 		}
 
 		return render(request, self.template_name, data)
@@ -262,7 +265,7 @@ class NewCommentView(View):
 		This view allowed add new comment to topic
 	'''
 	def get(self, request, forum, slug, idtopic, *args, **kwargs):
-		return Http404()
+		raise Http404()
 
 	def post(self, request, forum, slug, idtopic, *args, **kwargs):
 
@@ -282,10 +285,10 @@ class NewCommentView(View):
 			
 			obj.date = now
 			obj.user = user
-			obj.topic = topic.idtopic
+			obj.topic_id = topic.idtopic
 
 			obj.save()
 			return HttpResponseRedirect(url)
 		else:
-			messages.error(request, _("Form invalid"))
+			messages.error(request, _("Field required"))
 			return HttpResponseRedirect(url)
