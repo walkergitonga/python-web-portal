@@ -292,3 +292,31 @@ class NewCommentView(View):
 		else:
 			messages.error(request, _("Field required"))
 			return HttpResponseRedirect(url)
+
+
+class EditCommentView(View):
+	'''
+		This view allowed edit comment to topic
+	'''
+	def get(self, request, forum, slug, idtopic, idcomment, *args, **kwargs):
+		raise Http404()
+
+	def post(self, request, forum, slug, idtopic, idcomment, *args, **kwargs):
+
+		param = ""
+		param = forum + "/" + slug 
+		param = param + "/" + str(idtopic) + "/"
+		url = '/topic/' + param
+
+		description = request.POST.get('update_description')
+
+		if description:
+			
+			iduser = request.user.id
+			Comment.objects.filter(idcomment=idcomment, user=iduser).update(
+				description=description
+			)
+
+			return HttpResponseRedirect(url)
+		else:
+			return HttpResponseRedirect(url)

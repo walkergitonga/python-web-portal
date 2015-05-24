@@ -58,6 +58,7 @@
 
   <hr>
 
+  <!-- Modal Comments-->
   {% for comment in comments %}
     <article class="row">
       <div class="col-md-1 col-sm-1 hidden-xs">
@@ -73,21 +74,48 @@
               <time class="comment-date" datetime="16-12-2014 01:05"><i class="glyphicon glyphicon-time"></i> {{comment.date}}</time>
             </header>
             <div class="comment-post">
-              <p>
+              <div class="well" style="margin-top: 5px">
                 {{comment.description|safe}}
-              </p>
+              </div>
             </div>
-            <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-hand-up"></i> {% trans "Edit" %}</a></p>
+            {% if comment.user.id == user.id %}
+            <p class="text-right"><a style="cursor: pointer" data-toggle="modal" data-target="#myModal_{{comment.idcomment}}" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-hand-up"></i> {% trans "Edit" %}</a></p>
+            {% endif %}
           </div>
         </div>
       </div>
     </article>
+
+    <!-- Modal edit comment -->
+    <div class="modal fade" id="myModal_{{comment.idcomment}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">{% trans "Edit comment" %}</h4>
+          </div>
+          <div class="modal-body">
+                
+            <form class="form-horizontal" action="/updatecomment/{{topic.forum.name}}/{{topic.slug}}/{{topic.idtopic}}/{{comment.idcomment}}/" method="POST">{% csrf_token%}
+                <textarea name="update_description" style="width: 100%">
+                  {{comment.description|safe}}
+                </textarea> 
+              <br>
+              <input type="submit" class="btn btn-success" value='{% trans "Edit comment" %}' />
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
   {% endfor %}
 
   {% if comments.count > 0 %}
   <hr>
   {% endif %}
 
+  <!-- New comment-->
   {% if user.id != None %}
     <div class="row">
     <div class="col-md-2"></div>
@@ -130,7 +158,7 @@
 
 {% if topic.user.id == user.id %}
 
-    <!-- Modal -->
+    <!-- Modal edit topic-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">

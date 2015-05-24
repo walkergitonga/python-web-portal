@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 
 from apps.forum.views import (
 	ForumsView, ForumView, TopicView, NewTopicView,
-	EditTopicView, DeleteTopicView, NewCommentView
+	EditTopicView, DeleteTopicView, NewCommentView,
+	EditCommentView
 )
 
 urlpatterns = [
@@ -32,5 +33,9 @@ urlpatterns = [
 	url(
 		r'^newcomment/(?P<forum>.+)/(?P<slug>[-\w]+)/(?P<idtopic>\d+)/$', 
 		login_required(NewCommentView.as_view()), name='newcomment'
+	),
+	url(
+		r'^updatecomment/(?P<forum>.+)/(?P<slug>[-\w]+)/(?P<idtopic>\d+)/(?P<idcomment>\d+)/$', 
+		login_required(EditCommentView.as_view()), name='updatecomment'
 	),
 ]

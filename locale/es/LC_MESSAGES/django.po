@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-23 23:21-0300\n"
+"POT-Creation-Date: 2015-05-24 18:38-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -294,7 +294,7 @@ msgstr "Eliminar aplicación"
 msgid "Do you want to remove the application?"
 msgstr "¿Desea eliminar esta aplicación?"
 
-#: templates/applications/view_app.html:45 templates/forum/topic.html:146
+#: templates/applications/view_app.html:45 templates/forum/topic.html:174
 #: templates/jobs/view_job.html:52
 msgid "Delete"
 msgstr "Eliminar"
@@ -512,19 +512,23 @@ msgstr "Nuevo tema"
 msgid "Created"
 msgstr "Creado"
 
-#: templates/forum/topic.html:32 templates/forum/topic.html.py:139
+#: templates/forum/topic.html:32 templates/forum/topic.html.py:167
 msgid "Delete topic"
 msgstr "Eliminar tema"
 
-#: templates/forum/topic.html:80
+#: templates/forum/topic.html:82
 msgid "Edit"
 msgstr "Editar"
 
-#: templates/forum/topic.html:121
+#: templates/forum/topic.html:95 templates/forum/topic.html.py:104
+msgid "Edit comment"
+msgstr "Editar comentario"
+
+#: templates/forum/topic.html:149
 msgid "New comment"
 msgstr "Nuevo comentario"
 
-#: templates/forum/topic.html:142
+#: templates/forum/topic.html:170
 msgid "Do you want to remove the topic?"
 msgstr "¿Desea eliminar este tema?"
 
