@@ -4,3 +4,5 @@ django-seo-admin==0.2
 django-admin-log==0.2
 django-countries==3.3
 django-suit==0.2.13
+-e git://github.com/thornomad/django-hitcount.git@602038c445a55db4b9d33a9c1b6929c09539d42f#egg=django_hitcount-master
+-e git+https://github.com/webstack/django-endless-pagination@0ed7376fa461345d96ce62541816dd3550bb0d25#egg=django_endless_pagination-origin/HEAD

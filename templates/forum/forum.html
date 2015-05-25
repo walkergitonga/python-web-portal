@@ -19,7 +19,11 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4>{% trans "Forum" %}: {{forum.name}}</h4>
+			{% if total_hits|add:"0" > 1 %}
 			<p>{% trans "This forum has" %} {{ total_hits }} {% trans "views" %}</p>
+			{% else %}
+			<p>{% trans "This forum has" %} {{ total_hits }} {% trans "view" %}</p>
+			{% endif %}
 		</div>
 	  	<div class="panel-body">
 	    	<p>{{forum.description|safe}}</p>

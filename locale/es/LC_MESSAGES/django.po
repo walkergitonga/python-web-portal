@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-24 21:23-0300\n"
+"POT-Creation-Date: 2015-05-25 12:41-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,7 +108,7 @@ msgstr "Posición"
 #: templates/applications/add.html:39
 #: templates/applications/applications.html:19
 #: templates/applications/edit.html:39 templates/applications/view_app.html:13
-#: templates/forum/edit_topic.html:39 templates/forum/forum.html:21
+#: templates/forum/edit_topic.html:39 templates/forum/forum.html:37
 #: templates/forum/new_topic.html:39 templates/jobs/add.html:76
 #: templates/jobs/edit.html:76
 msgid "Description"
@@ -119,7 +119,7 @@ msgid "Moderators"
 msgstr "Moderadores"
 
 #: apps/forum/models.py:57 apps/forum/models.py:91 apps/forum/models.py:165
-#: templates/forum/forum.html:23
+#: templates/forum/forum.html:39
 msgid "Date"
 msgstr "Fecha"
 
@@ -132,8 +132,8 @@ msgid "Hidden"
 msgstr "Oculto"
 
 #: apps/forum/models.py:65 apps/forum/models.py:86 templates/base.html:33
-#: templates/forum/forum.html:11 templates/forum/index.html:11
-#: templates/forum/topic.html:16
+#: templates/forum/forum.html:21 templates/forum/index.html:11
+#: templates/forum/topic.html:21
 msgid "Forum"
 msgstr "Foro"
 
@@ -147,7 +147,7 @@ msgid "User"
 msgstr "Usuario"
 
 #: apps/forum/models.py:90 templates/forum/edit_topic.html:30
-#: templates/forum/forum.html:20 templates/forum/new_topic.html:30
+#: templates/forum/forum.html:36 templates/forum/new_topic.html:30
 #: templates/jobs/add.html:30 templates/jobs/edit.html:30
 msgid "Title"
 msgstr "Título"
@@ -160,7 +160,7 @@ msgstr "Archivo"
 msgid "Topic"
 msgstr "Tema"
 
-#: apps/forum/models.py:102 templates/forum/forum.html:40
+#: apps/forum/models.py:102 templates/forum/forum.html:59
 msgid "Topics"
 msgstr "Temas"
 
@@ -196,11 +196,11 @@ msgstr "Contraseña actual incorrecta"
 msgid "New password do not match"
 msgstr "La nueva contraseña no coincide"
 
-#: portal/settings.py:122
+#: portal/settings.py:123
 msgid "English"
 msgstr "Ingles"
 
-#: portal/settings.py:123
+#: portal/settings.py:124
 msgid "Spanish"
 msgstr "Español"
 
@@ -248,12 +248,12 @@ msgstr ""
 msgid "Feel free to upload the app you want."
 msgstr "Sientete libre de subir tu aplicación cuando lo desees."
 
-#: templates/applications/applications.html:54 templates/forum/forum.html:63
+#: templates/applications/applications.html:54 templates/forum/forum.html:82
 #: templates/jobs/jobs.html:58 templates/profiles/users.html:56
 msgid "Page"
 msgstr "Página"
 
-#: templates/applications/applications.html:54 templates/forum/forum.html:63
+#: templates/applications/applications.html:54 templates/forum/forum.html:82
 #: templates/jobs/jobs.html:58 templates/profiles/users.html:56
 msgid "of"
 msgstr "de"
@@ -270,7 +270,7 @@ msgstr "Actualizar"
 msgid "Application"
 msgstr "Aplicación"
 
-#: templates/applications/view_app.html:19 templates/forum/forum.html:22
+#: templates/applications/view_app.html:19 templates/forum/forum.html:38
 msgid "Username"
 msgstr "Nombre de usuario"
 
@@ -294,7 +294,7 @@ msgstr "Eliminar aplicación"
 msgid "Do you want to remove the application?"
 msgstr "¿Desea eliminar esta aplicación?"
 
-#: templates/applications/view_app.html:45 templates/forum/topic.html:200
+#: templates/applications/view_app.html:45 templates/forum/topic.html:210
 #: templates/jobs/view_job.html:52
 msgid "Delete"
 msgstr "Eliminar"
@@ -496,7 +496,7 @@ msgstr ""
 msgid "Yes, I'm sure"
 msgstr ""
 
-#: templates/forum/edit_topic.html:23 templates/forum/topic.html:31
+#: templates/forum/edit_topic.html:23 templates/forum/topic.html:36
 msgid "Edit topic"
 msgstr "Editar tema"
 
@@ -504,43 +504,59 @@ msgstr "Editar tema"
 msgid "Attachment"
 msgstr "Adjunto"
 
-#: templates/forum/forum.html:14
+#: templates/forum/forum.html:23 templates/forum/forum.html.py:25
+msgid "This forum has"
+msgstr "El foro tiene"
+
+#: templates/forum/forum.html:23 templates/forum/topic.html:39
+msgid "views"
+msgstr "vistas"
+
+#: templates/forum/forum.html:25 templates/forum/topic.html:41
+msgid "view"
+msgstr "vista"
+
+#: templates/forum/forum.html:30
 msgid "New topic"
 msgstr "Nuevo tema"
 
-#: templates/forum/forum.html:42
+#: templates/forum/forum.html:61
 msgid "Created"
 msgstr "Creado"
 
-#: templates/forum/topic.html:32 templates/forum/topic.html.py:193
+#: templates/forum/topic.html:37 templates/forum/topic.html.py:203
 msgid "Delete topic"
 msgstr "Eliminar tema"
 
-#: templates/forum/topic.html:84
+#: templates/forum/topic.html:39 templates/forum/topic.html.py:41
+msgid "This topic has"
+msgstr "El tema tiene"
+
+#: templates/forum/topic.html:94
 msgid "Edit"
 msgstr "Editar"
 
-#: templates/forum/topic.html:87
+#: templates/forum/topic.html:97
 msgid "Remove"
 msgstr ""
 
-#: templates/forum/topic.html:101 templates/forum/topic.html.py:110
+#: templates/forum/topic.html:111 templates/forum/topic.html.py:120
 msgid "Edit comment"
 msgstr "Editar comentario"
 
-#: templates/forum/topic.html:124 templates/forum/topic.html.py:131
+#: templates/forum/topic.html:134 templates/forum/topic.html.py:141
 msgid "Remove comment"
 msgstr "Eliminar comentario"
 
-#: templates/forum/topic.html:127
+#: templates/forum/topic.html:137
 msgid "Do you want remove this comment?"
 msgstr "¿Desea eliminar este comentario?"
 
-#: templates/forum/topic.html:175
+#: templates/forum/topic.html:185
 msgid "New comment"
 msgstr "Nuevo comentario"
 
-#: templates/forum/topic.html:196
+#: templates/forum/topic.html:206
 msgid "Do you want to remove the topic?"
 msgstr "¿Desea eliminar este tema?"
 

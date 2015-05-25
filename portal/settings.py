@@ -41,6 +41,7 @@ THIRD_PARTY_APPS = (
     'log',
     'django_countries',
     'hitcount',
+    'endless_pagination',
 )
 
 LOCAL_APSS = (

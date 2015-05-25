@@ -15,6 +15,7 @@ from django.utils.html import strip_tags
 
 from django.utils.translation import ugettext_lazy as _
 
+from endless_pagination.decorators import page_template
 from log.utils import set_error_to_log
 
 from apps.forum.forms import (
@@ -71,36 +72,36 @@ class ForumView(View):
 		return render(request, self.template_name, data)
 
 
-class TopicView(View):
+@page_template('forum/topic.html')
+def TopicView(request, forum, slug, idtopic, template='forum/topic_index.html', extra_context=None, *args, **kwargs):
 	'''
 	This view display one Topic of forum
 	'''
-	template_name = "forum/topic.html"
 
-	def get(self, request, forum, slug, idtopic, *args, **kwargs):
+	forum = get_object_or_404(Forum, name=forum, hidden=False)
+	topic = get_object_or_404(Topic, idtopic=idtopic, slug=slug)
 
-		forum = get_object_or_404(Forum, name=forum, hidden=False)
-		topic = get_object_or_404(Topic, idtopic=idtopic, slug=slug)
+	Profile = get_model(APP_PROFILE, MODEL_PROFILE)
 
-		Profile = get_model(APP_PROFILE, MODEL_PROFILE)
+	profile = get_object_or_404(Profile, iduser_id=topic.user_id)
+	field_photo = getattr(profile, FIELD_PHOTO_PROFILE)
 
-		profile = get_object_or_404(Profile, iduser_id=topic.user_id)
-		field_photo = getattr(profile, FIELD_PHOTO_PROFILE)
+	form_comment = FormAddComment()
 
-		form_comment = FormAddComment()
+	comments = Comment.objects.filter(topic_id=idtopic)
 
-		comments = Comment.objects.filter(topic_id=idtopic)
+	data = {
+		'topic': topic,
+		'profile': profile,
+		'URL_PROFILE': URL_PROFILE,
+		'field_photo': field_photo,
+		'form_comment': form_comment,
+		'comments': comments,
+	}
 
-		data = {
-			'topic': topic,
-			'profile': profile,
-			'URL_PROFILE': URL_PROFILE,
-			'field_photo': field_photo,
-			'form_comment': form_comment,
-			'comments': comments,
-		}
-
-		return render(request, self.template_name, data)
+	if extra_context is not None:
+		data.update(extra_context)
+	return render(request, template, data)
 
 
 class NewTopicView(FormView):

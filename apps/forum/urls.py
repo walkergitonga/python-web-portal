@@ -16,7 +16,7 @@ urlpatterns = [
 	),
 	url(
 		r'^topic/(?P<forum>.+)/(?P<slug>[-\w]+)/(?P<idtopic>\d+)/$', 
-		TopicView.as_view(), name='topic'
+		TopicView, name='topic'
 	),
 	url(
 		r'^newtopic/(?P<forum>.+)/$', login_required(NewTopicView.as_view()), 
