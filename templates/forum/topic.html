@@ -15,7 +15,7 @@
 {% endblock %}
 
 <!-- Comments-->
-{% paginate 2 comments  %}
+{% paginate comments  %}
 {% for comment in comments %}
   <article class="row">
     <div class="col-md-1 col-sm-1 hidden-xs">
@@ -64,7 +64,9 @@
                 {{comment.description|safe}}
               </textarea> 
             <br>
-            <input type="submit" class="btn btn-success" value='{% trans "Edit comment" %}' />
+            <button type="submit" class="btn btn-success">
+                <i class="glyphicon glyphicon-hand-up"></i> {% trans "Edit comment" %}
+            </button>
           </form>
 
         </div>
@@ -85,7 +87,9 @@
         </div>
         <div class="modal-footer">
             <form class="form-horizontal" action="/removecomment/{{topic.forum.name}}/{{topic.slug}}/{{topic.idtopic}}/{{comment.idcomment}}/" method="POST">{% csrf_token%}
-            <input type="submit" class="btn btn-danger" value='{% trans "Remove comment" %}' />
+            <button type="submit" class="btn btn-danger">
+              <i class="glyphicon glyphicon-trash"></i> {% trans "Remove comment" %}
+            </button>
           </form>
         </div>
       </div>
