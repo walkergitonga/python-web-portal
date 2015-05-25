@@ -79,7 +79,13 @@
               </div>
             </div>
             {% if comment.user.id == user.id %}
-            <p class="text-right"><a style="cursor: pointer" data-toggle="modal" data-target="#myModal_{{comment.idcomment}}" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-hand-up"></i> {% trans "Edit" %}</a></p>
+              <div class="span4 offset4 text-right">
+                <a style="cursor: pointer" data-toggle="modal" data-target="#myModal_{{comment.idcomment}}" class="btn btn-default btn-sm">
+                  <i class="glyphicon glyphicon-hand-up"></i> {% trans "Edit" %}</a>
+
+                <a style="cursor: pointer" data-toggle="modal" data-target="#myModal_{{comment.idcomment}}_remove" class="btn btn-default btn-sm">
+                  <i class="glyphicon glyphicon-trash"></i> {% trans "Remove" %}</a>
+              </div>
             {% endif %}
           </div>
         </div>
@@ -104,6 +110,26 @@
               <input type="submit" class="btn btn-success" value='{% trans "Edit comment" %}' />
             </form>
 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal remove comment -->
+    <div class="modal fade" id="myModal_{{comment.idcomment}}_remove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">{% trans "Remove comment" %}</h4>
+          </div>
+          <div class="modal-body">
+            <p>{% trans "Do you want remove this comment?" %}</p>
+          </div>
+          <div class="modal-footer">
+              <form class="form-horizontal" action="/removecomment/{{topic.forum.name}}/{{topic.slug}}/{{topic.idtopic}}/{{comment.idcomment}}/" method="POST">{% csrf_token%}
+              <input type="submit" class="btn btn-danger" value='{% trans "Remove comment" %}' />
+            </form>
           </div>
         </div>
       </div>

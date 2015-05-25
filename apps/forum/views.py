@@ -320,3 +320,26 @@ class EditCommentView(View):
 			return HttpResponseRedirect(url)
 		else:
 			return HttpResponseRedirect(url)
+
+
+class DeleteCommentView(View):
+	'''
+		This view allowed remove comment to topic
+	'''
+	def get(self, request, forum, slug, idtopic, idcomment, *args, **kwargs):
+		raise Http404()
+
+	def post(self, request, forum, slug, idtopic, idcomment, *args, **kwargs):
+
+		param = ""
+		param = forum + "/" + slug 
+		param = param + "/" + str(idtopic) + "/"
+		url = '/topic/' + param
+
+		try:
+			iduser = request.user.id
+			Comment.objects.filter(idcomment=idcomment, user=iduser).delete()
+
+			return HttpResponseRedirect(url)
+		except Exception:
+			return HttpResponseRedirect(url)
