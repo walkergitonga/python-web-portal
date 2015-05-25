@@ -1,14 +1,26 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load hitcount_tags %}
 
+{% block extra_js %}
+<script type="text/javascript">
+    $('[data-toggle="tooltip"]').tooltip();   
+</script>
+{% endblock %}
 
 {% block content %}
 	
 <div class="container">
 
+	{% get_hit_count_js_variables for forum as hitcount %}
+	{% get_hit_count for forum as total_hits %}
+
 	<div class="panel panel-default">
-		<div class="panel-heading"><h4>{% trans "Forum" %}: {{forum.name}}</h4></div>
+		<div class="panel-heading">
+			<h4>{% trans "Forum" %}: {{forum.name}}</h4>
+			<p>{% trans "This forum has" %} {{ total_hits }} {% trans "views" %}</p>
+		</div>
 	  	<div class="panel-body">
 	    	<p>{{forum.description|safe}}</p>
     		<a href="/newtopic/{{forum.name}}/" class="btn btn-success">{% trans "New topic" %}</a>
@@ -26,7 +38,10 @@
 				    <tbody>
 				    	{% for topic in topics %}
 						    <tr>
-						        <td><a href="/topic/{{forum.name}}/{{topic.slug}}/{{topic.idtopic}}/">{{topic.title}}</a></td>
+						        <td><a href="/topic/{{forum.name}}/{{topic.slug}}/{{topic.idtopic}}/" 
+						        	data-toggle="tooltip" data-placement="bottom" title="Total post: {{forum.topics_count}}">
+						        	{{topic.title}}
+						        </a></td>
 						        <td>{{topic.description|safe|truncatechars:100}}</td>
 						        <td><a href="/profile/{{topic.user.username}}">{{topic.user.username}}</a></td>
 						        <td>{{topic.date}}</td>
@@ -67,4 +82,8 @@
 
 </div>
 
+{% endblock %}
+
+{% block hitcount_javascript %}
+{% insert_hit_count_js_variables for forum %}
 {% endblock %}

@@ -40,6 +40,7 @@ THIRD_PARTY_APPS = (
     'seo',
     'log',
     'django_countries',
+    'hitcount',
 )
 
 LOCAL_APSS = (
@@ -149,6 +150,9 @@ APP_PROFILE = 'profiles'
 MODEL_PROFILE = 'Profile'
 FIELD_PHOTO_PROFILE = "photo"
 URL_PROFILE = '/profile/'
+
+# Django-hitcount
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Import local settings
 try:
