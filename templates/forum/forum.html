@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load hitcount_tags %}
+{% load forum_filter %}
 
 {% block extra_js %}
 <script type="text/javascript">
@@ -18,12 +19,15 @@
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h4>{% trans "Forum" %}: {{forum.name}}</h4>
-			{% if total_hits|add:"0" > 1 %}
-			<p>{% trans "This forum has" %} {{ total_hits }} {% trans "views" %}</p>
-			{% else %}
-			<p>{% trans "This forum has" %} {{ total_hits }} {% trans "view" %}</p>
-			{% endif %}
+			<div class="span4 offset4 text-left">
+				<h4>{% trans "Forum" %}: {{forum.name}}
+				{% if total_hits|add:"0" > 1 %}
+					<span style="font-size: 0.7em">({% trans "This forum has" %} {{ total_hits }} {% trans "views" %})</span>
+				{% else %}
+					<span style="font-size: 0.7em">({% trans "This forum has" %} {{ total_hits }} {% trans "view" %})</span>
+				{% endif %}
+				</h4>
+			</div>
 		</div>
 	  	<div class="panel-body">
 	    	<p>{{forum.description|safe}}</p>
@@ -34,8 +38,8 @@
 				    <thead>
 				      <tr>
 				        <th>{% trans "Title" %}</th>
-				        <th>{% trans "Description" %}</th>
 				        <th>{% trans "Username" %}</th>
+				    	<th>{% trans "Responses" %}</th>
 				        <th>{% trans "Date" %}</th>
 				      </tr>
 				    </thead>
@@ -46,8 +50,8 @@
 						        	data-toggle="tooltip" data-placement="bottom" title="Total post: {{forum.topics_count}}">
 						        	{{topic.title}}
 						        </a></td>
-						        <td>{{topic.description|safe|truncatechars:100}}</td>
 						        <td><a href="/profile/{{topic.user.username}}">{{topic.user.username}}</a></td>
+						        <td>{{topic.idtopic|get_tot_comments}}</td>
 						        <td>{{topic.date}}</td>
 						    </tr>
 					    {% endfor %}
