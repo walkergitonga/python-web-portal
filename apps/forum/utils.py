@@ -1,10 +1,15 @@
 # -*- coding: UTF-8 -*-
 import os
 
+from django.db.models import get_model
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 
 from apps.forum.models import Forum, Topic
+from apps.forum.settings import (
+	APP_PROFILE, MODEL_PROFILE,
+	URL_PROFILE, FIELD_PHOTO_PROFILE
+)
 from apps.utils import (
 	remove_folder, exists_folder
 )
@@ -16,8 +21,8 @@ def get_folder_attachment(topic):
 		folder attachment for app forum
 	'''
 	folder = ""
-	folder = "forum_" + str(topic.forum_id) 
-	folder = folder + "_user_" + str(topic.user.username) 
+	folder = "forum_" + str(topic.forum_id)
+	folder = folder + "_user_" + str(topic.user.username)
 	folder = folder + "_topic_" + str(topic.id_attachment)
 	path_folder = os.path.join("forum", folder)
 	media_path = settings.MEDIA_ROOT
@@ -41,7 +46,28 @@ def remove_folder_attachment(idtopic):
 	)
 
 	path = get_folder_attachment(topic)
-		
+
 	# Remove attachment if exists
 	if exists_folder(path):
 		remove_folder(path)
+
+
+def get_id_profile(iduser):
+	'''
+		This method return one id
+		of model profile
+	'''
+	Profile = get_model(APP_PROFILE, MODEL_PROFILE)
+	profile = get_object_or_404(Profile, iduser_id=iduser)
+
+	return profile
+
+
+def get_photo_profile(profile):
+
+	'''
+		This method return the photo
+		of model profile id
+	'''
+	field_photo = getattr(profile, FIELD_PHOTO_PROFILE)
+	return field_photo

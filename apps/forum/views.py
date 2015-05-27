@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 import datetime
 
-from django.db.models import get_model
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -23,13 +22,13 @@ from apps.forum.forms import (
 	FormAddComment
 )
 from apps.forum.models import Category, Forum, Topic, Comment
-from apps.forum.settings import (
-	APP_PROFILE, MODEL_PROFILE,
-	URL_PROFILE, FIELD_PHOTO_PROFILE
+from apps.forum.settings import URL_PROFILE
+from apps.forum.utils import (
+	remove_folder_attachment, get_id_profile,
+	get_photo_profile
 )
-from apps.forum.utils import remove_folder_attachment
 from apps.utils import (
-	remove_file, helper_paginator, 
+	remove_file, helper_paginator,
 	get_route_file, remove_folder,
 	exists_folder
 )
@@ -81,10 +80,8 @@ def TopicView(request, forum, slug, idtopic, template='forum/topic_index.html', 
 	forum = get_object_or_404(Forum, name=forum, hidden=False)
 	topic = get_object_or_404(Topic, idtopic=idtopic, slug=slug)
 
-	Profile = get_model(APP_PROFILE, MODEL_PROFILE)
-
-	profile = get_object_or_404(Profile, iduser_id=topic.user_id)
-	field_photo = getattr(profile, FIELD_PHOTO_PROFILE)
+	profile = get_id_profile(topic.user_id)
+	field_photo = get_photo_profile(profile)
 
 	form_comment = FormAddComment()
 
@@ -115,7 +112,7 @@ class NewTopicView(FormView):
 		return '/forum/' + self.kwargs['forum']
 
 	def get(self, request, forum, *args, **kwargs):
-		
+
 		data = {
 			'form': self.form_class,
 			'forum': forum,
@@ -133,7 +130,7 @@ class NewTopicView(FormView):
 			user = User.objects.get(id=request.user.id)
 			forum = get_object_or_404(Forum, name=forum)
 			title = strip_tags(request.POST['title'])
-			
+
 			obj.date = now
 			obj.user = user
 			obj.forum = forum
@@ -165,7 +162,7 @@ class EditTopicView(FormView):
 		return '/forum/' + self.kwargs['forum']
 
 	def get(self, request, forum, idtopic, *args, **kwargs):
-		
+
 		topic = get_object_or_404(Topic, idtopic=idtopic, user_id=request.user.id)
 
 		# Init fields form
@@ -198,7 +195,7 @@ class EditTopicView(FormView):
 			obj.description = description
 			obj.slug = slug
 
-			# If check field clear, remove file when update 
+			# If check field clear, remove file when update
 			if 'attachment-clear' in request.POST:
 				route_file = get_route_file(file_path, file_name.name)
 
@@ -227,7 +224,7 @@ class EditTopicView(FormView):
 
 			# Update topic
 			form.save()
-			
+
 			return self.form_valid(form, **kwargs)
 		else:
 			messages.error(request, _("Form invalid"))
@@ -273,7 +270,7 @@ class NewCommentView(View):
 		form = FormAddComment(request.POST)
 
 		param = ""
-		param = forum + "/" + slug 
+		param = forum + "/" + slug
 		param = param + "/" + str(idtopic) + "/"
 		url = '/topic/' + param
 
@@ -283,7 +280,7 @@ class NewCommentView(View):
 			now = datetime.datetime.now()
 			user = User.objects.get(id=request.user.id)
 			topic = get_object_or_404(Topic, idtopic=idtopic)
-			
+
 			obj.date = now
 			obj.user = user
 			obj.topic_id = topic.idtopic
@@ -305,14 +302,14 @@ class EditCommentView(View):
 	def post(self, request, forum, slug, idtopic, idcomment, *args, **kwargs):
 
 		param = ""
-		param = forum + "/" + slug 
+		param = forum + "/" + slug
 		param = param + "/" + str(idtopic) + "/"
 		url = '/topic/' + param
 
 		description = request.POST.get('update_description')
 
 		if description:
-			
+
 			iduser = request.user.id
 			Comment.objects.filter(idcomment=idcomment, user=iduser).update(
 				description=description
@@ -333,7 +330,7 @@ class DeleteCommentView(View):
 	def post(self, request, forum, slug, idtopic, idcomment, *args, **kwargs):
 
 		param = ""
-		param = forum + "/" + slug 
+		param = forum + "/" + slug
 		param = param + "/" + str(idtopic) + "/"
 		url = '/topic/' + param
 

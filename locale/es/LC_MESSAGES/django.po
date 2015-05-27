@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-26 00:00-0300\n"
+"POT-Creation-Date: 2015-05-27 00:08-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,7 +118,7 @@ msgid "Moderators"
 msgstr "Moderadores"
 
 #: apps/forum/models.py:57 apps/forum/models.py:91 apps/forum/models.py:165
-#: templates/forum/forum.html:43
+#: templates/forum/forum.html:44
 msgid "Date"
 msgstr "Fecha"
 
@@ -159,7 +159,7 @@ msgstr "Archivo"
 msgid "Topic"
 msgstr "Tema"
 
-#: apps/forum/models.py:102 templates/forum/forum.html:63
+#: apps/forum/models.py:102 templates/forum/forum.html:65
 msgid "Topics"
 msgstr "Temas"
 
@@ -247,12 +247,12 @@ msgstr ""
 msgid "Feel free to upload the app you want."
 msgstr "Sientete libre de subir tu aplicación cuando lo desees."
 
-#: templates/applications/applications.html:54 templates/forum/forum.html:86
+#: templates/applications/applications.html:54 templates/forum/forum.html:88
 #: templates/jobs/jobs.html:58 templates/profiles/users.html:56
 msgid "Page"
 msgstr "Página"
 
-#: templates/applications/applications.html:54 templates/forum/forum.html:86
+#: templates/applications/applications.html:54 templates/forum/forum.html:88
 #: templates/jobs/jobs.html:58 templates/profiles/users.html:56
 msgid "of"
 msgstr "de"
@@ -523,7 +523,11 @@ msgstr "Nuevo tema"
 msgid "Responses"
 msgstr "Respuestas"
 
-#: templates/forum/forum.html:65
+#: templates/forum/forum.html:43 templates/forum/forum.html.py:51
+msgid "Views"
+msgstr "Vistas"
+
+#: templates/forum/forum.html:67
 msgid "Created"
 msgstr "Creado"
 
