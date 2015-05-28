@@ -1,4 +1,4 @@
-# encoding:utf-8 
+# encoding:utf-8
 
 from django import forms
 from django.forms.widgets import ClearableFileInput, CheckboxInput
@@ -17,9 +17,9 @@ class FormAdminTopic(forms.ModelForm):
 	class Meta:
 		model = Topic
 		exclude = ('slug', 'id_attachment')
-		widgets = { 
+		widgets = {
 			'description': TextareaWidget,
-		}  
+		}
 
 
 class FormAddTopic(forms.ModelForm):
@@ -29,10 +29,10 @@ class FormAddTopic(forms.ModelForm):
 
 	class Meta:
 		model = Topic
-		exclude = ('forum', "user", "slug", "date", "id_attachment")
-		widgets = { 
+		exclude = ('forum', "user", "slug", "date", "id_attachment", "moderate")
+		widgets = {
 			'description': TextareaWidget,
-		}  
+		}
 
 	def __init__(self, *args, **kwargs):
 
@@ -93,11 +93,11 @@ class FormEditTopic(forms.ModelForm):
 
 	class Meta:
 		model = Topic
-		exclude = ('forum', "user", "slug", "date", "id_attachment")
-		widgets = { 
+		exclude = ('forum', "user", "slug", "date", "id_attachment", "moderate")
+		widgets = {
 			'description': TextareaWidget,
 			'attachment': CustomClearableFileInput,
-		}  
+		}
 
 	def __init__(self, *args, **kwargs):
 
@@ -119,7 +119,7 @@ class FormAddComment(forms.ModelForm):
 	class Meta:
 		model = Comment
 		fields = ['description']
-		widgets = { 
+		widgets = {
 			'description': TextareaWidget,
 		}
 

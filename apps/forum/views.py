@@ -72,7 +72,9 @@ class ForumView(View):
 
 
 @page_template('forum/topic.html')
-def TopicView(request, forum, slug, idtopic, template='forum/topic_index.html', extra_context=None, *args, **kwargs):
+def TopicView(request, forum, slug, idtopic,
+	template='forum/topic_index.html', extra_context=None,
+	*args, **kwargs):
 	'''
 	This view display one Topic of forum
 	'''
@@ -143,6 +145,14 @@ class NewTopicView(FormView):
 
 				file_name = request.FILES['attachment']
 				obj.attachment = file_name
+
+			if forum.is_moderate:
+				if forum.moderators_id == request.user.id:
+					obj.moderate = True
+				else:
+					obj.moderate = False
+			else:
+				obj.moderate = True
 
 			obj.save()
 			return self.form_valid(form, **kwargs)

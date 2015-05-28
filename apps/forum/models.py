@@ -40,7 +40,7 @@ class Forum(models.Model):
 
 	idforum = models.AutoField(primary_key=True)
 	category = models.ForeignKey(
-		Category, related_name='forums', 
+		Category, related_name='forums',
 		verbose_name=_('Category')
 	)
 	parent = models.ForeignKey(
@@ -51,7 +51,7 @@ class Forum(models.Model):
 	position = models.IntegerField(_('Position'), blank=True, default=0)
 	description = models.TextField(_('Description'), blank=True)
 	moderators = models.ForeignKey(
-		User, blank=True, null=True, 
+		User, blank=True, null=True,
 		verbose_name=_('Moderators')
 	)
 	date = models.DateTimeField(_('Date'), blank=True, null=True)
@@ -59,6 +59,7 @@ class Forum(models.Model):
 	hidden = models.BooleanField(
 		_('Hidden'), blank=False, null=False, default=False
 	)
+	is_moderate = models.BooleanField(_('Check topics'), default=False)
 
 	class Meta(object):
 		ordering = ['category', 'position']
@@ -72,8 +73,8 @@ class Forum(models.Model):
 def generate_path(instance, filename):
 
 	folder = ""
-	folder = "forum_" + str(instance.forum_id) 
-	folder = folder + "_user_" + str(instance.user) 
+	folder = "forum_" + str(instance.forum_id)
+	folder = folder + "_user_" + str(instance.user)
 	folder = folder + "_topic_" + str(instance.id_attachment)
 	return os.path.join("forum", folder, filename)
 
@@ -95,6 +96,7 @@ class Topic(models.Model):
 		_('File'), blank=True, null=True, upload_to=generate_path,
 		validators=[valid_extension]
 	)
+	moderate = models.BooleanField(_('Moderate'), default=False)
 
 	class Meta(object):
 		ordering = ['date', 'title', 'forum']
@@ -111,8 +113,8 @@ class Topic(models.Model):
 		topic = get_object_or_404(Topic, idtopic=idtopic)
 
 		folder = ""
-		folder = "forum_" + str(forum) 
-		folder = folder + "_user_" + str(topic.user.username) 
+		folder = "forum_" + str(forum)
+		folder = folder + "_user_" + str(topic.user.username)
 		folder = folder + "_topic_" + str(topic.id_attachment)
 		path_folder = os.path.join("forum", folder)
 		media_path = settings.MEDIA_ROOT
@@ -124,7 +126,7 @@ class Topic(models.Model):
 
 		Topic.objects.filter(idtopic=idtopic).delete()
 		self.update_forum_topics(self.forum, "subtraction")
-		
+
 	def save(self, *args, **kwargs):
 
 		if not self.idtopic:
@@ -135,7 +137,7 @@ class Topic(models.Model):
 		super(Topic, self).save(*args, **kwargs)
 
 	def update_forum_topics(self, forum, action):
-		
+
 		f = Forum.objects.get(name=forum)
 		tot_topics = f.topics_count
 		if action == "sum":

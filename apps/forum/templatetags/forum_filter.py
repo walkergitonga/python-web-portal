@@ -39,15 +39,14 @@ def get_tot_views(idtopic):
 	This tag filter return the total
 	views for topic or forum
 	'''
-	content = Topic.objects.get(idtopic=idtopic)
-	idobj = ContentType.objects.get_for_model(content)
+	try:
+		content = Topic.objects.get(idtopic=idtopic)
+		idobj = ContentType.objects.get_for_model(content)
 
-	hit = HitCount.objects.get(
+		hit = HitCount.objects.get(
 			object_pk=idtopic,
 			content_type_id=idobj
 		)
-
-	try:
 		total = hit.hits
 	except Exception:
 		total = 0
@@ -56,11 +55,12 @@ def get_tot_views(idtopic):
 
 
 @register.filter
-def get_tot_users_comments(idtopic):
+def get_tot_users_comments(topic):
 	'''
 	This tag filter return the total
 	users of one topic
 	'''
+	idtopic = topic.idtopic
 	users = Comment.objects.filter(
 				topic_id=idtopic,
 			)
@@ -84,4 +84,32 @@ def get_tot_users_comments(idtopic):
 
 		i=i+1
 
+	if len(users) == 0:
+		usuario = topic.user.username
+		iduser = topic.user.id
+
+		photo = get_photo(iduser)
+		tooltip = ""
+		tooltip += "data-toggle='tooltip' data-placement='bottom'"
+		tooltip += "title='"+ usuario +"'"
+		data += "<a href='/profile/"+ usuario +"' "+tooltip+" >"
+		data += "<img class='img-circle' src='"+str(photo)+"' "
+		data += "width=30, height=30></a>"
+
+
 	return data
+
+
+@register.filter
+def get_tot_topics_moderate(forum):
+	'''
+		This filter return info about
+		Few topics missing for moderate
+	'''
+	topics_count = forum.topics_count
+	idforum = forum.idforum
+
+	moderates = Topic.objects.filter(
+							forum_id=idforum,
+							moderate=True).count()
+	return topics_count - moderates
