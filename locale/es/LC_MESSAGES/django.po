@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-28 20:39-0300\n"
+"POT-Creation-Date: 2015-05-29 20:14-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,7 +43,7 @@ msgid "Username or Email"
 msgstr "Usuario o Email"
 
 #: apps/baseapp/forms.py:23 apps/baseapp/forms.py:62
-#: templates/profiles/settings.html:34
+#: templates/profiles/settings.html:33
 msgid "Password"
 msgstr "Contraseña"
 
@@ -82,7 +82,7 @@ msgid "If checked, this category will be visible only for staff"
 msgstr ""
 
 #: apps/forum/models.py:31 apps/forum/models.py:44
-#: templates/forum/index.html:15
+#: templates/forum/index.html:16
 msgid "Category"
 msgstr "Categoría"
 
@@ -134,13 +134,12 @@ msgstr "Oculto"
 msgid "Check topics"
 msgstr "Controlar los temas"
 
-#: apps/forum/models.py:66 apps/forum/models.py:87 templates/base.html:33
-#: templates/forum/forum.html:34 templates/forum/index.html:11
-#: templates/forum/topic_index.html:22
+#: apps/forum/models.py:66 apps/forum/models.py:87 templates/base.html:34
+#: templates/forum/forum.html:34 templates/forum/topic_index.html:22
 msgid "Forum"
 msgstr "Foro"
 
-#: apps/forum/models.py:67
+#: apps/forum/models.py:67 templates/forum/index.html:13
 msgid "Forums"
 msgstr "Foros"
 
@@ -306,29 +305,29 @@ msgstr "¿Desea eliminar esta aplicación?"
 msgid "Delete"
 msgstr "Eliminar"
 
-#: templates/base.html:32
+#: templates/base.html:33
 msgid "Blog"
 msgstr "Blog"
 
-#: templates/base.html:34
+#: templates/base.html:35
 msgid "Tutorials"
 msgstr "Tutoriales"
 
-#: templates/base.html:35 templates/jobs/jobs.html:9
+#: templates/base.html:36 templates/jobs/jobs.html:9
 msgid "Jobs"
 msgstr "Empleos"
 
-#: templates/base.html:42 templates/baseapp/login.html:20
+#: templates/base.html:43 templates/baseapp/login.html:20
 #: templates/baseapp/login.html.py:51 templates/baseapp/signup.html:86
 msgid "Sign in"
 msgstr "Ingresar"
 
-#: templates/base.html:53 templates/profiles/admin.html:6
+#: templates/base.html:54 templates/profiles/admin.html:6
 #: templates/profiles/edit_profile.html:10
 msgid "Profile"
 msgstr "Perfil"
 
-#: templates/base.html:59
+#: templates/base.html:60
 msgid "Sign out"
 msgstr "Salir"
 
@@ -550,6 +549,10 @@ msgstr "Falta por moderar"
 #: templates/forum/forum.html:85
 msgid "Created"
 msgstr "Creado"
+
+#: templates/forum/notification.html:4
+msgid "Notifications"
+msgstr "Notificaciones"
 
 #: templates/forum/topic.html:41 templates/forum/topic_index.html:40
 msgid "Edit"

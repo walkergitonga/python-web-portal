@@ -174,3 +174,21 @@ class Comment(models.Model):
 
 	def __str__(self):
 		return self.date
+
+
+@python_2_unicode_compatible
+class Notification(models.Model):
+
+	idnotification = models.AutoField(primary_key=True)
+	idobject = models.IntegerField(default=0)
+	iduser = models.IntegerField(default=0)
+	is_topic = models.BooleanField(default=0)
+	is_comment = models.BooleanField(default=0)
+	is_view = models.BooleanField(default=0)
+	date = models.DateTimeField(blank=True, db_index=True)
+
+	class Meta(object):
+		ordering = ['date']
+
+	def __str__(self):
+		return self.date
