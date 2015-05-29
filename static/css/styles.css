@@ -18,7 +18,7 @@ footer {
 /*Center one form and resize width that is full screen*/
 .center_div_full_screen{
     margin: 0 auto;
-    width:50% 
+    width:50%
 }
 
 .src-image {
@@ -68,4 +68,12 @@ footer {
   background: #F8F8F8;
   border-color: #E7E7E7;
   border: 2px solid #E7E7E7;
+}
+
+/*Item for panel. For example settings*/
+.item-panel{
+  padding: 10px;
+  border: 1px solid #DDD;
+  border-radius: 0px;
+  list-style-type: none;
 }

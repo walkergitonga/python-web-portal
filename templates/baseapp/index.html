@@ -3,12 +3,12 @@
 {% load i18n %}
 
 {% block content %}
-	
+
 	<div class="jumbotron">
 		<div class="container">
 		    <h2>{% trans "Welcome to Portal web python" %}</h2>
 		    <p class="lead">{% trans "Portal web python is a community for the python programming language, where developers can share knowledge and make new friends." %}</p>
-		    
+
 		    {% if not user.is_authenticated %}
 		    	<p><a class="btn btn-large btn-success" href="/join/">{% trans "Sign up" %} »</a></p>
 		    {% else %}
@@ -23,19 +23,19 @@
 	        <div class="col-md-4">
 	          <h2>{% trans "Rankings" %}</h2>
 	          <p>{% trans "This section provides rankings of the most used applications on github, rankings of the prominent users, etc." %} </p>
-	          <p><a class="btn btn-default" href="#" role="button">{% trans "Got to section" %} »</a></p>
+	          <p><a class="btn btn-primary" href="#" role="button">{% trans "Got to section" %} »</a></p>
 	        </div>
 	       	<div class="col-md-4">
 	          <h2>{% trans "Applications" %}</h2>
-	          <p>{% trans "This section will contain open source applications for the community to contribute." %} 
+	          <p>{% trans "This section will contain open source applications for the community to contribute." %}
 	          {% trans "If you are looking for people to assist with your project, this is the right place." %}</p>
 	          <p>{% trans "Feel free to upload the app you want." %} </p>
-	          <p><a class="btn btn-default" href="applications/" role="button"> {% trans "Got to section" %} »</a></p>
+	          <p><a class="btn btn-primary" href="applications/" role="button"> {% trans "Got to section" %} »</a></p>
 	        </div>
 	        <div class="col-md-4">
 	          <h2>{% trans "Users" %}</h2>
 	          <p>{% trans "This section contains users of the community." %} </p>
-	          <p><a href="/users/" class="btn btn-default" href="#" role="button">{% trans "Got to section" %} »</a></p>
+	          <p><a href="/users/" class="btn btn-primary" href="#" role="button">{% trans "Got to section" %} »</a></p>
 	       </div>
 	    </div>
      </div>

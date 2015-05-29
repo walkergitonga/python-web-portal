@@ -9,6 +9,7 @@
 	{% load i18n %}
 
 	<link rel="stylesheet" type="text/css" href="{% static 'css/libs/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/libs/bootstrap/css/material/material.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 	{% block extra_css %}{% endblock %}
 </head>
@@ -39,12 +40,12 @@
 			    {% if not user.is_authenticated %}
 			    	{% if request.path != "/login/" %}
 					   	<form class="navbar-form navbar-right">
-				            <a href="/login/" class="btn btn-success">{% trans "Sign in" %}</a>
+				            <a href="/login/" class="btn btn-success btn-sm" style="margin-top: 0px">{% trans "Sign in" %}</a>
 			        	</form>
 		        	{% endif %}
 		        {% else %}
 		        	<form class="nav navbar-nav navbar-right">
-			        	<li class="dropdown" class="nav navbar-nav navbar-right">
+			        	<li class="dropdown">
 			              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ user.username }}  <span class="caret"></span></a>
 			              <ul class="dropdown-menu" role="menu">
 			                  <li>
@@ -67,7 +68,7 @@
 		</div>
 
 	</div>
-	
+
 	<section>
 		{% block content %}{% endblock %}
 	</section>
@@ -96,7 +97,7 @@
 						{% endfor %}
 						</select>
 						<span class="input-group-btn">
-							<input type="submit" class="btn btn-default  btn-sm" value="Go" />
+							<input type="submit" class="btn btn-flat btn-primary  btn-sm" value="Go" />
 						</span>
 					</div>
 				</form>
@@ -108,6 +109,7 @@
 
 	<script src="{% static 'js/libs/jquery/jquery-2.1.3.min.js' %}"></script>
 	<script src="{% static 'js/libs/bootstrap/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/libs/bootstrap/material/material.js' %}"></script>
 	<script src="{% static 'js/hitcount/django-hitcount.js' %}"></script>
 	{% block extra_js %}{% endblock %}
 
