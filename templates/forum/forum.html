@@ -14,6 +14,8 @@
 
 <div class="container">
 
+	{% include "forum/notification.html" %}
+
 	{% get_hit_count_js_variables for forum as hitcount %}
 	{% get_hit_count for forum as total_hits %}
 

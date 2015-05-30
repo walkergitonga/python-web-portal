@@ -28,7 +28,8 @@ from apps.forum.models import (
 from apps.forum.settings import URL_PROFILE
 from apps.forum.utils import (
 	remove_folder_attachment, get_id_profile,
-	get_photo_profile
+	get_photo_profile, get_users_topic,
+	get_notifications
 )
 from apps.utils import (
 	remove_file, helper_paginator,
@@ -46,8 +47,12 @@ class ForumsView(View):
 	def get(self, request, *args, **kwargs):
 
 		categories = Category.objects.filter(hidden=False)
+		notifications = get_notifications(request.user.id)
 
-		data = {'categories': categories}
+		data = {
+				'categories': categories,
+				'notifications': notifications
+			}
 
 		return render(request, self.template_name, data)
 
@@ -298,24 +303,18 @@ class NewCommentView(View):
 			obj.user = user
 			obj.topic_id = topic.idtopic
 
-			obj.save()
+			inserted = obj.save()
 
-			try:
-				comments = Comment.objects.filter(topic_id=topic.idtopic)
-				for comment in comments:
-					iduser = comment.user_id
-					idcomment = comment.idcomment
-					if iduser != request.user.id:
-						# Check if no exists the comment else create
-						Notification.objects.get_or_create(
-							idobject=idcomment, iduser=iduser,
-							is_topic=False, is_view=False,
-							defaults={'idobject': idcomment, 'iduser': iduser,
-							'is_topic': False, 'is_comment': True,
-							'is_view': False, 'date': now}
-						)
-			except Exception:
-				pass
+			idcomment = obj.idcomment
+			lista_us = get_users_topic(topic, request.user.id)
+			for user in lista_us:
+				notification = Notification(
+								iduser=user, is_view=False,
+								idobject=idcomment, date=now,
+								is_topic=False, is_comment=True
+							)
+				notification.save()
+
 
 			return HttpResponseRedirect(url)
 		else:

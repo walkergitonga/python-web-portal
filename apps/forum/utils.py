@@ -5,7 +5,9 @@ from django.db.models import get_model
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 
-from apps.forum.models import Forum, Topic
+from apps.forum.models import (
+	Forum, Topic, Comment, Notification
+)
 from apps.forum.settings import (
 	APP_PROFILE, MODEL_PROFILE,
 	URL_PROFILE, FIELD_PHOTO_PROFILE
@@ -71,3 +73,31 @@ def get_photo_profile(profile):
 	'''
 	field_photo = getattr(profile, FIELD_PHOTO_PROFILE)
 	return field_photo
+
+
+def get_users_topic(topic, myuser):
+	'''
+		This method return all users
+		of one topic, else my user
+	'''
+	comments = Comment.objects.filter(topic_id=topic.idtopic)
+	lista_us = []
+	for comment in comments:
+		if comment.user_id != myuser:
+			if not comment.user_id in lista_us:
+				lista_us.append(comment.user_id)
+
+	return lista_us
+
+
+def get_notifications(iduser):
+	'''
+		This method return Notification
+		of one user
+	'''
+	try:
+		notif = Notification.objects.filter(iduser=iduser)
+	except Notification.DoesNotExist:
+		notif = None
+
+	return notif

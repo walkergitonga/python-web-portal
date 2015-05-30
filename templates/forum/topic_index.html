@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-	
+
 <div class="container">
 
   {% get_hit_count_js_variables for topic as hitcount %}
@@ -20,6 +20,7 @@
   <div class="row">
     <div class="col-md-12">
         <h2>{% trans "Forum" %}: <a href="/forum/{{topic.forum.name}}">{{topic.forum.name}}</a></h2>
+        {% include "forum/notification.html" %}
         <p>{{topic.forum.description|safe}}</p>
         <hr>
         <section class="comment-list">
@@ -36,7 +37,7 @@
               </figure>
               <div style="text-align: center">
                 {% if topic.user.id == user.id %}
-                <a href="/edit_topic/{{topic.forum.name}}/{{topic.idtopic}}/" class="btn btn-success btn-xs"> 
+                <a href="/edit_topic/{{topic.forum.name}}/{{topic.idtopic}}/" class="btn btn-success btn-xs">
                   <i class="glyphicon glyphicon-hand-up"></i>{% trans "Edit" %}</a>
                 <a style="cursor: pointer" data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-xs">
                   <i class="glyphicon glyphicon-trash"></i>{% trans "Delete" %}</a>
@@ -124,7 +125,7 @@
     <div class="col-md-2"></div>
     </div>
   {% endif %}
-  
+
 
 </div>
 

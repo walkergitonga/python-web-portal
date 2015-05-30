@@ -77,3 +77,12 @@ footer {
   border-radius: 0px;
   list-style-type: none;
 }
+
+.without-style-list{
+  list-style-type: none;
+}
+
+.item-notification{
+  width: 35em;
+  text-transform: none;
+}
