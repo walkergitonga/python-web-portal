@@ -28,7 +28,7 @@ from apps.forum.models import (
 from apps.forum.settings import URL_PROFILE
 from apps.forum.utils import (
 	remove_folder_attachment, get_id_profile,
-	get_photo_profile
+	get_photo_profile, get_notifications
 )
 from apps.utils import (
 	remove_file, helper_paginator,
@@ -46,8 +46,12 @@ class ForumsView(View):
 	def get(self, request, *args, **kwargs):
 
 		categories = Category.objects.filter(hidden=False)
+		notifications = get_notifications(request.user.id)
 
-		data = {'categories': categories}
+		data = {
+				'categories': categories,
+				'notifications': notifications
+			}
 
 		return render(request, self.template_name, data)
 

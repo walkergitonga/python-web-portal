@@ -7,7 +7,7 @@
 {% block extra_js %}
     {{ form.media.js }}
 {% endblock %}
-	
+
 <div class="container">
 
 	<div class="mainbox col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">
@@ -27,7 +27,7 @@
 		<div class="panel panel-default" >
             <div class="panel-heading">
                 <div class="panel-title text-center">{% trans "Add" %}</div>
-            </div>     
+            </div>
 
             <div class="panel-body">
             	<form class="form-horizontal" action="{{request.get_full_path}}" method="POST" enctype="multipart/form-data">{% csrf_token%}

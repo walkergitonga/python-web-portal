@@ -5,7 +5,10 @@ from django.contrib.contenttypes.models import ContentType
 
 from hitcount.models import HitCount
 
-from apps.forum.models import Comment, Forum, Topic
+from apps.forum.models import (
+	Comment, Forum, Topic,
+	Notification
+)
 from apps.forum.templatetags.photo import get_photo
 
 register = template.Library()
@@ -113,3 +116,26 @@ def get_tot_topics_moderate(forum):
 							forum_id=idforum,
 							moderate=True).count()
 	return topics_count - moderates
+
+
+@register.filter
+def get_item_notification(notification):
+	'''
+		This filter return info about
+		one notification of one user
+	'''
+	idobject = notification.idobject
+	is_comment = notification.is_comment
+	is_topic = notification.is_comment
+
+	html = ""
+	if is_comment:
+		comment = Comment.objects.get(idcomment=idobject)
+		html += "<h5>"+comment.topic.title+"</h5>"
+		html += "<a href='#'><p>"+comment.description+"</p></a>"
+		name = comment.user.last_name + " " + comment.user.first_name
+		html += "<p>"+ name +"</p>"
+	else:
+		html = ""
+
+	return html

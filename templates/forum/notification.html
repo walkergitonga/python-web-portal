@@ -1,5 +1,30 @@
 {% load i18n %}
+{% load forum_filter %}
 
-<ul class="nav nav-pills pull-right">
-    <li><a href="/forum/notifications/">{% trans "Notifications" %} <span class="badge">3</span></a></li>
-</ul>
+<li class="dropdown without-style-list btn pull-right">
+  	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  		<span class="glyphicon glyphicon-envelope"></span> {% trans "Notifications" %}
+		<span class="caret"></span>
+  	</a>
+  	<ul class="dropdown-menu dropdown-cart" role="menu">
+  		{% for notification in notifications %}
+  			<li>
+		        <span class="item">
+		            <span class="item-left">
+		            	{% if notification.is_view %}
+		            		<div class="alert alert-success" role="alert">
+								{{notification|get_item_notification|safe}}
+		            		</div>
+		            	{% else %}
+		            		<div class="alert alert-warning" role="alert">
+								{{notification|get_item_notification|safe}}
+		            		</div>
+		            	{% endif %}
+		            </span>
+		        </span>
+		    </li>
+  		{% endfor %}
+        <li class="divider"></li>
+        <li><a class="text-center" href="">{% trans "All" %}</a></li>
+  	</ul>
+</li>
