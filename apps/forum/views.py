@@ -21,7 +21,10 @@ from apps.forum.forms import (
 	FormAddTopic, FormEditTopic,
 	FormAddComment
 )
-from apps.forum.models import Category, Forum, Topic, Comment
+from apps.forum.models import (
+	Category, Forum, Topic,
+	Comment, Notification
+)
 from apps.forum.settings import URL_PROFILE
 from apps.forum.utils import (
 	remove_folder_attachment, get_id_profile,
@@ -296,6 +299,24 @@ class NewCommentView(View):
 			obj.topic_id = topic.idtopic
 
 			obj.save()
+
+			try:
+				comments = Comment.objects.filter(topic_id=topic.idtopic)
+				for comment in comments:
+					iduser = comment.user_id
+					idcomment = comment.idcomment
+					if iduser != request.user.id:
+						# Check if no exists the comment else create
+						Notification.objects.get_or_create(
+							idobject=idcomment, iduser=iduser,
+							is_topic=False, is_view=False,
+							defaults={'idobject': idcomment, 'iduser': iduser,
+							'is_topic': False, 'is_comment': True,
+							'is_view': False, 'date': now}
+						)
+			except Exception:
+				pass
+
 			return HttpResponseRedirect(url)
 		else:
 			messages.error(request, _("Field required"))
