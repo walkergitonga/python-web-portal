@@ -1,7 +1,10 @@
 # encoding:utf-8
 from django import template
 
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.utils.text import Truncator
 
 from hitcount.models import HitCount
 
@@ -10,6 +13,7 @@ from apps.forum.models import (
 	Notification
 )
 from apps.forum.templatetags.photo import get_photo
+from apps.forum.utils import get_id_profile, get_photo_profile
 
 register = template.Library()
 
@@ -132,14 +136,23 @@ def get_item_notification(notification):
 			slug = comment.topic.slug
 			idtopic = comment.topic.idtopic
 
+			description = Truncator(comment.description).chars(100)
+
 			url_topic = "/topic/" + forum + "/" + slug + "/" + str(idtopic) + "/"
  			html += "<h5><a href='"+url_topic+"'><u>"+comment.topic.title+"</u></h5></a>"
-			html += "<p>"+comment.description+"</p>"
+			html += "<p>"+description+"</p>"
 
 			name = comment.user.last_name + " " + comment.user.first_name
 			username = comment.user.username
 
-			html += "<a href='/profile/"+username+"'><p>"+ name +"</p></a>"
+			profile = get_id_profile(comment.user.id)
+			photo = get_photo_profile(profile)
+			if photo:
+				path_img = settings.MEDIA_URL + str(photo)
+			else:
+				path_img = static("img/profile.png")
+			img = "<img src='"+path_img+"' width=30 height=30 class='img-circle' />"
+			html += "<a href='/profile/"+username+"'><p>"+ img + " " +  name +"</p></a>"
 		except Comment.DoesNotExist:
 			html = ""
 	else:
