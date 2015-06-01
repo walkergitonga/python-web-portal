@@ -47,7 +47,11 @@ class ForumsView(View):
 	def get(self, request, *args, **kwargs):
 
 		categories = Category.objects.filter(hidden=False)
-		notifications = get_notifications(request.user.id)
+
+		if request.user.id:
+			notifications = get_notifications(request.user.id)
+		else:
+			notifications = None
 
 		data = {
 				'categories': categories,
@@ -70,10 +74,16 @@ class ForumView(View):
 
 		pag = helper_paginator(self, request, topics, 15, 'topics')
 
+		if request.user.id:
+			notifications = get_notifications(request.user.id)
+		else:
+			notifications = None
+
 		data = {
 			'forum': forum,
 			'topics': pag['topics'],
-			'paginator': pag
+			'paginator': pag,
+			'notifications': notifications,
 		}
 
 		return render(request, self.template_name, data)
@@ -97,6 +107,11 @@ def TopicView(request, forum, slug, idtopic,
 
 	comments = Comment.objects.filter(topic_id=idtopic)
 
+	if request.user.id:
+		notifications = get_notifications(request.user.id)
+	else:
+		notifications = None
+
 	data = {
 		'topic': topic,
 		'profile': profile,
@@ -104,6 +119,7 @@ def TopicView(request, forum, slug, idtopic,
 		'field_photo': field_photo,
 		'form_comment': form_comment,
 		'comments': comments,
+		'notifications': notifications,
 	}
 
 	if extra_context is not None:
@@ -371,3 +387,17 @@ class DeleteCommentView(View):
 			return HttpResponseRedirect(url)
 		except Exception:
 			return HttpResponseRedirect(url)
+
+
+@page_template('forum/all_notification.html')
+def AllNotification(request, template='forum/all_notification_index.html',
+					extra_context=None, *args, **kwargs):
+
+	notifications = get_notifications(request.user.id)
+	data = {
+		'notifications': notifications,
+	}
+
+	if extra_context is not None:
+		data.update(extra_context)
+	return render(request, template, data)

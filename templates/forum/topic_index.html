@@ -20,7 +20,9 @@
   <div class="row">
     <div class="col-md-12">
         <h2>{% trans "Forum" %}: <a href="/forum/{{topic.forum.name}}">{{topic.forum.name}}</a></h2>
-        {% include "forum/notification.html" %}
+        {% if user.id %}
+          {% include "forum/notification.html" %}
+        {% endif %}
         <p>{{topic.forum.description|safe}}</p>
         <hr>
         <section class="comment-list">

@@ -7,7 +7,9 @@
 
 <div class="container">
 
-	{% include "forum/notification.html" %}
+	{% if user.id %}
+		{% include "forum/notification.html" %}
+	{% endif %}
 
 	<div class="panel panel-default">
 		<div class="panel-heading"><h4>{% trans "Forums" %}</h4></div>
