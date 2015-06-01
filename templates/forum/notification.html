@@ -7,24 +7,20 @@
 		<span class="caret"></span>
   	</a>
   	<ul class="dropdown-menu dropdown-cart" role="menu">
-  		{% for notification in notifications %}
+  		{% for notification in notifications|slice:"5" %}
   			<li class="item-notification">
 		        <span class="item">
 		            <span class="item-left">
 		            	{% if notification.is_view %}
-		            		<div class="alert alert-success" role="alert">
-								{{notification|get_item_notification|safe}}
-		            		</div>
+							{{notification|get_item_notification|safe}}
 		            	{% else %}
-		            		<div class="alert alert-info" role="alert">
-								{{notification|get_item_notification|safe}}
-		            		</div>
+							{{notification|get_item_notification|safe}}
 		            	{% endif %}
 		            </span>
 		        </span>
 		    </li>
   		{% endfor %}
         <li class="divider"></li>
-        <li><a class="text-center" href="">{% trans "All" %}</a></li>
+        <li><a class="text-center" href=""><span class="without-text-transform">{% trans "All" %}</span></a></li>
   	</ul>
 </li>

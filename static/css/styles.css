@@ -86,3 +86,7 @@ footer {
   width: 35em;
   text-transform: none;
 }
+
+.without-text-transform{
+  text-transform: none;
+}

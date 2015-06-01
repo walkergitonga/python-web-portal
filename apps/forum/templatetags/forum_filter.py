@@ -1,6 +1,5 @@
 # encoding:utf-8
 from django import template
-
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.staticfiles.templatetags.staticfiles import static
@@ -13,7 +12,10 @@ from apps.forum.models import (
 	Notification
 )
 from apps.forum.templatetags.photo import get_photo
-from apps.forum.utils import get_id_profile, get_photo_profile
+from apps.forum.utils import (
+	get_id_profile, get_photo_profile,
+	get_datetime_topic
+)
 
 register = template.Library()
 
@@ -139,8 +141,8 @@ def get_item_notification(notification):
 			description = Truncator(comment.description).chars(100)
 
 			url_topic = "/topic/" + forum + "/" + slug + "/" + str(idtopic) + "/"
- 			html += "<h5><a href='"+url_topic+"'><u>"+comment.topic.title+"</u></h5></a>"
-			html += "<p>"+description+"</p>"
+ 			title = "<h5><a href='"+url_topic+"'><u>"+comment.topic.title+"</u></h5></a>"
+			description = "<p>"+description+"</p>"
 
 			name = comment.user.last_name + " " + comment.user.first_name
 			username = comment.user.username
@@ -151,8 +153,25 @@ def get_item_notification(notification):
 				path_img = settings.MEDIA_URL + str(photo)
 			else:
 				path_img = static("img/profile.png")
-			img = "<img src='"+path_img+"' width=30 height=30 class='img-circle' />"
-			html += "<a href='/profile/"+username+"'><p>"+ img + " " +  name +"</p></a>"
+
+			user = "<a href='/profile/"+username+"'><p>" +  name +"</p></a>"
+			date = get_datetime_topic(notification.date)
+
+			html += '<div class="list-group">'
+			html += '   <div class="list-group-item">'
+			html += '      <div class="row-action-primary">'
+			html += '           <img src="'+path_img+'" width=30 height=30 class="img-circle" />'
+			html += '       </div>'
+			html += '       <div class="row-content">'
+			html += '           <div class="least-content">'+date+'</div>'
+			html += '           <h4 class="list-group-item-heading">'+title+'</h4>'
+			html += '           <p class="list-group-item-text">'+description+'</p>'
+			html += '           <p>'+user+'</p>'
+			html += '        </div>'
+			html += '   </div>'
+			html += '   <div class="list-group-separator"></div>'
+			html += '</div>'
+
 		except Comment.DoesNotExist:
 			html = ""
 	else:

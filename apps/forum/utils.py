@@ -4,6 +4,8 @@ import os
 from django.db.models import get_model
 from django.conf import settings
 from django.shortcuts import get_object_or_404
+from django.utils import formats, timezone
+from django.utils.translation import ugettext_lazy as _
 
 from apps.forum.models import (
 	Forum, Topic, Comment, Notification
@@ -96,8 +98,42 @@ def get_notifications(iduser):
 		of one user
 	'''
 	try:
-		notif = Notification.objects.filter(iduser=iduser)
+		notif = Notification.objects.filter(
+					iduser=iduser).order_by("-date")
 	except Notification.DoesNotExist:
 		notif = None
 
 	return notif
+
+
+def get_datetime_topic(date):
+	'''
+		This method return info
+		one datetime for topic or
+		notification
+	'''
+	flag = True
+	now = timezone.now()
+	# If is beteween 1 and 10 return days
+	difference = (now - date).days
+
+	# If is this days return hours
+	if difference == 0:
+		flag = False
+		diff = now - date
+		minutes = (diff.seconds//60)%60
+		hours = diff.seconds//3600
+		if minutes < 60 and hours == 0:
+			difference =  "%s %s" % (str((diff.seconds//60)%60) + "m ", _("ago"))
+		else:
+			difference =  "%s %s" % (str(diff.seconds//3600) + "h ", _("ago"))
+
+	# If > 10 days return string date
+	if difference > 1 and difference <= 10:
+		flag = False
+		difference = formats.date_format(date, "SHORT_DATETIME_FORMAT")
+
+	if flag:
+		difference = "%s %s" % (str(difference),  _("days ago"))
+
+	return difference
