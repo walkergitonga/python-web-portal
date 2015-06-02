@@ -58,13 +58,13 @@
           <h4 class="modal-title" id="myModalLabel">{% trans "Edit comment" %}</h4>
         </div>
         <div class="modal-body">
-              
+
           <form class="form-horizontal" action="/updatecomment/{{topic.forum.name}}/{{topic.slug}}/{{topic.idtopic}}/{{comment.idcomment}}/" method="POST">{% csrf_token%}
               <textarea name="update_description" id="textarea_comment_{{comment.idcomment}}" style="width: 100%">
                 {{comment.description|safe}}
-              </textarea> 
+              </textarea>
             <br>
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="btn btn-success btn-sm">
                 <i class="glyphicon glyphicon-hand-up"></i> {% trans "Edit comment" %}
             </button>
           </form>
@@ -87,7 +87,7 @@
         </div>
         <div class="modal-footer">
             <form class="form-horizontal" action="/removecomment/{{topic.forum.name}}/{{topic.slug}}/{{topic.idtopic}}/{{comment.idcomment}}/" method="POST">{% csrf_token%}
-            <button type="submit" class="btn btn-danger">
+            <button type="submit" class="btn btn-danger btn-sm">
               <i class="glyphicon glyphicon-trash"></i> {% trans "Remove comment" %}
             </button>
           </form>

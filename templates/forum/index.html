@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load static %}
 {% load forum_filter %}
+
+{% block extra_js %}
+	<script src="{% static 'js/js/forum.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 

@@ -8,6 +8,7 @@
     {{form_comment.media.js}}
     <script src="{% static 'js/endless/endless-pagination.js' %}"></script>
     <script>$.endlessPaginate({paginateOnScroll: true});</script>
+    <script src="{% static 'js/js/forum.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -119,7 +120,7 @@
         {% endfor %}
         </center>
         <br>
-        <button type="submit" class="btn btn-success">
+        <button type="submit" class="btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i> {% trans "New comment" %}
         </button>
       </form>

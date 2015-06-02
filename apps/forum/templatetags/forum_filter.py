@@ -178,3 +178,12 @@ def get_item_notification(notification):
 		html = ""
 
 	return html
+
+
+@register.filter
+def get_pending_notifications(user):
+	'''
+		This method return total pending notifications
+	'''
+	return Notification.objects.filter(
+				is_view=False, iduser=user).count()

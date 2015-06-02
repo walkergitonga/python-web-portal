@@ -4,7 +4,7 @@ import datetime
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import defaultfilters
 from django.views.generic import View
@@ -393,7 +393,11 @@ class DeleteCommentView(View):
 def AllNotification(request, template='forum/all_notification_index.html',
 					extra_context=None, *args, **kwargs):
 
-	notifications = get_notifications(request.user.id)
+	iduser = request.user.id
+
+	Notification.objects.filter(iduser=iduser).update(is_view=True)
+
+	notifications = get_notifications(iduser)
 	data = {
 		'notifications': notifications,
 	}
@@ -401,3 +405,13 @@ def AllNotification(request, template='forum/all_notification_index.html',
 	if extra_context is not None:
 		data.update(extra_context)
 	return render(request, template, data)
+
+
+def set_notifications(request):
+	'''
+		This view set all views notifications in true
+	'''
+	iduser = request.user.id
+	Notification.objects.filter(iduser=iduser).update(is_view=True)
+
+	return HttpResponse("Ok")

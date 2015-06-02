@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from apps.forum.views import (
 	ForumsView, ForumView, TopicView, NewTopicView,
 	EditTopicView, DeleteTopicView, NewCommentView,
-	EditCommentView, DeleteCommentView, AllNotification
+	EditCommentView, DeleteCommentView, AllNotification,
+	set_notifications
 )
 
 urlpatterns = [
@@ -43,7 +44,11 @@ urlpatterns = [
 		login_required(DeleteCommentView.as_view()), name='removecomment'
 	),
 	url(
-		r'^all_notification/$', login_required(AllNotification),
-		name='all_notification'
+		r'^forum_all_notification/$', login_required(AllNotification),
+		name='forum_all_notification'
+	),
+	url(
+		r'^forum_set_notifications/$', login_required(set_notifications),
+		name='forum_set_notifications'
 	),
 ]
